@@ -1,18 +1,151 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState('inicio');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Verificar si ya hay una sesión activa al cargar la página
+  useEffect(() => {
+    const savedAuth = localStorage.getItem('agiru-auth');
+    if (savedAuth) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   const toggleSubmenu = (id: string) => {
     setOpenMenu(openMenu === id ? null : id);
   };
 
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setLoginError('');
+
+    // Simular validación de credenciales (en un caso real, esto se conectaría a un backend)
+    setTimeout(() => {
+      // Credenciales de ejemplo (en producción esto vendría de una base de datos segura)
+      const validUsers = [
+        { username: 'admin', password: 'admin123', role: 'administrador' },
+        { username: 'produccion', password: 'prod2023', role: 'produccion' },
+        { username: 'ventas', password: 'ventas2023', role: 'ventas' },
+        { username: 'logistica', password: 'logistica2023', role: 'logistica' },
+      ];
+
+      const user = validUsers.find(
+        (u) => u.username === username && u.password === password
+      );
+
+      if (user) {
+        setIsAuthenticated(true);
+        // Guardar autenticación en localStorage (en producción usaríamos métodos más seguros)
+        localStorage.setItem('agiru-auth', JSON.stringify({
+          username: user.username,
+          role: user.role,
+          timestamp: new Date().getTime()
+        }));
+      } else {
+        setLoginError('Usuario o contraseña incorrectos');
+      }
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUsername('');
+    setPassword('');
+    localStorage.removeItem('agiru-auth');
+  };
+
+  // Si el usuario no está autenticado, mostrar formulario de login
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-amber-800">
+              AGIRU
+              <span className="text-green-500 text-3xl ml-1">
+                <i className="fas fa-leaf"></i>
+              </span>
+            </h1>
+            <p className="text-amber-600 mt-2">Sistema Interno - Acceso Restringido</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            {loginError && (
+              <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm">
+                {loginError}
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium text-amber-800 mb-1">
+                Usuario
+              </label>
+              <input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                placeholder="Ingrese su usuario"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-amber-800 mb-1">
+                Contraseña
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                placeholder="Ingrese su contraseña"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-amber-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-amber-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 disabled:opacity-70"
+            >
+              {isLoading ? (
+                <span className="flex items-center justify-center">
+                  <i className="fas fa-spinner fa-spin mr-2"></i>
+                  Verificando...
+                </span>
+              ) : (
+                'Iniciar Sesión'
+              )}
+            </button>
+          </form>
+
+          <div className="mt-6 p-4 bg-amber-50 rounded-lg text-sm text-amber-700">
+            <p className="font-semibold">Credenciales de ejemplo:</p>
+            <p>Usuario: admin | Contraseña: admin123</p>
+            <p>Usuario: produccion | Contraseña: prod2023</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Contenido original (solo visible para usuarios autenticados)
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50">
-      {/* Header */}
+      {/* Header con botón de cerrar sesión */}
       <header className="bg-gradient-to-r from-amber-800 to-orange-900 shadow-lg">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
@@ -23,6 +156,14 @@ export default function Home() {
                   <i className="fas fa-leaf"></i>
                 </span>
               </h1>
+              <button
+                onClick={handleLogout}
+                className="ml-4 text-amber-200 hover:text-white text-sm flex items-center"
+                title="Cerrar sesión"
+              >
+                <i className="fas fa-sign-out-alt mr-1"></i>
+                Salir
+              </button>
             </div>
             
             {/* Pestañas de navegación */}
@@ -62,7 +203,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Resto del contenido de la página */}
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Image Gallery Section - Left Side */}
@@ -256,13 +397,11 @@ export default function Home() {
             </div>
             <div className="text-center md:text-right">
               <p className="text-sm">© 2023 AGIRU. Todos los derechos reservados.</p>
-              <p className="text-sm mt-1">Sitio corporativo</p>
+              <p className="text-sm mt-1">Sitio corporativo interno</p>
             </div>
           </div>
         </div>
       </footer>
-
-      {/* Font Awesome Script */}
     </div>
   );
 }

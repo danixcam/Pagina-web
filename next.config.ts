@@ -5,8 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // Agrega esta línea para GitHub Pages:
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/nombre-repositorio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/Pagina-web' : '',
 }
 
 module.exports = nextConfig
