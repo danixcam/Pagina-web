@@ -260,55 +260,114 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Galería */}
-          <div className="w-full lg:w-1/3">
-            <div className="bg-white rounded-xl shadow-md p-4 h-full">
-              <h2 className="text-xl font-bold text-amber-900 mb-4 text-center">Galería AIRU</h2>
-              
-              {/* Carrusel de imágenes */}
-              <div className="mb-6 rounded-lg overflow-hidden shadow-md cursor-pointer" onClick={() => redirectToOneDrive('produccion')}>
-                <div className="h-48 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center">
-                  <span className="text-white text-lg font-semibold">Producción AIRU</span>
-                </div>
-                <div className="p-3 bg-amber-100 text-amber-800 text-sm text-center">
-                  Nuestro proceso de producción y liofilización
-                </div>
-              </div>
-              
-              {/* Miniaturas de imágenes */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="h-24 bg-gradient-to-r from-green-500 to-green-700 rounded flex items-center justify-center cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-plantacion')}>
-                  <span className="text-white text-xs">Plantaciones</span>
-                </div>
-                <div className="h-24 bg-gradient-to-r from-blue-500 to-blue-700 rounded flex items-center justify-center cursor-pointer" onClick={() => redirectToOneDrive('investigacion-desarrollo')}>
-                  <span className="text-white text-xs">I+D</span>
-                </div>
-                <div className="h-24 bg-gradient-to-r from-purple-500 to-purple-700 rounded flex items-center justify-center cursor-pointer" onClick={() => redirectToOneDrive('admin-activos-infraestructura')}>
-                  <span className="text-white text-xs">Infraestructura</span>
-                </div>
-                <div className="h-24 bg-gradient-to-r from-amber-600 to-orange-700 rounded flex items-center justify-center cursor-pointer" onClick={() => redirectToOneDrive('ventas-marketing')}>
-                  <span className="text-white text-xs">Ventas</span>
-                </div>
-              </div>
-              
-              {/* Eventos destacados */}
-              <div className="mt-6">
-                <h3 className="text-lg font-semibold text-amber-800 mb-3 text-center">Próximos Eventos</h3>
-                <div className="bg-amber-50 p-4 rounded-lg">
-                  <div className="flex items-start mb-3">
-                    <div className="bg-green-600 text-white text-xs font-bold py-1 px-2 rounded mr-3">18 OCT</div>
-                    <div className="text-sm text-amber-700">Inspección de plantaciones</div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="bg-blue-600 text-white text-xs font-bold py-1 px-2 rounded mr-3">20 OCT</div>
-                    <div className="text-sm text-amber-700">Reunión de investigación</div>
-                  </div>
-                </div>
-              </div>
+<div className="container mx-auto px-4 py-8">
+  <div className="flex flex-col lg:flex-row gap-8">
+    {/* Galería */}
+    <div className="w-full lg:w-1/3">
+      <div className="bg-white rounded-xl shadow-md p-4 h-full">
+        <h2 className="text-xl font-bold text-amber-900 mb-4 text-center">Galería AIRU</h2>
+        
+        {/* Imagen principal de producción */}
+        <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
+          <div className="h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative">
+            <img 
+              src="https://1drv.ms/u/c/092e39edf7b9ea99/EfDDZlEf0zRNjcC7rCXqPnwB27ef0VicFl2rdMDmrx8Q5g?e=LvIIUU" 
+              alt="Proceso de producción AIRU" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center">
+              <span className="text-white text-lg font-semibold">AIRU</span>
             </div>
           </div>
+          <div className="p-3 bg-amber-100 text-amber-800 text-sm text-center border-t border-amber-200">
+            Nuestro proceso de producción y liofilización
+          </div>
+        </div>
+        
+        {/* Miniaturas de imágenes */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {/* Plantaciones */}
+          <div className="h-24 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
+            <img 
+              src="https://1drv.ms/i/c/092e39edf7b9ea99/EYYH5lx1sxpBlrvw7gv-97MBw50zCmh4YlNZQK5k09bLGQ?e=VvvQVE" 
+              alt="Plantaciones AIRU" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600 flex items-center justify-center">
+              <span className="text-white text-xs font-medium">Plantaciones</span>
+            </div>
+          </div>
+
+          {/* I+D */}
+          <div className="h-24 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
+            <img 
+              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+              alt="Investigación y Desarrollo" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-700 flex items-center justify-center">
+              <span className="text-white text-xs font-medium">I+D</span>
+            </div>
+          </div>
+
+          {/* Infraestructura */}
+          <div className="h-24 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
+            <img 
+              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+              alt="Infraestructura AIRU" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-700 to-orange-800 flex items-center justify-center">
+              <span className="text-white text-xs font-medium">Infraestructura</span>
+            </div>
+          </div>
+
+          {/* Ventas */}
+          <div className="h-24 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center relative">
+            <img 
+              src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+              alt="Ventas y Marketing" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-800 to-orange-900 flex items-center justify-center">
+              <span className="text-white text-xs font-medium">Ventas</span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Productos de la empresa */}
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold text-amber-800 mb-3 text-center">Nuestros Productos</h3>
+          <div className="space-y-4">
+            {/* Producto 1 */}
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
+              <div className="flex items-center mb-2">
+                <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-white">🍓</span>
+                </div>
+                <h4 className="font-semibold text-amber-900">Pulpa de Achachairú</h4>
+              </div>
+              <p className="text-sm text-amber-700">
+                Nuestra pulpa de achachairú se elabora bajo estrictos estándares de calidad.
+              </p>
+            </div>
+
+            {/* Producto 2 */}
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
+              <div className="flex items-center mb-2">
+                <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-white">🥬</span>
+                </div>
+                <h4 className="font-semibold text-amber-900">Chips Liofilizados</h4>
+              </div>
+              <p className="text-sm text-amber-700">
+                Experimenta la magia del achachairú con nuestros chips liofilizados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
           
 {/* Áreas */}
 <div className="w-full lg:w-2/3">
