@@ -310,267 +310,276 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Áreas */}
-          <div className="w-full lg:w-2/3">
-            <h2 className="text-3xl font-bold text-center text-amber-900 mb-8">Nuestras Áreas</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* PRODUCCIÓN */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-500">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('produccion')}>
-                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-industry text-orange-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-orange-800">Producción</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'produccion' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('produccion')}>
-                      <div className="text-orange-700 flex items-center">
-                        <i className="fas fa-cogs mr-2"></i>Producción
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('produccion-seguimiento')}>
-                      <div className="text-orange-700 flex items-center">
-                        <i className="fas fa-chart-line mr-2"></i>Seguimiento
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('produccion-liofilizacion')}>
-                      <div className="text-orange-700 flex items-center">
-                        <i className="fas fa-snowflake mr-2"></i>Liofilización
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* PLANTACIONES */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-plantacion')}>
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-seedling text-green-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-green-800">Plantaciones</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'plantaciones' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-mosca')}>
-                      <div className="text-green-700 flex items-center">
-                        <i className="fas fa-bug mr-2"></i>Control de Mosca
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-plantacion')}>
-                      <div className="text-green-700 flex items-center">
-                        <i className="fas fa-leaf mr-2"></i>Plantación
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-propiedad')}>
-                      <div className="text-green-700 flex items-center">
-                        <i className="fas fa-landmark mr-2"></i>Propiedad
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-tractor')}>
-                      <div className="text-green-700 flex items-center">
-                        <i className="fas fa-tractor mr-2"></i>Maquinaria
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* LOGÍSTICA */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-500">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('logistica-compra-de-frutas')}>
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-truck-loading text-amber-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-amber-800">Logística</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'logistica' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('logistica-compra-de-frutas')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-apple-alt mr-2"></i>Compra de Frutas
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('logistica-compra-abastecimientos-insumos-planta')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-boxes mr-2"></i>Insumos Planta
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('logistica-exportacion')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-globe-americas mr-2"></i>Exportación
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* CALIDAD */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-600">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('calidad-seguridad')}>
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-award text-amber-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-amber-800">Calidad</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'calidad' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-seguridad')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-shield-alt mr-2"></i>Calidad y Seguridad
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-certificaciones')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-certificate mr-2"></i>Certificaciones
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-normas')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-book mr-2"></i>Normas
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-procedimientos')}>
-                      <div className="text-amber-700 flex items-center">
-                        <i className="fas fa-clipboard-list mr-2"></i>Procedimientos
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* VENTAS */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-700">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('ventas-marketing')}>
-                  <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-chart-line text-amber-700 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-amber-900">Ventas</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'ventas' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('ventas-manual-marca')}>
-                      <div className="text-amber-800 flex items-center">
-                        <i className="fas fa-book-open mr-2"></i>Manual de Marca
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('ventas-marketing')}>
-                      <div className="text-amber-800 flex items-center">
-                        <i className="fas fa-bullhorn mr-2"></i>Marketing
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('ventas-varios')}>
-                      <div className="text-amber-800 flex items-center">
-                        <i className="fas fa-archive mr-2"></i>Varios
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* RECURSOS HUMANOS */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-700">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('rh')}>
-                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-users text-orange-700 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-orange-900">Recursos Humanos</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'rh' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('rh')}>
-                      <div className="text-orange-800 flex items-center">
-                        <i className="fas fa-user-tie mr-2"></i>RRHH Principal
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('rh-capacitaciones')}>
-                      <div className="text-orange-800 flex items-center">
-                        <i className="fas fa-graduation-cap mr-2"></i>Capacitaciones
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* ADMINISTRACIÓN */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-600">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('admin-finanzas-contabilidad-legal')}>
-                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-calculator text-orange-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-orange-800">Administración</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'admin' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('admin-finanzas-contabilidad-legal')}>
-                      <div className="text-orange-700 flex items-center">
-                        <i className="fas fa-money-bill-wave mr-2"></i>Finanzas y Contabilidad
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('admin-activos-infraestructura')}>
-                      <div className="text-orange-700 flex items-center">
-                        <i className="fas fa-building mr-2"></i>Activos e Infraestructura
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('admin-firma-digital')}>
-                      <div className="text-orange-700 flex items-center">
-                        <i className="fas fa-signature mr-2"></i>Firma Digital
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* INVESTIGACIÓN Y DESARROLLO */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('investigacion-desarrollo')}>
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-flask text-blue-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-blue-800">Investigación y Desarrollo</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'investigacion' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-blue-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('investigacion-desarrollo')}>
-                      <div className="text-blue-700 flex items-center">
-                        <i className="fas fa-microscope mr-2"></i>Investigación y Desarrollo
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* ÁREA GENERAL - CORREGIDA */}
-              <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-gray-500">
-                <div className="flex items-center mb-4 cursor-pointer" onClick={() => redirectToOneDrive('general-varios')}>
-                  <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4">
-                    <i className="fas fa-folder-open text-gray-600 text-xl"></i>
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800">General</h3>
-                </div>
-                <div className={`submenu ${openMenu === 'general' ? 'block' : 'hidden'}`}>
-                  <ul className="space-y-2">
-                    <li className="p-2 hover:bg-gray-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('general-cartas')}>
-                      <div className="text-gray-700 flex items-center">
-                        <i className="fas fa-envelope mr-2"></i>Cartas
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-gray-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('general-reuniones')}>
-                      <div className="text-gray-700 flex items-center">
-                        <i className="fas fa-calendar-alt mr-2"></i>Reuniones - Cartas
-                      </div>
-                    </li>
-                    <li className="p-2 hover:bg-gray-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('general-varios')}>
-                      <div className="text-gray-700 flex items-center">
-                        <i className="fas fa-archive mr-2"></i>Varios
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+{/* Áreas */}
+<div className="w-full lg:w-2/3">
+  <h2 className="text-3xl font-bold text-center text-amber-900 mb-8">Nuestras Áreas</h2>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* PRODUCCIÓN */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-500">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('produccion')}>
+        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-industry text-orange-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-orange-800">Producción</h3>
+        <i className={`fas fa-chevron-${openMenu === 'produccion' ? 'up' : 'down'} ml-auto text-orange-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'produccion' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('produccion')}>
+            <div className="text-orange-700 flex items-center">
+              <i className="fas fa-cogs mr-2"></i>Producción
             </div>
+          </li>
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('produccion-seguimiento')}>
+            <div className="text-orange-700 flex items-center">
+              <i className="fas fa-chart-line mr-2"></i>Seguimiento
+            </div>
+          </li>
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('produccion-liofilizacion')}>
+            <div className="text-orange-700 flex items-center">
+              <i className="fas fa-snowflake mr-2"></i>Liofilización
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* PLANTACIONES */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('plantaciones')}>
+        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-seedling text-green-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-green-800">Plantaciones</h3>
+        <i className={`fas fa-chevron-${openMenu === 'plantaciones' ? 'up' : 'down'} ml-auto text-green-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'plantaciones' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-mosca')}>
+            <div className="text-green-700 flex items-center">
+              <i className="fas fa-bug mr-2"></i>Control de Mosca
+            </div>
+          </li>
+          <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-plantacion')}>
+            <div className="text-green-700 flex items-center">
+              <i className="fas fa-leaf mr-2"></i>Plantación
+            </div>
+          </li>
+          <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-propiedad')}>
+            <div className="text-green-700 flex items-center">
+              <i className="fas fa-landmark mr-2"></i>Propiedad
+            </div>
+          </li>
+          <li className="p-2 hover:bg-green-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('plantaciones-tractor')}>
+            <div className="text-green-700 flex items-center">
+              <i className="fas fa-tractor mr-2"></i>Maquinaria
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* LOGÍSTICA */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-500">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('logistica')}>
+        <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-truck-loading text-amber-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-amber-800">Logística</h3>
+        <i className={`fas fa-chevron-${openMenu === 'logistica' ? 'up' : 'down'} ml-auto text-amber-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'logistica' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('logistica-compra-de-frutas')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-apple-alt mr-2"></i>Compra de Frutas
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('logistica-compra-abastecimientos-insumos-planta')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-boxes mr-2"></i>Insumos Planta
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('logistica-exportacion')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-globe-americas mr-2"></i>Exportación
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* CALIDAD */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-600">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('calidad')}>
+        <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-award text-amber-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-amber-800">Calidad</h3>
+        <i className={`fas fa-chevron-${openMenu === 'calidad' ? 'up' : 'down'} ml-auto text-amber-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'calidad' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-seguridad')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-shield-alt mr-2"></i>Calidad y Seguridad
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-certificaciones')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-certificate mr-2"></i>Certificaciones
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-normas')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-book mr-2"></i>Normas
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('calidad-procedimientos')}>
+            <div className="text-amber-700 flex items-center">
+              <i className="fas fa-clipboard-list mr-2"></i>Procedimientos
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* VENTAS */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-amber-700">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('ventas')}>
+        <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-chart-line text-amber-700 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-amber-900">Ventas</h3>
+        <i className={`fas fa-chevron-${openMenu === 'ventas' ? 'up' : 'down'} ml-auto text-amber-700`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'ventas' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('ventas-manual-marca')}>
+            <div className="text-amber-800 flex items-center">
+              <i className="fas fa-book-open mr-2"></i>Manual de Marca
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('ventas-marketing')}>
+            <div className="text-amber-800 flex items-center">
+              <i className="fas fa-bullhorn mr-2"></i>Marketing
+            </div>
+          </li>
+          <li className="p-2 hover:bg-amber-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('ventas-varios')}>
+            <div className="text-amber-800 flex items-center">
+              <i className="fas fa-archive mr-2"></i>Varios
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* RECURSOS HUMANOS */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-700">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('rh')}>
+        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-users text-orange-700 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-orange-900">Recursos Humanos</h3>
+        <i className={`fas fa-chevron-${openMenu === 'rh' ? 'up' : 'down'} ml-auto text-orange-700`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'rh' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('rh')}>
+            <div className="text-orange-800 flex items-center">
+              <i className="fas fa-user-tie mr-2"></i>RRHH Principal
+            </div>
+          </li>
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('rh-capacitaciones')}>
+            <div className="text-orange-800 flex items-center">
+              <i className="fas fa-graduation-cap mr-2"></i>Capacitaciones
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* ADMINISTRACIÓN */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-orange-600">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('admin')}>
+        <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-calculator text-orange-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-orange-800">Administración</h3>
+        <i className={`fas fa-chevron-${openMenu === 'admin' ? 'up' : 'down'} ml-auto text-orange-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'admin' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('admin-finanzas-contabilidad-legal')}>
+            <div className="text-orange-700 flex items-center">
+              <i className="fas fa-money-bill-wave mr-2"></i>Finanzas y Contabilidad
+            </div>
+          </li>
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('admin-activos-infraestructura')}>
+            <div className="text-orange-700 flex items-center">
+              <i className="fas fa-building mr-2"></i>Activos e Infraestructura
+            </div>
+          </li>
+          <li className="p-2 hover:bg-orange-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('admin-firma-digital')}>
+            <div className="text-orange-700 flex items-center">
+              <i className="fas fa-signature mr-2"></i>Firma Digital
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* INVESTIGACIÓN Y DESARROLLO */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('investigacion')}>
+        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-flask text-blue-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-blue-800">Investigación y Desarrollo</h3>
+        <i className={`fas fa-chevron-${openMenu === 'investigacion' ? 'up' : 'down'} ml-auto text-blue-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'investigacion' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-blue-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('investigacion-desarrollo')}>
+            <div className="text-blue-700 flex items-center">
+              <i className="fas fa-microscope mr-2"></i>Investigación y Desarrollo
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* ÁREA GENERAL */}
+    <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-gray-500">
+      <div className="flex items-center mb-4 cursor-pointer" onClick={() => toggleSubmenu('general')}>
+        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+          <i className="fas fa-folder-open text-gray-600 text-xl"></i>
+        </div>
+        <h3 className="text-xl font-semibold text-gray-800">General</h3>
+        <i className={`fas fa-chevron-${openMenu === 'general' ? 'up' : 'down'} ml-auto text-gray-600`}></i>
+      </div>
+      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'general' ? 'max-h-96' : 'max-h-0'}`}>
+        <ul className="space-y-2">
+          <li className="p-2 hover:bg-gray-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('general-cartas')}>
+            <div className="text-gray-700 flex items-center">
+              <i className="fas fa-envelope mr-2"></i>Cartas
+            </div>
+          </li>
+          <li className="p-2 hover:bg-gray-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('general-reuniones')}>
+            <div className="text-gray-700 flex items-center">
+              <i className="fas fa-calendar-alt mr-2"></i>Reuniones - Cartas
+            </div>
+          </li>
+          <li className="p-2 hover:bg-gray-50 rounded cursor-pointer" onClick={() => redirectToOneDrive('general-varios')}>
+            <div className="text-gray-700 flex items-center">
+              <i className="fas fa-archive mr-2"></i>Varios
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
             
             {/* Indicadores */}
             <div className="bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-xl shadow-lg p-8 mt-12">
