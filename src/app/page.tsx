@@ -34,10 +34,10 @@ export default function Home() {
     // Simular validación de credenciales
     setTimeout(() => {
       const validUsers = [
-        { username: 'administracion', password: 'admin2025', role: 'Emily' },
-        { username: 'produccion', password: 'prod2025', role: 'Rodrigo' },
-        { username: 'gerencia', password: 'gerencia2025', role: 'Fernando' },
-        { username: 'logistica', password: 'logistica2025', role: 'Daniela' },
+        { username: 'Emily', password: 'admin2025', role: 'administracio' },
+        { username: 'Rodrigo', password: 'prod2025', role: 'produccion' },
+        { username: 'Fernado', password: 'gerencia2025', role: 'gerencia' },
+        { username: 'Daniela', password: 'logistica2025', role: 'Logistica' },
 
       ];
 
@@ -125,13 +125,13 @@ export default function Home() {
     window.location.href = enlace;
   };
 
-  // Imágenes para el carrusel
-  const carouselImages = [
-    'https://1drv.ms/i/c/092e39edf7b9ea99/EYYH5lx1sxpBlrvw7gv-97MBw50zCmh4YlNZQK5k09bLGQ?e=VvvQVE',
-    'https://1drv.ms/i/c/092e39edf7b9ea99/ESEQkzPMb7RLpbth0CxaQnEBCF68IsUe-ZcE3VB_Xpbm3w?e=vMyeE6',
-    'https://1drv.ms/i/c/092e39edf7b9ea99/EfDDZlEf0zRNjcC7rCXqPnwB27ef0VicFl2rdMDmrx8Q5g?e=LvIIUU',
-    'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'
-  ];
+    // Imágenes para el carrusel
+    const carouselImages = [
+      'https://i.ibb.co/prWnw63p/MG-0034.jpg',
+      'https://i.ibb.co/m5mw3sw3/MG-0028.jpg',
+      'https://i.ibb.co/XfcVnR8g/MG-0019.jpg',
+      'https://i.ibb.co/bjdtqpGP/MG-0006.jpg'
+    ];
 
   // Si el usuario no está autenticado, mostrar formulario de login
   if (!isAuthenticated) {
@@ -141,7 +141,7 @@ export default function Home() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
               <img 
-                src="https://1drv.ms/i/c/092e39edf7b9ea99/ESEQkzPMb7RLpbth0CxaQnEBCF68IsUe-ZcE3VB_Xpbm3w?e=psVZIh" 
+                src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
                 alt="AIRU Logo" 
                 className="h-16 w-16 object-contain mr-3"
               />
@@ -226,7 +226,7 @@ export default function Home() {
             <div className="flex items-center mb-4 md:mb-0">
               <div className="flex items-center">
                 <img 
-                  src="https://1drv.ms/i/c/092e39edf7b9ea99/ESEQkzPMb7RLpbth0CxaQnEBCF68IsUe-ZcE3VB_Xpbm3w?e=vMyeE6" 
+                  src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
                   alt="AIRU Logo" 
                   className="h-12 w-12 object-contain mr-3"
                 />
@@ -686,23 +686,23 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
                   <i className="fas fa-box text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">Producción</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">425 uds/día</p>
+                  <h4 className="font-bold text-amber-900">Arancelaria</h4>
+                  <p className="text-2xl font-bold text-amber-900 mt-2">0813.40.00.00</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
                   <i className="fas fa-seedling text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">Plantaciones</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">120 Ha</p>
+                  <h4 className="font-bold text-amber-900">Chips al mes</h4>
+                  <p className="text-2xl font-bold text-amber-900 mt-2">1000</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
                   <i className="fas fa-flask text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">I+D</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">15 proyectos</p>
+                  <h4 className="font-bold text-amber-900">Pulpa al mes</h4>
+                  <p className="text-2xl font-bold text-amber-900 mt-2">1.000 Kg</p>
                 </div>
                 <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
                   <i className="fas fa-building text-3xl mb-3 text-amber-900"></i>
                   <h4 className="font-bold text-amber-900">Infraestructura</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">8 plantas</p>
+                  <p className="text-2xl font-bold text-amber-900 mt-2">1 planta</p>
                 </div>
               </div>
             </div>
@@ -716,11 +716,6 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <div className="flex items-center">
-                <img 
-                  src="https://1drv.ms/i/c/092e39edf7b9ea99/ESEQkzPMb7RLpbth0CxaQnEBCF68IsUe-ZcE3VB_Xpbm3w?e=vMyeE6" 
-                  alt="AIRU Logo" 
-                  className="h-10 w-10 object-contain mr-3"
-                />
                 <h3 className="text-xl font-bold text-yellow-200">AIRU</h3>
               </div>
               <p className="text-sm text-yellow-200 mt-1">Innovación y calidad en cada producto</p>
