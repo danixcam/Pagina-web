@@ -38,7 +38,6 @@ export default function Home() {
         { username: 'Rodrigo', password: 'prod2025', role: 'produccion' },
         { username: 'Fernado', password: 'nano2025', role: 'gerencia' },
         { username: 'Daniela', password: 'dan2025', role: 'Logistica' },
-
       ];
 
       const user = validUsers.find(
@@ -112,7 +111,7 @@ export default function Home() {
       'investigacion-desarrollo': 'https://1drv.ms/f/c/092e39edf7b9ea99/ErlenIsFwlJBmK6tY7pRdR4BAyLjKnXYbTUZnVuErJhsbw?e=GYWAo1',
       
       // PROCEDIMIENTOS
-      'procedimientos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EXAMPLE_LINK_HERE?e=EXAMPLE',
+      'procedimientos': '/procedimientos',
       
       // GENERAL
       'general-cartas': 'https://1drv.ms/f/c/092e39edf7b9ea99/Esc3i-f5juRFtPiNh8UePjIBIl18Kc9hBQukPWh8I-npNA?e=Pe1uOM',
@@ -122,37 +121,37 @@ export default function Home() {
     
     const enlace = enlaces[carpeta] || '#';
     // Redirección real
-    window.location.href = enlace;
+    if (carpeta === 'procedimientos') {
+      window.location.href = enlace;
+    } else {
+      window.open(enlace, '_blank');
+    }
   };
 
-    // Imágenes para el carrusel
-    const carouselImages = [
-      'https://i.ibb.co/prWnw63p/MG-0034.jpg',
-      'https://i.ibb.co/m5mw3sw3/MG-0028.jpg',
-      'https://i.ibb.co/XfcVnR8g/MG-0019.jpg',
-      'https://i.ibb.co/bjdtqpGP/MG-0006.jpg'
-    ];
+  // Imágenes para el carrusel
+  const carouselImages = [
+    'https://i.ibb.co/prWnw63p/MG-0034.jpg',
+    'https://i.ibb.co/m5mw3sw3/MG-0028.jpg',
+    'https://i.ibb.co/XfcVnR8g/MG-0019.jpg',
+    'https://i.ibb.co/bjdtqpGP/MG-0006.jpg'
+  ];
 
   // Si el usuario no está autenticado, mostrar formulario de login
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-amber-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border-4 border-yellow-400">
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border-4 border-orange-400">
           <div className="text-center mb-8">
-            <div className="flex items-center justify-center mb-4">
-              <img 
-                src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
-                alt="AIRU Logo" 
-                className="h-16 w-16 object-contain mr-3"
-              />
-              <h1 className="text-5xl font-bold text-yellow-600">
-                AIRU
-                <span className="text-green-500 text-4xl ml-1">
-                  <i className="fas fa-leaf"></i>
-                </span>
-              </h1>
+            <div className="flex flex-col items-center justify-center mb-4">
+              <div className="h-24 w-24 mb-4 flex items-center justify-center bg-white rounded-xl p-2 shadow-lg border-2 border-orange-300">
+                <img 
+                  src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
+                  alt="Logo" 
+                  className="max-h-full max-w-full object-scale-down"
+                />
+              </div>
             </div>
-            <p className="text-yellow-700 mt-2 font-semibold text-lg">Sistema Interno - Acceso Restringido</p>
+            <p className="text-orange-700 mt-2 font-semibold text-lg">Sistema Interno - Acceso Restringido</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
@@ -163,7 +162,7 @@ export default function Home() {
             )}
 
             <div>
-              <label htmlFor="username" className="block text-sm font-semibold text-yellow-700 mb-2">
+              <label htmlFor="username" className="block text-sm font-semibold text-orange-700 mb-2">
                 Usuario
               </label>
               <input
@@ -171,14 +170,14 @@ export default function Home() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-yellow-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all duration-200"
+                className="w-full px-4 py-3 border-2 border-orange-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200"
                 placeholder="Ingrese su usuario"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-yellow-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-semibold text-orange-700 mb-2">
                 Contraseña
               </label>
               <input
@@ -186,7 +185,7 @@ export default function Home() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-yellow-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all duration-200"
+                className="w-full px-4 py-3 border-2 border-orange-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200"
                 placeholder="Ingrese su contraseña"
                 required
               />
@@ -195,7 +194,7 @@ export default function Home() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 text-white py-3 px-4 rounded-xl font-bold hover:from-yellow-600 hover:to-amber-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 disabled:opacity-70 shadow-lg transform hover:scale-105"
+              className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white py-3 px-4 rounded-xl font-bold hover:from-orange-600 hover:to-amber-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 disabled:opacity-70 shadow-lg transform hover:scale-105"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -208,8 +207,8 @@ export default function Home() {
             </button>
           </form>
 
-          <div className="mt-6 p-4 bg-yellow-50 rounded-xl text-sm text-yellow-800 border-2 border-yellow-200">
-            <p className="font-bold text-center">Sistema Interno AIRU</p>
+          <div className="mt-6 p-4 bg-orange-50 rounded-xl text-sm text-orange-800 border-2 border-orange-200">
+            <p className="font-bold text-center">Sistema Interno</p>
             <p className="mt-2 text-center">Acceso exclusivo para personal autorizado</p>
           </div>
         </div>
@@ -219,22 +218,23 @@ export default function Home() {
 
   // Contenido para usuarios autenticados
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-amber-100">
-      <header className="bg-gradient-to-r from-yellow-500 to-amber-600 shadow-2xl border-b-4 border-yellow-400">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-amber-100">
+      <header className="bg-gradient-to-r from-orange-500 to-amber-600 shadow-2xl border-b-4 border-orange-400">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0">
               <div className="flex items-center">
-                <img 
-                  src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
-                  alt="AIRU Logo" 
-                  className="h-12 w-12 object-contain mr-3"
-                />
-
+                <div className="h-16 w-16 mr-4 flex items-center justify-center bg-white rounded-lg p-1 shadow-lg border-2 border-orange-300">
+                  <img 
+                    src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
+                    alt="Logo" 
+                    className="max-h-full max-w-full object-scale-down"
+                  />
+                </div>
               </div>
               <button
                 onClick={handleLogout}
-                className="ml-6 text-yellow-100 hover:text-white text-sm flex items-center bg-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-700 transition-colors"
+                className="ml-6 text-orange-100 hover:text-white text-sm flex items-center bg-orange-600 px-3 py-2 rounded-lg hover:bg-orange-700 transition-colors shadow-md"
                 title="Cerrar sesión"
               >
                 <i className="fas fa-sign-out-alt mr-2"></i>
@@ -244,31 +244,31 @@ export default function Home() {
             
             <nav className="flex flex-wrap justify-center gap-2 md:gap-4">
               <button 
-                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'inicio' ? 'bg-yellow-400 text-amber-900 shadow-lg' : 'text-yellow-100 hover:bg-yellow-400 hover:text-amber-900'}`}
+                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'inicio' ? 'bg-orange-400 text-orange-900 shadow-lg' : 'text-orange-100 hover:bg-orange-400 hover:text-orange-900'}`}
                 onClick={() => setActiveTab('inicio')}
               >
                 Inicio
               </button>
               <button 
-                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'vision' ? 'bg-yellow-400 text-amber-900 shadow-lg' : 'text-yellow-100 hover:bg-yellow-400 hover:text-amber-900'}`}
+                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'vision' ? 'bg-orange-400 text-orange-900 shadow-lg' : 'text-orange-100 hover:bg-orange-400 hover:text-orange-900'}`}
                 onClick={() => setActiveTab('vision')}
               >
                 Visión
               </button>
               <button 
-                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'mision' ? 'bg-yellow-400 text-amber-900 shadow-lg' : 'text-yellow-100 hover:bg-yellow-400 hover:text-amber-900'}`}
+                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'mision' ? 'bg-orange-400 text-orange-900 shadow-lg' : 'text-orange-100 hover:bg-orange-400 hover:text-orange-900'}`}
                 onClick={() => setActiveTab('mision')}
               >
                 Misión
               </button>
               <button 
-                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'paneles' ? 'bg-yellow-400 text-amber-900 shadow-lg' : 'text-yellow-100 hover:bg-yellow-400 hover:text-amber-900'}`}
+                className={`px-4 py-2 rounded-xl font-bold transition-all duration-200 ${activeTab === 'paneles' ? 'bg-orange-400 text-orange-900 shadow-lg' : 'text-orange-100 hover:bg-orange-400 hover:text-orange-900'}`}
                 onClick={() => setActiveTab('paneles')}
               >
                 Paneles
               </button>
               <button 
-                className={`px-4 py-2 rounded-xl font-bold bg-yellow-400 text-amber-900 shadow-lg`}
+                className={`px-4 py-2 rounded-xl font-bold bg-orange-400 text-orange-900 shadow-lg`}
               >
                 <i className="fas fa-user mr-2"></i>
                 {currentUser}
@@ -282,100 +282,100 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Galería */}
           <div className="w-full lg:w-1/3">
-            <div className="bg-white rounded-2xl shadow-lg p-6 h-full border-4 border-yellow-300">
-              <h2 className="text-2xl font-bold text-amber-900 mb-6 text-center border-b-2 border-yellow-200 pb-3">Galería AIRU</h2>
+            <div className="bg-white rounded-2xl shadow-lg p-6 h-full border-4 border-orange-300">
+              <h2 className="text-2xl font-bold text-orange-900 mb-6 text-center border-b-2 border-orange-200 pb-3">Galería</h2>
               
               {/* Carrusel de imágenes */}
-              <div className="mb-6 rounded-xl overflow-hidden shadow-xl border-2 border-yellow-400">
-                <div className="relative h-48 bg-gradient-to-r from-yellow-400 to-amber-500 overflow-hidden">
+              <div className="mb-6 rounded-xl overflow-hidden shadow-xl border-2 border-orange-400">
+                <div className="relative h-48 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
                   <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full">
                     {carouselImages.map((img, index) => (
                       <div key={index} className="flex-shrink-0 w-full h-full snap-center">
                         <img 
                           src={img} 
-                          alt={`Imagen ${index + 1} AIRU`}
+                          alt={`Imagen ${index + 1}`}
                           className="w-full h-full object-cover"
                         />
                       </div>
                     ))}
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
-                    <span className="text-white text-sm font-semibold">AIRU</span>
+                    <span className="text-white text-sm font-semibold">Innovación y Calidad</span>
                   </div>
                 </div>
               </div>
               
-{/* Miniaturas de imágenes */}
-<div className="grid grid-cols-2 gap-4 mb-6">
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
-    <img 
-      src="https://i.ibb.co/prWnw63p/MG-0034.jpg" 
-      alt="Plantaciones" 
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">Plantaciones</span>
-    </div>
-  </div>
-  
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
-    <img 
-      src="https://i.ibb.co/MxRj4n6K/MG-0234.jpg" 
-      alt="Pulpa" 
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">Pulpa</span>
-    </div>
-  </div>
-  
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
-    <img 
-      src="https://i.ibb.co/trtnRZW/MG-0280.jpg" 
-      alt="Equipo" 
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">Equipo</span>
-    </div>
-  </div>
-  
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
-    <img 
-      src="https://i.ibb.co/Q3rR7MjS/MG-0265.jpg" 
-      alt="Instalaciones" 
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">Instalaciones</span>
-    </div>
-  </div>
-</div>
+              {/* Miniaturas de imágenes */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
+                  <img 
+                    src="https://i.ibb.co/prWnw63p/MG-0034.jpg" 
+                    alt="Plantaciones" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-white font-bold text-sm text-center">Plantaciones</span>
+                  </div>
+                </div>
+                
+                <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
+                  <img 
+                    src="https://i.ibb.co/MxRj4n6K/MG-0234.jpg" 
+                    alt="Pulpa" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-white font-bold text-sm text-center">Pulpa</span>
+                  </div>
+                </div>
+                
+                <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
+                  <img 
+                    src="https://i.ibb.co/trtnRZW/MG-0280.jpg" 
+                    alt="Equipo" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-white font-bold text-sm text-center">Equipo</span>
+                  </div>
+                </div>
+                
+                <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
+                  <img 
+                    src="https://i.ibb.co/Q3rR7MjS/MG-0265.jpg" 
+                    alt="Instalaciones" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-white font-bold text-sm text-center">Instalaciones</span>
+                  </div>
+                </div>
+              </div>
               
               {/* Productos de la empresa */}
               <div className="mt-6">
-                <h3 className="text-lg font-bold text-amber-800 mb-4 text-center border-b border-yellow-200 pb-2">Nuestros Productos</h3>
+                <h3 className="text-lg font-bold text-orange-800 mb-4 text-center border-b border-orange-200 pb-2">Nuestros Productos</h3>
                 <div className="space-y-4">
-                  <div className="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-4 border-2 border-yellow-300 shadow-sm">
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4 border-2 border-orange-300 shadow-sm">
                     <div className="flex items-center mb-2">
-                      <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3 shadow-md">
-                        <span className="text-white text-lg"></span>
+                      <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-3 shadow-md">
+                        <span className="text-white text-lg">🍓</span>
                       </div>
-                      <h4 className="font-bold text-amber-900">Pulpa de Achachairú</h4>
+                      <h4 className="font-bold text-orange-900">Pulpa de Achachairú</h4>
                     </div>
-                    <p className="text-sm text-amber-800">
+                    <p className="text-sm text-orange-800">
                       Nuestra pulpa de achachairú se elabora bajo estrictos estándares de calidad.
                     </p>
                   </div>
 
-                  <div className="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-4 border-2 border-yellow-300 shadow-sm">
+                  <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4 border-2 border-orange-300 shadow-sm">
                     <div className="flex items-center mb-2">
                       <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center mr-3 shadow-md">
-                        <span className="text-white text-lg"></span>
+                        <span className="text-white text-lg">🥬</span>
                       </div>
-                      <h4 className="font-bold text-amber-900">Chips Liofilizados</h4>
+                      <h4 className="font-bold text-orange-900">Chips Liofilizados</h4>
                     </div>
-                    <p className="text-sm text-amber-800">
+                    <p className="text-sm text-orange-800">
                       Experimenta la magia del achachairú con nuestros chips liofilizados.
                     </p>
                   </div>
@@ -386,7 +386,7 @@ export default function Home() {
           
           {/* Áreas */}
           <div className="w-full lg:w-2/3">
-            <h2 className="text-4xl font-bold text-center text-amber-900 mb-8 border-b-4 border-yellow-400 pb-3">Nuestras Áreas</h2>
+            <h2 className="text-4xl font-bold text-center text-orange-900 mb-8 border-b-4 border-orange-400 pb-3">Nuestras Áreas</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* PRODUCCIÓN */}
@@ -676,28 +676,28 @@ export default function Home() {
             </div>
             
             {/* Indicadores */}
-            <div className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white rounded-2xl shadow-2xl p-8 mt-12 border-4 border-yellow-300">
-              <h3 className="text-3xl font-bold mb-8 text-center text-amber-900">Indicadores Clave AIRU</h3>
+            <div className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-2xl shadow-2xl p-8 mt-12 border-4 border-orange-300">
+              <h3 className="text-3xl font-bold mb-8 text-center text-orange-900">Indicadores Clave</h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
-                  <i className="fas fa-box text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">Arancelaria</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">0813.40.00.00</p>
+                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-orange-300 shadow-lg">
+                  <i className="fas fa-box text-3xl mb-3 text-orange-900"></i>
+                  <h4 className="font-bold text-orange-900">Arancelaria</h4>
+                  <p className="text-2xl font-bold text-orange-900 mt-2">0813.40.00.00</p>
                 </div>
-                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
-                  <i className="fas fa-seedling text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">Chips al mes</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">1000</p>
+                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-orange-300 shadow-lg">
+                  <i className="fas fa-seedling text-3xl mb-3 text-orange-900"></i>
+                  <h4 className="font-bold text-orange-900">Chips al mes</h4>
+                  <p className="text-2xl font-bold text-orange-900 mt-2">1000</p>
                 </div>
-                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
-                  <i className="fas fa-flask text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">Pulpa al mes</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">1.000 Kg</p>
+                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-orange-300 shadow-lg">
+                  <i className="fas fa-flask text-3xl mb-3 text-orange-900"></i>
+                  <h4 className="font-bold text-orange-900">Pulpa al mes</h4>
+                  <p className="text-2xl font-bold text-orange-900 mt-2">1.000 Kg</p>
                 </div>
-                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-yellow-300 shadow-lg">
-                  <i className="fas fa-building text-3xl mb-3 text-amber-900"></i>
-                  <h4 className="font-bold text-amber-900">Infraestructura</h4>
-                  <p className="text-2xl font-bold text-amber-900 mt-2">1 planta</p>
+                <div className="bg-white/30 backdrop-blur-sm p-6 rounded-xl text-center border-2 border-orange-300 shadow-lg">
+                  <i className="fas fa-building text-3xl mb-3 text-orange-900"></i>
+                  <h4 className="font-bold text-orange-900">Infraestructura</h4>
+                  <p className="text-2xl font-bold text-orange-900 mt-2">1 planta</p>
                 </div>
               </div>
             </div>
@@ -706,18 +706,24 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-yellow-600 to-amber-700 text-yellow-100 py-8 mt-12 border-t-4 border-yellow-400">
+      <footer className="bg-gradient-to-r from-orange-600 to-amber-700 text-orange-100 py-8 mt-12 border-t-4 border-orange-400">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <div className="flex items-center">
-                <h3 className="text-xl font-bold text-yellow-200">AIRU</h3>
+                <div className="h-10 w-10 mr-3 flex items-center justify-center bg-white rounded-lg p-1">
+                  <img 
+                    src="https://i.ibb.co/hRVrjPmY/logo-airu.png" 
+                    alt="Logo" 
+                    className="max-h-full max-w-full object-scale-down"
+                  />
+                </div>
               </div>
-              <p className="text-sm text-yellow-200 mt-1">Innovación y calidad en cada producto</p>
+              <p className="text-sm text-orange-200 mt-1">Innovación y calidad en cada producto</p>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-sm text-yellow-200">© 2025 AIRU. Todos los derechos reservados.</p>
-              <p className="text-sm mt-1 text-yellow-200">Sistema interno corporativo</p>
+              <p className="text-sm text-orange-200">© 2025. Todos los derechos reservados.</p>
+              <p className="text-sm mt-1 text-orange-200">Sistema interno corporativo</p>
             </div>
           </div>
         </div>
