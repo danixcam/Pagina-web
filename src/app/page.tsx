@@ -34,15 +34,11 @@ export default function Home() {
     // Simular validación de credenciales
     setTimeout(() => {
       const validUsers = [
-        { username: 'administracion', password: 'admin2024', role: 'administración' },
-        { username: 'produccion', password: 'prod2024', role: 'producción' },
-        { username: 'calidad', password: 'calidad2024', role: 'calidad' },
-        { username: 'logistica', password: 'logistica2024', role: 'logística' },
-        { username: 'ventas', password: 'ventas2024', role: 'ventas' },
-        { username: 'rh', password: 'rh2024', role: 'recursos humanos' },
-        { username: 'plantaciones', password: 'plantas2024', role: 'plantaciones' },
-        { username: 'investigacion', password: 'invest2024', role: 'investigación y desarrollo' },
-        { username: 'procedimientos', password: 'proc2024', role: 'procedimientos' },
+        { username: 'administracion', password: 'admin2025', role: 'Emily' },
+        { username: 'produccion', password: 'prod2025', role: 'Rodrigo' },
+        { username: 'gerencia', password: 'gerencia2025', role: 'Fernando' },
+        { username: 'logistica', password: 'logistica2025', role: 'Daniela' },
+
       ];
 
       const user = validUsers.find(
@@ -145,7 +141,7 @@ export default function Home() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
               <img 
-                src="https://1drv.ms/i/c/092e39edf7b9ea99/ESEQkzPMb7RLpbth0CxaQnEBCF68IsUe-ZcE3VB_Xpbm3w?e=vMyeE6" 
+                src="https://1drv.ms/i/c/092e39edf7b9ea99/ESEQkzPMb7RLpbth0CxaQnEBCF68IsUe-ZcE3VB_Xpbm3w?e=psVZIh" 
                 alt="AIRU Logo" 
                 className="h-16 w-16 object-contain mr-3"
               />
@@ -314,21 +310,52 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Miniaturas de imágenes */}
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="h-24 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-yellow-300">
-                  <span className="text-white font-bold text-sm text-center">Plantaciones</span>
-                </div>
-                <div className="h-24 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-amber-300">
-                  <span className="text-white font-bold text-sm text-center">I+D</span>
-                </div>
-                <div className="h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300">
-                  <span className="text-white font-bold text-sm text-center">Infraestructura</span>
-                </div>
-                <div className="h-24 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-red-300">
-                  <span className="text-white font-bold text-sm text-center">Ventas</span>
-                </div>
-              </div>
+{/* Miniaturas de imágenes */}
+<div className="grid grid-cols-2 gap-4 mb-6">
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-yellow-300 relative">
+    <img 
+      src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+      alt="Plantaciones" 
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+      <span className="text-white font-bold text-sm text-center">Plantaciones</span>
+    </div>
+  </div>
+  
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-amber-300 relative">
+    <img 
+      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+      alt="Investigación y Desarrollo" 
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+      <span className="text-white font-bold text-sm text-center">I+D</span>
+    </div>
+  </div>
+  
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
+    <img 
+      src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+      alt="Infraestructura" 
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+      <span className="text-white font-bold text-sm text-center">Infraestructura</span>
+    </div>
+  </div>
+  
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-red-300 relative">
+    <img 
+      src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+      alt="Ventas" 
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+      <span className="text-white font-bold text-sm text-center">Ventas</span>
+    </div>
+  </div>
+</div>
               
               {/* Productos de la empresa */}
               <div className="mt-6">
@@ -337,7 +364,7 @@ export default function Home() {
                   <div className="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-4 border-2 border-yellow-300 shadow-sm">
                     <div className="flex items-center mb-2">
                       <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center mr-3 shadow-md">
-                        <span className="text-white text-lg">🍓</span>
+                        <span className="text-white text-lg"></span>
                       </div>
                       <h4 className="font-bold text-amber-900">Pulpa de Achachairú</h4>
                     </div>
@@ -349,7 +376,7 @@ export default function Home() {
                   <div className="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-4 border-2 border-yellow-300 shadow-sm">
                     <div className="flex items-center mb-2">
                       <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center mr-3 shadow-md">
-                        <span className="text-white text-lg">🥬</span>
+                        <span className="text-white text-lg"></span>
                       </div>
                       <h4 className="font-bold text-amber-900">Chips Liofilizados</h4>
                     </div>
@@ -699,7 +726,7 @@ export default function Home() {
               <p className="text-sm text-yellow-200 mt-1">Innovación y calidad en cada producto</p>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-sm text-yellow-200">© 2025. Todos los derechos reservados.</p>
+              <p className="text-sm text-yellow-200">© 2025 AIRU. Todos los derechos reservados.</p>
               <p className="text-sm mt-1 text-yellow-200">Sistema interno corporativo</p>
             </div>
           </div>
