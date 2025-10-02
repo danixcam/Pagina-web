@@ -34,10 +34,10 @@ export default function Home() {
     // Simular validación de credenciales
     setTimeout(() => {
       const validUsers = [
-        { username: 'Emily', password: 'admin2025', role: 'administracio' },
+        { username: 'Emily', password: 'admin2025', role: 'administracion' },
         { username: 'Rodrigo', password: 'prod2025', role: 'produccion' },
-        { username: 'Fernado', password: 'gerencia2025', role: 'gerencia' },
-        { username: 'Daniela', password: 'logistica2025', role: 'Logistica' },
+        { username: 'Fernado', password: 'nano2025', role: 'gerencia' },
+        { username: 'Daniela', password: 'dan2025', role: 'Logistica' },
 
       ];
 
@@ -230,12 +230,7 @@ export default function Home() {
                   alt="AIRU Logo" 
                   className="h-12 w-12 object-contain mr-3"
                 />
-                <h1 className="text-4xl font-bold text-white">
-                  AIRU
-                  <span className="text-green-400 text-3xl ml-1">
-                    <i className="fas fa-leaf"></i>
-                  </span>
-                </h1>
+
               </div>
               <button
                 onClick={handleLogout}
@@ -305,16 +300,16 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3">
-                    <span className="text-white text-sm font-semibold">AIRU - Innovación y Calidad</span>
+                    <span className="text-white text-sm font-semibold">AIRU</span>
                   </div>
                 </div>
               </div>
               
 {/* Miniaturas de imágenes */}
 <div className="grid grid-cols-2 gap-4 mb-6">
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-yellow-300 relative">
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
     <img 
-      src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+      src="https://i.ibb.co/prWnw63p/MG-0034.jpg" 
       alt="Plantaciones" 
       className="w-full h-full object-cover"
     />
@@ -323,36 +318,36 @@ export default function Home() {
     </div>
   </div>
   
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-amber-300 relative">
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
     <img 
-      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-      alt="Investigación y Desarrollo" 
+      src="https://i.ibb.co/MxRj4n6K/MG-0234.jpg" 
+      alt="Pulpa" 
       className="w-full h-full object-cover"
     />
     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">I+D</span>
+      <span className="text-white font-bold text-sm text-center">Pulpa</span>
     </div>
   </div>
   
   <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
     <img 
-      src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-      alt="Infraestructura" 
+      src="https://i.ibb.co/trtnRZW/MG-0280.jpg" 
+      alt="Equipo" 
       className="w-full h-full object-cover"
     />
     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">Infraestructura</span>
+      <span className="text-white font-bold text-sm text-center">Equipo</span>
     </div>
   </div>
   
-  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-red-300 relative">
+  <div className="h-24 rounded-xl overflow-hidden flex items-center justify-center shadow-lg border-2 border-orange-300 relative">
     <img 
-      src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-      alt="Ventas" 
+      src="https://i.ibb.co/Q3rR7MjS/MG-0265.jpg" 
+      alt="Instalaciones" 
       className="w-full h-full object-cover"
     />
     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-      <span className="text-white font-bold text-sm text-center">Ventas</span>
+      <span className="text-white font-bold text-sm text-center">Instalaciones</span>
     </div>
   </div>
 </div>
