@@ -36,7 +36,7 @@ export default function Home() {
       const validUsers = [
         { username: 'Emily', password: 'admin2025', role: 'administracion' },
         { username: 'Rodrigo', password: 'prod2025', role: 'produccion' },
-        { username: 'Fernado', password: 'nano2025', role: 'gerencia' },
+        { username: 'Fernando', password: 'nano2025', role: 'gerencia' },
         { username: 'Daniela', password: 'dan2025', role: 'Logistica' },
       ];
 
