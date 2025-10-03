@@ -111,7 +111,7 @@ export default function Home() {
       'investigacion-desarrollo': 'https://1drv.ms/f/c/092e39edf7b9ea99/ErlenIsFwlJBmK6tY7pRdR4BAyLjKnXYbTUZnVuErJhsbw?e=GYWAo1',
       
       // PROCEDIMIENTOS
-      'procedimientos': '/procedimientos',
+      'procedimientos': 'https://shiny-griffin-92b9a3.netlify.app/',
       
       // GENERAL
       'general-cartas': 'https://1drv.ms/f/c/092e39edf7b9ea99/Esc3i-f5juRFtPiNh8UePjIBIl18Kc9hBQukPWh8I-npNA?e=Pe1uOM',
