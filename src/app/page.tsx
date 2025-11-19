@@ -199,7 +199,7 @@ export default function Home() {
     window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank');
   };
 
-  // Estructura de carpetas por área
+  // Estructura de carpetas por área - Versión compacta
   const areasData = [
     {
       id: 'plantacion',
@@ -218,7 +218,7 @@ export default function Home() {
       color: 'orange',
       carpetas: [
         { nombre: 'Almacén', id: 'almacen', icono: 'fas fa-warehouse' },
-        { nombre: 'Mantenimiento de Equipos', id: 'mantenimiento-de-equipos', icono: 'fas fa-tools' },
+        { nombre: 'Mantenimiento', id: 'mantenimiento-de-equipos', icono: 'fas fa-tools' },
         { nombre: 'Producción', id: 'produccion', icono: 'fas fa-cogs' }
       ]
     },
@@ -228,9 +228,9 @@ export default function Home() {
       icono: 'fas fa-truck-loading',
       color: 'amber',
       carpetas: [
-        { nombre: 'Compra Abastecimiento Insumos Planta', id: 'compra-abastecimiento-insumos-planta', icono: 'fas fa-boxes' },
-        { nombre: 'Cotizaciones Activos Infraestructura', id: 'cotizaciones-activos-infraestructura', icono: 'fas fa-file-invoice-dollar' },
-        { nombre: 'Distribución Transporte', id: 'distribucio-transporte', icono: 'fas fa-truck' },
+        { nombre: 'Compras e Insumos', id: 'compra-abastecimiento-insumos-planta', icono: 'fas fa-boxes' },
+        { nombre: 'Cotizaciones', id: 'cotizaciones-activos-infraestructura', icono: 'fas fa-file-invoice-dollar' },
+        { nombre: 'Distribución', id: 'distribucio-transporte', icono: 'fas fa-truck' },
         { nombre: 'Proveedores', id: 'proveedores', icono: 'fas fa-handshake' }
       ]
     },
@@ -269,8 +269,8 @@ export default function Home() {
         { nombre: 'Contratos', id: 'contratos', icono: 'fas fa-file-contract' },
         { nombre: 'Credenciales', id: 'credenciales', icono: 'fas fa-id-badge' },
         { nombre: 'File Personal', id: 'file-personal', icono: 'fas fa-folder' },
-        { nombre: 'Pago Cargos Sociales', id: 'pago-cargos-socailes', icono: 'fas fa-money-bill-wave' },
-        { nombre: 'Planillas Asistencia', id: 'planillas-asistencia', icono: 'fas fa-clipboard-check' },
+        { nombre: 'Pagos Sociales', id: 'pago-cargos-socailes', icono: 'fas fa-money-bill-wave' },
+        { nombre: 'Planillas', id: 'planillas-asistencia', icono: 'fas fa-clipboard-check' },
         { nombre: 'Planilla Fiscal', id: 'planilla-fiscal', icono: 'fas fa-file-invoice' },
         { nombre: 'Planillas Generales', id: 'planillas-generales', icono: 'fas fa-clipboard-list' },
         { nombre: 'Trabajopolis', id: 'trabajopolis', icono: 'fas fa-briefcase' }
@@ -283,27 +283,27 @@ export default function Home() {
       color: 'amber',
       carpetas: [
         { nombre: 'Catálogos', id: 'catalogos', icono: 'fas fa-book' },
-        { nombre: 'Estudio Mercado Gerencia', id: 'estudio-mercado-grenia', icono: 'fas fa-chart-bar' },
+        { nombre: 'Estudio Mercado', id: 'estudio-mercado-grenia', icono: 'fas fa-chart-bar' },
         { nombre: 'Etiquetas', id: 'etiquetas', icono: 'fas fa-tag' },
         { nombre: 'Ferias', id: 'ferias', icono: 'fas fa-calendar-alt' },
-        { nombre: 'Folletos Volantes Trípticos', id: 'folletos-volantes-tripticos', icono: 'fas fa-newspaper' },
-        { nombre: 'Galería Imágenes', id: 'galeria-imagenes', icono: 'fas fa-images' },
+        { nombre: 'Folletos', id: 'folletos-volantes-tripticos', icono: 'fas fa-newspaper' },
+        { nombre: 'Galería', id: 'galeria-imagenes', icono: 'fas fa-images' },
         { nombre: 'Logo', id: 'logo', icono: 'fas fa-palette' },
         { nombre: 'Manual Marca', id: 'manual-marca', icono: 'fas fa-book-open' },
         { nombre: 'Plan Marketing', id: 'plan-marketing', icono: 'fas fa-chart-line' },
-        { nombre: 'Precios Venta', id: 'precios-venta', icono: 'fas fa-tags' },
+        { nombre: 'Precios', id: 'precios-venta', icono: 'fas fa-tags' },
         { nombre: 'Redes Sociales', id: 'redes-sociales', icono: 'fas fa-share-alt' },
         { nombre: 'Videos', id: 'videos', icono: 'fas fa-video' }
       ]
     },
     {
       id: 'investigacion',
-      nombre: 'Investigación y Desarrollo',
+      nombre: 'I+D',
       icono: 'fas fa-flask',
       color: 'blue',
       carpetas: [
         { nombre: 'Cultivo', id: 'cultivo', icono: 'fas fa-seedling' },
-        { nombre: 'Estudios Beneficiosos', id: 'estudios-beneficiosos', icono: 'fas fa-microscope' },
+        { nombre: 'Estudios', id: 'estudios-beneficiosos', icono: 'fas fa-microscope' },
         { nombre: 'Literatura', id: 'literatura', icono: 'fas fa-book' },
         { nombre: 'Manejo Frutales', id: 'manejo frutales', icono: 'fas fa-tree' },
         { nombre: 'Néctares', id: 'nectares', icono: 'fas fa-wine-bottle' }
@@ -315,10 +315,10 @@ export default function Home() {
       icono: 'fas fa-chart-line',
       color: 'amber',
       carpetas: [
-        { nombre: 'Análisis de Ventas', id: 'ANALISIS DE VENTAS', icono: 'fas fa-chart-bar' },
-        { nombre: 'Venta Jugos Carnaval', id: 'VENTA JUGOS CARNAVAL', icono: 'fas fa-glass-cheers' },
+        { nombre: 'Análisis', id: 'ANALISIS DE VENTAS', icono: 'fas fa-chart-bar' },
+        { nombre: 'Venta Carnaval', id: 'VENTA JUGOS CARNAVAL', icono: 'fas fa-glass-cheers' },
         { nombre: 'Ventas', id: 'VENTAS', icono: 'fas fa-shopping-cart' },
-        { nombre: 'Ventas Supermercados', id: 'VENTAS SUPERMERCADOS', icono: 'fas fa-store' }
+        { nombre: 'Supermercados', id: 'VENTAS SUPERMERCADOS', icono: 'fas fa-store' }
       ]
     },
     {
@@ -327,14 +327,14 @@ export default function Home() {
       icono: 'fas fa-globe-americas',
       color: 'purple',
       carpetas: [
-        { nombre: 'Documentación Aduanas', id: 'documentacion-aduanas', icono: 'fas fa-file-contract' },
+        { nombre: 'Aduanas', id: 'documentacion-aduanas', icono: 'fas fa-file-contract' },
         { nombre: 'Exportación', id: 'exportacion', icono: 'fas fa-plane-departure' },
         { nombre: 'Importación', id: 'importacion', icono: 'fas fa-plane-arrival' }
       ]
     },
     {
       id: 'respaldos',
-      nombre: 'Respaldos-Procedimientos',
+      nombre: 'Respaldos',
       icono: 'fas fa-hdd',
       color: 'gray',
       carpetas: [
@@ -343,7 +343,7 @@ export default function Home() {
     },
     {
       id: 'gestion',
-      nombre: 'Sistema de Gestión',
+      nombre: 'Gestión',
       icono: 'fas fa-clipboard-list',
       color: 'purple',
       carpetas: [
@@ -361,7 +361,7 @@ export default function Home() {
     },
     {
       id: 'finanzas',
-      nombre: 'Finanzas-Contabilidad-Legal',
+      nombre: 'Finanzas',
       icono: 'fas fa-money-bill-wave',
       color: 'green',
       carpetas: [
@@ -371,7 +371,7 @@ export default function Home() {
     },
     {
       id: 'personales',
-      nombre: 'Carpetas Personales',
+      nombre: 'Personales',
       icono: 'fas fa-user-circle',
       color: 'orange',
       carpetas: [
@@ -386,18 +386,6 @@ export default function Home() {
 
   // Filtrar áreas según permisos de usuario
   const filteredAreas = areasData.filter(area => hasAccess(area.id));
-
-  // Filtrar carpetas según término de búsqueda
-  const filteredCarpetas = filteredAreas.flatMap(area => 
-    area.carpetas.map(carpeta => ({
-      ...carpeta,
-      areaNombre: area.nombre,
-      areaColor: area.color
-    }))
-  ).filter(carpeta => 
-    carpeta.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    carpeta.areaNombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   // Si el usuario no está autenticado, mostrar formulario de login
   if (!isAuthenticated) {
@@ -609,7 +597,7 @@ export default function Home() {
                   <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-3 md:p-4 border-2 border-orange-300 shadow-lg hover:shadow-xl transition-all duration-200">
                     <div className="flex items-center mb-2">
                       <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-orange-500 to-amber-600 rounded-full flex items-center justify-center mr-3 shadow-lg">
-                        <span className="text-white text-lg">🍓</span>
+                        <span className="text-white text-lg">🥭</span>
                       </div>
                       <h4 className="font-bold text-orange-900 text-sm md:text-base">Pulpa de Achachairú</h4>
                     </div>
@@ -621,7 +609,7 @@ export default function Home() {
                   <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-3 md:p-4 border-2 border-orange-300 shadow-lg hover:shadow-xl transition-all duration-200">
                     <div className="flex items-center mb-2">
                       <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mr-3 shadow-lg">
-                        <span className="text-white text-lg">🥬</span>
+                        <span className="text-white text-lg">📦</span>
                       </div>
                       <h4 className="font-bold text-orange-900 text-sm md:text-base">Chips Liofilizados</h4>
                     </div>
@@ -638,107 +626,76 @@ export default function Home() {
           <div className="w-full xl:w-2/3">
             <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">Nuestras Áreas</h2>
             
-            {/* Barra de búsqueda */}
-            <div className="mb-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Buscar carpetas..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-6 py-4 rounded-2xl border-2 border-orange-300 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 shadow-lg transition-all duration-200"
-                />
-                <i className="fas fa-search absolute right-4 top-1/2 transform -translate-y-1/2 text-orange-500 text-xl"></i>
-              </div>
-            </div>
-            
-            {/* Navegación por pestañas */}
-            <div className="flex overflow-x-auto mb-6 pb-2 scrollbar-hide">
-              <div className="flex space-x-2">
-                <button 
-                  className={`px-4 py-2 rounded-2xl font-bold transition-all duration-200 whitespace-nowrap ${
-                    searchTerm === '' 
-                      ? 'bg-orange-500 text-white shadow-lg' 
-                      : 'bg-white text-orange-700 hover:bg-orange-100'
-                  }`}
-                  onClick={() => setSearchTerm('')}
+            {/* Grid de áreas compacto */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              {filteredAreas.map(area => (
+                <div 
+                  key={area.id} 
+                  className="bg-white rounded-2xl shadow-lg p-4 md:p-5 border-l-4 border-orange-400 hover:shadow-xl transition-all duration-200 cursor-pointer transform hover:scale-105"
+                  onClick={() => setSearchTerm(area.nombre)}
                 >
-                  Todas las áreas
-                </button>
-                {filteredAreas.map(area => (
-                  <button 
-                    key={area.id}
-                    className={`px-4 py-2 rounded-2xl font-bold transition-all duration-200 whitespace-nowrap ${
-                      searchTerm === area.nombre
-                        ? `bg-${area.color}-500 text-white shadow-lg`
-                        : `bg-white text-${area.color}-700 hover:bg-${area.color}-100`
-                    }`}
-                    onClick={() => setSearchTerm(area.nombre)}
-                  >
-                    {area.nombre}
-                  </button>
-                ))}
-              </div>
-            </div>
-            
-            {/* Mostrar carpetas según búsqueda o por área */}
-            {searchTerm ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredCarpetas.map((carpeta, index) => (
-                  <div 
-                    key={index}
-                    className="bg-white rounded-2xl p-4 shadow-lg border-l-4 border-orange-400 hover:shadow-xl transition-all duration-200 cursor-pointer transform hover:scale-105"
-                    onClick={() => redirectToOneDrive(carpeta.id)}
-                  >
-                    <div className="flex items-center mb-3">
-                      <div className={`w-10 h-10 bg-${carpeta.areaColor}-100 rounded-full flex items-center justify-center mr-3`}>
-                        <i className={`${carpeta.icono} text-${carpeta.areaColor}-600`}></i>
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-800 text-sm">{carpeta.nombre}</h3>
-                        <span className={`text-xs text-${carpeta.areaColor}-600`}>{carpeta.areaNombre}</span>
-                      </div>
+                  <div className="flex flex-col items-center text-center">
+                    <div className={`w-14 h-14 md:w-16 md:h-16 bg-${area.color}-100 rounded-2xl flex items-center justify-center mb-3 shadow-lg`}>
+                      <i className={`${area.icono} text-${area.color}-600 text-xl md:text-2xl`}></i>
                     </div>
-                    <div className="text-right">
-                      <button className="text-orange-500 hover:text-orange-700 text-sm font-medium">
-                        Abrir <i className="fas fa-external-link-alt ml-1"></i>
-                      </button>
+                    <h3 className="font-bold text-gray-800 text-sm md:text-base mb-2">{area.nombre}</h3>
+                    <p className="text-xs text-gray-600 mb-3">{area.carpetas.length} carpetas</p>
+                    <div className="flex flex-wrap justify-center gap-1">
+                      {area.carpetas.slice(0, 3).map((carpeta, index) => (
+                        <span key={index} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full">
+                          {carpeta.nombre.split(' ')[0]}
+                        </span>
+                      ))}
+                      {area.carpetas.length > 3 && (
+                        <span className="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full">
+                          +{area.carpetas.length - 3}
+                        </span>
+                      )}
                     </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-8">
-                {filteredAreas.map(area => (
-                  <div key={area.id} className="bg-white rounded-3xl shadow-2xl p-6 border-l-4 border-orange-400">
-                    <div className="flex items-center mb-6">
-                      <div className={`w-12 h-12 bg-${area.color}-100 rounded-2xl flex items-center justify-center mr-4 shadow-lg`}>
-                        <i className={`${area.icono} text-${area.color}-600 text-2xl`}></i>
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-800">{area.nombre}</h3>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {area.carpetas.map((carpeta, index) => (
-                        <div 
-                          key={index}
-                          className="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-4 shadow-md border border-gray-200 hover:shadow-lg transition-all duration-200 cursor-pointer transform hover:scale-105"
-                          onClick={() => redirectToOneDrive(carpeta.id)}
-                        >
-                          <div className="flex items-center">
-                            <div className={`w-8 h-8 bg-${area.color}-100 rounded-full flex items-center justify-center mr-3`}>
-                              <i className={`${carpeta.icono} text-${area.color}-600 text-sm`}></i>
-                            </div>
-                            <h4 className="font-medium text-gray-800 text-sm">{carpeta.nombre}</h4>
+                </div>
+              ))}
+            </div>
+
+            {/* Vista detallada cuando se selecciona un área */}
+            {searchTerm && (
+              <div className="mt-8 bg-white rounded-3xl shadow-2xl p-6 border-4 border-orange-200">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-orange-900">
+                    {filteredAreas.find(a => a.nombre === searchTerm)?.nombre}
+                  </h3>
+                  <button 
+                    onClick={() => setSearchTerm('')}
+                    className="text-orange-600 hover:text-orange-800 font-medium"
+                  >
+                    <i className="fas fa-times mr-2"></i>Cerrar
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredAreas
+                    .find(a => a.nombre === searchTerm)
+                    ?.carpetas.map((carpeta, index) => (
+                      <div 
+                        key={index}
+                        className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-4 shadow-md border border-orange-200 hover:shadow-lg transition-all duration-200 cursor-pointer transform hover:scale-105"
+                        onClick={() => redirectToOneDrive(carpeta.id)}
+                      >
+                        <div className="flex items-center">
+                          <div className={`w-10 h-10 bg-${filteredAreas.find(a => a.nombre === searchTerm)?.color}-100 rounded-full flex items-center justify-center mr-3`}>
+                            <i className={`${carpeta.icono} text-${filteredAreas.find(a => a.nombre === searchTerm)?.color}-600`}></i>
                           </div>
-                          <div className="mt-2 text-right">
-                            <span className="text-xs text-gray-500">Haz clic para abrir</span>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-800 text-sm">{carpeta.nombre}</h4>
+                            <div className="flex justify-between items-center mt-2">
+                              <span className="text-xs text-gray-500">Haz clic para abrir</span>
+                              <i className="fas fa-external-link-alt text-orange-500 text-xs"></i>
+                            </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+                      </div>
+                    ))}
+                </div>
               </div>
             )}
             
