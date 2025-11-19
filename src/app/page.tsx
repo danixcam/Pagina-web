@@ -91,7 +91,6 @@ export default function Home() {
 
   // Función para redirigir a carpetas de OneDrive
   const redirectToOneDrive = (carpeta: string) => {
-    // Enlaces reales de tus carpetas de OneDrive
     const enlaces: { [key: string]: string } = {
       // PLANTACION
       'historico-antes-de-2025': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElIubDi-PlpAp3zW9TP55h8BBSRCpYkxuTshu8F7UruV9A?e=o8lsN1',
@@ -183,10 +182,21 @@ export default function Home() {
       'santiago': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjdfmscNdIhGokkMFTRTLXUBOnQI4SE6RX9tlxzgvFW9VQ?e=LHwZeY',
       'emili': 'https://1drv.ms/f/c/092e39edf7b9ea99/EguLXjSL0_NJotfcTyeCXB8BQJBPReT-JQuQrZpUbBe7Pw?e=9vBydD',
       'daniela': 'https://1drv.ms/f/c/092e39edf7b9ea99/EgwujdpFBVJCjOF8KQuYmqcB5G2gmrtVrk4bTHbwymP5cw?e=9yJJ00',
+
+      // ÁREAS ADICIONALES
+      'clientes': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleClientes',
+      'contratos-comerciales': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleContratos',
+      'sistemas': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleSistemas',
+      'redes': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleRedes',
+      'procesos': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleProcesos',
+      'optimizacion': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleOptimizacion',
+      'contratos-legal': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleLegal',
+      'litigios': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleLitigios',
+      'impacto-ambiental': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleAmbiental',
+      'rsc': 'https://1drv.ms/f/c/092e39edf7b9ea99/ExampleRSC',
     };
     
     const enlace = enlaces[carpeta] || '#';
-    // Redirección real
     if (carpeta === 'procedimientos') {
       window.location.href = enlace;
     } else {
@@ -200,7 +210,7 @@ export default function Home() {
     produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion'],
     gerencia: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'gerencia', 'finanzas', 'comercial', 'operaciones'],
     gestion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas'],
-    invitado: ['plantacion', 'planta'] // Acceso limitado para invitados
+    invitado: ['plantacion', 'planta']
   };
 
   const hasAccess = (area: AreaType) => {
@@ -220,60 +230,11 @@ export default function Home() {
     window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank');
   };
 
-  // Si el usuario no está autenticado, mostrar formulario de login
+  // Si el usuario no está autenticado, mostrar SOLO el formulario de login
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 p-4 md:p-6">
-        <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 mb-6 md:mb-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            {/* Logo Mejorado */}
-            <div className="flex items-center mb-4 md:mb-0">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg mr-4">
-                <i className="fas fa-leaf text-white text-2xl md:text-3xl"></i>
-              </div>
-              <div>
-                <h1 className="text-2xl md:text-4xl font-bold text-orange-900">Airú</h1>
-                <p className="text-sm md:text-base text-orange-700">Jugos Naturales</p>
-              </div>
-            </div>
-            
-            {/* Navegación Superior */}
-            <div className="flex flex-wrap justify-center gap-2 md:gap-4">
-              <button 
-                className={`px-4 py-2 rounded-2xl font-semibold transition-all duration-300 ${
-                  activeSection === 'areas' 
-                    ? 'bg-orange-500 text-white shadow-lg' 
-                    : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-                }`}
-                onClick={() => setActiveSection('areas')}
-              >
-                Nuestras Áreas
-              </button>
-              <button 
-                className={`px-4 py-2 rounded-2xl font-semibold transition-all duration-300 ${
-                  activeSection === 'mision' 
-                    ? 'bg-orange-500 text-white shadow-lg' 
-                    : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-                }`}
-                onClick={() => setActiveSection('mision')}
-              >
-                Misión, Visión y Valores
-              </button>
-              <button 
-                className={`px-4 py-2 rounded-2xl font-semibold transition-all duration-300 ${
-                  activeSection === 'paneles' 
-                    ? 'bg-orange-500 text-white shadow-lg' 
-                    : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-                }`}
-                onClick={() => setActiveSection('paneles')}
-              >
-                Paneles
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full mx-auto border-4 border-orange-300 transform hover:scale-105 transition-transform duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border-4 border-orange-300 transform hover:scale-105 transition-transform duration-300">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center justify-center mb-6">
               <div className="h-28 w-28 mb-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-3 shadow-2xl border-4 border-white">
@@ -284,7 +245,8 @@ export default function Home() {
                 />
               </div>
             </div>
-            <p className="text-orange-800 mt-2 font-bold text-xl bg-gradient-to-r from-orange-100 to-amber-100 py-2 px-4 rounded-full">Sistema Interno - Acceso Restringido</p>
+            <h1 className="text-3xl font-bold text-orange-900 mb-2">Airú</h1>
+            <p className="text-orange-700 font-semibold">Sistema Interno - Acceso Restringido</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
@@ -347,344 +309,451 @@ export default function Home() {
           </form>
 
           <div className="mt-8 p-5 bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl text-sm text-orange-800 border-2 border-orange-200 shadow-lg">
-            <p className="font-bold text-center text-orange-900 text-lg">Sistema Interno</p>
-            <p className="mt-2 text-center text-orange-700">Acceso exclusivo para personal autorizado</p>
+            <p className="font-bold text-center text-orange-900">Acceso exclusivo para personal autorizado</p>
+            <p className="mt-2 text-center text-orange-700 text-xs">Sistema interno corporativo Airú</p>
           </div>
         </div>
       </div>
     );
   }
 
-  // Contenido para usuarios autenticados
+  // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 p-4 md:p-6">
-      {/* Header Mejorado */}
-      <header className="bg-white rounded-3xl shadow-xl p-4 md:p-6 mb-6 md:mb-8">
-        <div className="flex flex-col md:flex-row items-center justify-between">
-          {/* Logo Mejorado */}
-          <div className="flex items-center mb-4 md:mb-0">
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg mr-4">
-              <i className="fas fa-leaf text-white text-2xl md:text-3xl"></i>
-            </div>
-            <div>
-              <h1 className="text-2xl md:text-4xl font-bold text-orange-900">Airú</h1>
-              <p className="text-sm md:text-base text-orange-700">Jugos Naturales</p>
-              <div className="flex items-center mt-1">
-                <span className="text-xs text-orange-600 bg-orange-100 px-2 py-1 rounded-full">
-                  Bienvenido: {currentUser}
-                </span>
-                <span className="text-xs text-orange-500 ml-2">
-                  Rol: {userRole}
-                </span>
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+      {/* Header Profesional */}
+      <header className="bg-gradient-to-r from-orange-500 to-amber-600 shadow-2xl border-b-4 border-orange-400">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div className="flex items-center">
+              <div className="flex items-center">
+                <div className="h-16 w-16 md:h-20 md:w-20 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-2 shadow-2xl border-4 border-white">
+                  <img 
+                    src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
+                    alt="Logo" 
+                    className="w-full h-full object-contain drop-shadow-lg"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-orange-100 text-sm">Bienvenido</span>
+                <span className="text-white font-bold text-lg">{currentUser}</span>
+                <span className="text-orange-200 text-xs">Rol: {userRole}</span>
               </div>
             </div>
-          </div>
-          
-          {/* Navegación Superior */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
-            <button 
-              className={`px-4 py-2 rounded-2xl font-semibold transition-all duration-300 ${
-                activeSection === 'areas' 
-                  ? 'bg-orange-500 text-white shadow-lg' 
-                  : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-              }`}
-              onClick={() => setActiveSection('areas')}
-            >
-              Nuestras Áreas
-            </button>
-            <button 
-              className={`px-4 py-2 rounded-2xl font-semibold transition-all duration-300 ${
-                activeSection === 'mision' 
-                  ? 'bg-orange-500 text-white shadow-lg' 
-                  : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-              }`}
-              onClick={() => setActiveSection('mision')}
-            >
-              Misión, Visión y Valores
-            </button>
-            <button 
-              className={`px-4 py-2 rounded-2xl font-semibold transition-all duration-300 ${
-                activeSection === 'paneles' 
-                  ? 'bg-orange-500 text-white shadow-lg' 
-                  : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-              }`}
-              onClick={() => setActiveSection('paneles')}
-            >
-              Paneles
-            </button>
-            <button 
-              className="px-4 py-2 rounded-2xl font-semibold bg-red-500 text-white hover:bg-red-600 transition-all duration-300"
-              onClick={handleLogout}
-            >
-              <i className="fas fa-sign-out-alt mr-2"></i>Salir
-            </button>
+            
+            <nav className="flex flex-wrap justify-center gap-2">
+              <button 
+                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
+                  activeSection === 'areas' 
+                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
+                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
+                }`}
+                onClick={() => setActiveSection('areas')}
+              >
+                <i className="fas fa-folder mr-2"></i>Áreas
+              </button>
+              <button 
+                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
+                  activeSection === 'mision' 
+                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
+                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
+                }`}
+                onClick={() => setActiveSection('mision')}
+              >
+                <i className="fas fa-bullseye mr-2"></i>Misión & Visión
+              </button>
+              <button 
+                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
+                  activeSection === 'paneles' 
+                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
+                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
+                }`}
+                onClick={() => setActiveSection('paneles')}
+              >
+                <i className="fas fa-chart-bar mr-2"></i>Paneles
+              </button>
+              <button 
+                className="px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold bg-white text-orange-600 shadow-2xl hover:shadow-xl transition-all duration-200 text-sm md:text-base"
+                onClick={handleLogout}
+              >
+                <i className="fas fa-sign-out-alt mr-2"></i>Salir
+              </button>
+            </nav>
           </div>
         </div>
       </header>
 
-      {/* Sección de Misión, Visión y Valores */}
-      {activeSection === 'mision' && (
-        <div className="w-full xl:w-2/3 mx-auto mb-8">
-          <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-            Nuestros Valores
-          </h2>
-          
-          <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-              En Airú, nos comprometemos a ofrecer productos frescos, saludables y de alta calidad, 
-              cultivados con cuidado por agricultores locales. Nos destacamos por nuestra producción 
-              orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad 
-              ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva. 
-              Descubre nuestro compromiso con la excelencia y el cuidado del achachairú.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-green-500">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                  <i className="fas fa-award text-green-600 text-xl"></i>
-                </div>
-                <h3 className="text-xl font-bold text-green-800">Calidad y Frescura</h3>
-              </div>
-              <p className="text-gray-700">
-                Somos comprometidos con ofrecer productos frescos, cultivados de forma responsable y sin agroquímicos.
+      <div className="container mx-auto px-3 md:px-4 py-6 md:py-8">
+        {/* Sección de Misión, Visión y Valores */}
+        {activeSection === 'mision' && (
+          <div className="w-full xl:w-2/3 mx-auto mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
+              Nuestros Valores
+            </h2>
+            
+            <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                En Airú, nos comprometemos a ofrecer productos frescos, saludables y de alta calidad, 
+                cultivados con cuidado por agricultores locales. Nos destacamos por nuestra producción 
+                orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad 
+                ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva. 
+                Descubre nuestro compromiso con la excelencia y el cuidado del achachairú.
               </p>
             </div>
             
-            <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-blue-500">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                  <i className="fas fa-leaf text-blue-600 text-xl"></i>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-green-500">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                    <i className="fas fa-award text-green-600 text-xl"></i>
+                  </div>
+                  <h3 className="text-xl font-bold text-green-800">Calidad y Frescura</h3>
                 </div>
-                <h3 className="text-xl font-bold text-blue-800">Sostenibilidad Ambiental</h3>
+                <p className="text-gray-700">
+                  Somos comprometidos con ofrecer productos frescos, cultivados de forma responsable y sin agroquímicos.
+                </p>
               </div>
-              <p className="text-gray-700">
-                Nos preocupamos por el medio ambiente y practicamos métodos de producción sostenibles que respetan la naturaleza.
+              
+              <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-blue-500">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                    <i className="fas fa-leaf text-blue-600 text-xl"></i>
+                  </div>
+                  <h3 className="text-xl font-bold text-blue-800">Sostenibilidad Ambiental</h3>
+                </div>
+                <p className="text-gray-700">
+                  Nos preocupamos por el medio ambiente y practicamos métodos de producción sostenibles que respetan la naturaleza.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Sección de Paneles */}
+        {activeSection === 'paneles' && (
+          <div className="w-full xl:w-2/3 mx-auto mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
+              Paneles
+            </h2>
+            
+            <div className="bg-white rounded-3xl shadow-2xl p-8 text-center">
+              <i className="fas fa-tachometer-alt text-5xl text-orange-400 mb-4"></i>
+              <h3 className="text-xl font-bold text-orange-800 mb-2">Paneles en Desarrollo</h3>
+              <p className="text-gray-600">
+                Esta sección estará disponible próximamente con métricas y análisis en tiempo real.
               </p>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Sección de Paneles */}
-      {activeSection === 'paneles' && (
-        <div className="w-full xl:w-2/3 mx-auto mb-8">
-          <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-            Paneles
-          </h2>
-          
-          <div className="bg-white rounded-3xl shadow-2xl p-8 text-center">
-            <i className="fas fa-tachometer-alt text-5xl text-orange-400 mb-4"></i>
-            <h3 className="text-xl font-bold text-orange-800 mb-2">Paneles en Desarrollo</h3>
-            <p className="text-gray-600">
-              Esta sección estará disponible próximamente con métricas y análisis en tiempo real.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Sección de Áreas */}
-      {activeSection === 'areas' && (
-        <div className="w-full xl:w-2/3 mx-auto">
-          <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-            Nuestras Áreas
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {/* PLANTACIÓN */}
-            {hasAccess('plantacion') && (
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-green-500 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('plantacion')}>
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                    <i className="fas fa-seedling text-green-600 text-xl md:text-2xl"></i>
+        {/* Sección de Áreas (Principal) */}
+        {activeSection === 'areas' && (
+          <div className="flex flex-col xl:flex-row gap-6 md:gap-8">
+            {/* Galería */}
+            <div className="w-full xl:w-1/3">
+              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 h-full border-4 border-orange-200">
+                <h2 className="text-xl md:text-2xl font-bold text-orange-900 mb-4 md:mb-6 text-center border-b-2 border-orange-200 pb-2 md:pb-3">Galería</h2>
+                
+                {/* Carrusel de imágenes */}
+                <div className="mb-4 md:mb-6 rounded-2xl overflow-hidden shadow-2xl border-4 border-orange-300 cursor-pointer" onClick={redirectToGoogleDrive}>
+                  <div className="relative h-40 md:h-48 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
+                    <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full">
+                      {carouselImages.map((img, index) => (
+                        <div key={index} className="flex-shrink-0 w-full h-full snap-center">
+                          <img 
+                            src={img} 
+                            alt={`Imagen ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                      <span className="text-white text-sm font-bold">Haz clic para ver más imágenes</span>
+                    </div>
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-green-800">Plantación</h3>
-                  <i className={`fas fa-chevron-${openMenu === 'plantacion' ? 'up' : 'down'} ml-auto text-green-600 text-lg`}></i>
                 </div>
-                <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'plantacion' ? 'max-h-96' : 'max-h-0'}`}>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('historico-antes-de-2025')}>
-                      <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-history mr-3 md:mr-4 text-green-600 text-lg"></i>Histórico antes de 2025
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('propiedad')}>
-                      <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-landmark mr-3 md:mr-4 text-green-600 text-lg"></i>Propiedad
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            {/* PLANTA */}
-            {hasAccess('planta') && (
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-500 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('planta')}>
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                    <i className="fas fa-industry text-orange-600 text-xl md:text-2xl"></i>
+                
+                {/* Indicadores */}
+                <div className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-2xl p-4 md:p-6 border-4 border-orange-300">
+                  <h3 className="text-lg font-bold mb-4 text-center text-white drop-shadow-lg">Indicadores Clave</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                      <i className="fas fa-file-contract text-xl mb-2 text-white"></i>
+                      <h4 className="font-bold text-white text-xs mb-1">Arancelaria</h4>
+                      <p className="text-sm font-bold text-white">0813.40.00.00</p>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                      <i className="fas fa-industry text-xl mb-2 text-white"></i>
+                      <h4 className="font-bold text-white text-xs mb-1">Chips/mes</h4>
+                      <p className="text-sm font-bold text-white">1,000</p>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                      <i className="fas fa-weight text-xl mb-2 text-white"></i>
+                      <h4 className="font-bold text-white text-xs mb-1">Pulpa/mes</h4>
+                      <p className="text-sm font-bold text-white">1,000 Kg</p>
+                    </div>
+                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                      <i className="fas fa-building text-xl mb-2 text-white"></i>
+                      <h4 className="font-bold text-white text-xs mb-1">Plantas</h4>
+                      <p className="text-sm font-bold text-white">1</p>
+                    </div>
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-orange-800">Planta</h3>
-                  <i className={`fas fa-chevron-${openMenu === 'planta' ? 'up' : 'down'} ml-auto text-orange-600 text-lg`}></i>
-                </div>
-                <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'planta' ? 'max-h-96' : 'max-h-0'}`}>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('almacen')}>
-                      <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-warehouse mr-3 md:mr-4 text-orange-600 text-lg"></i>Almacén
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('mantenimiento-de-equipos')}>
-                      <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-tools mr-3 md:mr-4 text-orange-600 text-lg"></i>Mantenimiento de Equipos
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('produccion')}>
-                      <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-cogs mr-3 md:mr-4 text-orange-600 text-lg"></i>Producción
-                      </div>
-                    </li>
-                  </ul>
                 </div>
               </div>
-            )}
-
-            {/* LOGÍSTICA */}
-            {hasAccess('logistica') && (
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-500 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('logistica')}>
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                    <i className="fas fa-truck-loading text-amber-600 text-xl md:text-2xl"></i>
+            </div>
+            
+            {/* Áreas */}
+            <div className="w-full xl:w-2/3">
+              <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">Nuestras Áreas</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                
+                {/* PLANTACIÓN */}
+                {hasAccess('plantacion') && (
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-green-500 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('plantacion')}>
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
+                        <i className="fas fa-seedling text-green-600 text-xl md:text-2xl"></i>
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-green-800">Plantación</h3>
+                      <i className={`fas fa-chevron-${openMenu === 'plantacion' ? 'up' : 'down'} ml-auto text-green-600 text-lg`}></i>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'plantacion' ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-2 md:space-y-3">
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('historico-antes-de-2025')}>
+                          <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-history mr-3 md:mr-4 text-green-600 text-lg"></i>Histórico antes de 2025
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('propiedad')}>
+                          <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-landmark mr-3 md:mr-4 text-green-600 text-lg"></i>Propiedad
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-amber-800">Logística</h3>
-                  <i className={`fas fa-chevron-${openMenu === 'logistica' ? 'up' : 'down'} ml-auto text-amber-600 text-lg`}></i>
-                </div>
-                <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'logistica' ? 'max-h-96' : 'max-h-0'}`}>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('compra-abastecimiento-insumos-planta')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-boxes mr-3 md:mr-4 text-amber-600 text-lg"></i>Compra Abastecimiento Insumos Planta
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('cotizaciones-activos-infraestructura')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-file-invoice-dollar mr-3 md:mr-4 text-amber-600 text-lg"></i>Cotizaciones Activos Infraestructura
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('distribucio-transporte')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-truck mr-3 md:mr-4 text-amber-600 text-lg"></i>Distribución Transporte
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('proveedores')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-handshake mr-3 md:mr-4 text-amber-600 text-lg"></i>Proveedores
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
+                )}
 
-            {/* CALIDAD */}
-            {hasAccess('calidad') && (
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-600 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('calidad')}>
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-100 to-orange-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                    <i className="fas fa-award text-amber-600 text-xl md:text-2xl"></i>
+                {/* PLANTA */}
+                {hasAccess('planta') && (
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-500 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('planta')}>
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
+                        <i className="fas fa-industry text-orange-600 text-xl md:text-2xl"></i>
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-orange-800">Planta</h3>
+                      <i className={`fas fa-chevron-${openMenu === 'planta' ? 'up' : 'down'} ml-auto text-orange-600 text-lg`}></i>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'planta' ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-2 md:space-y-3">
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('almacen')}>
+                          <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-warehouse mr-3 md:mr-4 text-orange-600 text-lg"></i>Almacén
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('mantenimiento-de-equipos')}>
+                          <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-tools mr-3 md:mr-4 text-orange-600 text-lg"></i>Mantenimiento de Equipos
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('produccion')}>
+                          <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-cogs mr-3 md:mr-4 text-orange-600 text-lg"></i>Producción
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-amber-800">Calidad</h3>
-                  <i className={`fas fa-chevron-${openMenu === 'calidad' ? 'up' : 'down'} ml-auto text-amber-600 text-lg`}></i>
-                </div>
-                <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'calidad' ? 'max-h-96' : 'max-h-0'}`}>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('calidad-seguridad')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-shield-alt mr-3 md:mr-4 text-amber-600 text-lg"></i>Calidad y Seguridad
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('certificaciones')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-certificate mr-3 md:mr-4 text-amber-600 text-lg"></i>Certificaciones
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('fichas-tecnicas')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-clipboard-list mr-3 md:mr-4 text-amber-600 text-lg"></i>Fichas Técnicas
-                      </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('normas')}>
-                      <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-book mr-3 md:mr-4 text-amber-600 text-lg"></i>Normas
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
+                )}
 
-            {/* ADMINISTRACIÓN */}
-            {hasAccess('admin') && (
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-600 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('admin')}>
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                    <i className="fas fa-calculator text-orange-600 text-xl md:text-2xl"></i>
+                {/* LOGÍSTICA */}
+                {hasAccess('logistica') && (
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-500 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('logistica')}>
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
+                        <i className="fas fa-truck-loading text-amber-600 text-xl md:text-2xl"></i>
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-amber-800">Logística</h3>
+                      <i className={`fas fa-chevron-${openMenu === 'logistica' ? 'up' : 'down'} ml-auto text-amber-600 text-lg`}></i>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'logistica' ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-2 md:space-y-3">
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('compra-abastecimiento-insumos-planta')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-boxes mr-3 md:mr-4 text-amber-600 text-lg"></i>Compra Abastecimiento Insumos Planta
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('cotizaciones-activos-infraestructura')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-file-invoice-dollar mr-3 md:mr-4 text-amber-600 text-lg"></i>Cotizaciones Activos Infraestructura
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('distribucio-transporte')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-truck mr-3 md:mr-4 text-amber-600 text-lg"></i>Distribución Transporte
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('proveedores')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-handshake mr-3 md:mr-4 text-amber-600 text-lg"></i>Proveedores
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-orange-800">Administración</h3>
-                  <i className={`fas fa-chevron-${openMenu === 'admin' ? 'up' : 'down'} ml-auto text-orange-600 text-lg`}></i>
-                </div>
-                <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'admin' ? 'max-h-96' : 'max-h-0'}`}>
-                  <ul className="space-y-2 md:space-y-3">
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2024-ad')}>
-                      <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-folder mr-3 md:mr-4 text-orange-600 text-lg"></i>2024 AD
+                )}
+
+                {/* CALIDAD */}
+                {hasAccess('calidad') && (
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-600 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('calidad')}>
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-100 to-orange-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
+                        <i className="fas fa-award text-amber-600 text-xl md:text-2xl"></i>
                       </div>
-                    </li>
-                    <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2025-ad')}>
-                      <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                        <i className="fas fa-folder-open mr-3 md:mr-4 text-orange-600 text-lg"></i>2025 AD
+                      <h3 className="text-lg md:text-xl font-bold text-amber-800">Calidad</h3>
+                      <i className={`fas fa-chevron-${openMenu === 'calidad' ? 'up' : 'down'} ml-auto text-amber-600 text-lg`}></i>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'calidad' ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-2 md:space-y-3">
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('calidad-seguridad')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-shield-alt mr-3 md:mr-4 text-amber-600 text-lg"></i>Calidad y Seguridad
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('certificaciones')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-certificate mr-3 md:mr-4 text-amber-600 text-lg"></i>Certificaciones
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('fichas-tecnicas')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-clipboard-list mr-3 md:mr-4 text-amber-600 text-lg"></i>Fichas Técnicas
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('normas')}>
+                          <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-book mr-3 md:mr-4 text-amber-600 text-lg"></i>Normas
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {/* ADMINISTRACIÓN */}
+                {hasAccess('admin') && (
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-600 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('admin')}>
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
+                        <i className="fas fa-calculator text-orange-600 text-xl md:text-2xl"></i>
                       </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
+                      <h3 className="text-lg md:text-xl font-bold text-orange-800">Administración</h3>
+                      <i className={`fas fa-chevron-${openMenu === 'admin' ? 'up' : 'down'} ml-auto text-orange-600 text-lg`}></i>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'admin' ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-2 md:space-y-3">
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2024-ad')}>
+                          <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-folder mr-3 md:mr-4 text-orange-600 text-lg"></i>2024 AD
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2025-ad')}>
+                          <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-folder-open mr-3 md:mr-4 text-orange-600 text-lg"></i>2025 AD
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
 
-            {/* Continúa con el resto de las áreas... */}
-            {/* Solo muestro las primeras como ejemplo, el resto sería similar */}
+                {/* RECURSOS HUMANOS */}
+                {hasAccess('rh') && (
+                  <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-700 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                    <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('rh')}>
+                      <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-red-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
+                        <i className="fas fa-users text-orange-700 text-xl md:text-2xl"></i>
+                      </div>
+                      <h3 className="text-lg md:text-xl font-bold text-orange-900">Recursos Humanos</h3>
+                      <i className={`fas fa-chevron-${openMenu === 'rh' ? 'up' : 'down'} ml-auto text-orange-700 text-lg`}></i>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'rh' ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="space-y-2 md:space-y-3">
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2024-rh')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-folder mr-3 md:mr-4 text-orange-700 text-lg"></i>2024 RH
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('afiliaciones')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-id-card mr-3 md:mr-4 text-orange-700 text-lg"></i>Afiliaciones
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('capacitaciones')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-graduation-cap mr-3 md:mr-4 text-orange-700 text-lg"></i>Capacitaciones
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('cns')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-file-medical mr-3 md:mr-4 text-orange-700 text-lg"></i>CNS
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('contratos')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-file-contract mr-3 md:mr-4 text-orange-700 text-lg"></i>Contratos
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('credenciales')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-id-badge mr-3 md:mr-4 text-orange-700 text-lg"></i>Credenciales
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('file-personal')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-folder mr-3 md:mr-4 text-orange-700 text-lg"></i>File Personal
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('pago-cargos-socailes')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-money-bill-wave mr-3 md:mr-4 text-orange-700 text-lg"></i>Pago Cargos Sociales
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('planillas-asistencia')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-clipboard-check mr-3 md:mr-4 text-orange-700 text-lg"></i>Planillas Asistencia
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('planilla-fiscal')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-file-invoice mr-3 md:mr-4 text-orange-700 text-lg"></i>Planilla Fiscal
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('planillas-generales')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-clipboard-list mr-3 md:mr-4 text-orange-700 text-lg"></i>Planillas Generales
+                          </div>
+                        </li>
+                        <li className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('trabajopolis')}>
+                          <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
+                            <i className="fas fa-briefcase mr-3 md:mr-4 text-orange-700 text-lg"></i>Trabajopolis
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
 
-          </div>
+                {/* Continúa con las demás áreas... */}
+                {/* MARKETING, INVESTIGACION, VENTAS, IMPORT-EXPORT, etc. */}
 
-          {/* Indicadores */}
-          <div className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-3xl shadow-2xl p-6 md:p-8 mt-8 md:mt-12 border-4 border-orange-300">
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center text-white drop-shadow-lg">Indicadores Clave</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              <div className="bg-white/20 backdrop-blur-lg p-4 md:p-6 rounded-2xl text-center border-2 border-white/30 shadow-2xl hover:scale-105 transition-transform duration-200">
-                <i className="fas fa-file-contract text-3xl md:text-4xl mb-3 md:mb-4 text-white drop-shadow-lg"></i>
-                <h4 className="font-bold text-white text-sm md:text-lg mb-1 md:mb-2 drop-shadow-lg">Arancelaria</h4>
-                <p className="text-lg md:text-2xl font-bold text-white mt-1 md:mt-2 drop-shadow-lg break-all">0813.40.00.00</p>
-              </div>
-              <div className="bg-white/20 backdrop-blur-lg p-4 md:p-6 rounded-2xl text-center border-2 border-white/30 shadow-2xl hover:scale-105 transition-transform duration-200">
-                <i className="fas fa-industry text-3xl md:text-4xl mb-3 md:mb-4 text-white drop-shadow-lg"></i>
-                <h4 className="font-bold text-white text-sm md:text-lg mb-1 md:mb-2 drop-shadow-lg">Chips al mes</h4>
-                <p className="text-lg md:text-2xl font-bold text-white mt-1 md:mt-2 drop-shadow-lg">1,000</p>
-              </div>
-              <div className="bg-white/20 backdrop-blur-lg p-4 md:p-6 rounded-2xl text-center border-2 border-white/30 shadow-2xl hover:scale-105 transition-transform duration-200">
-                <i className="fas fa-weight text-3xl md:text-4xl mb-3 md:mb-4 text-white drop-shadow-lg"></i>
-                <h4 className="font-bold text-white text-sm md:text-lg mb-1 md:mb-2 drop-shadow-lg">Pulpa al mes</h4>
-                <p className="text-lg md:text-2xl font-bold text-white mt-1 md:mt-2 drop-shadow-lg">1,000 Kg</p>
-              </div>
-              <div className="bg-white/20 backdrop-blur-lg p-4 md:p-6 rounded-2xl text-center border-2 border-white/30 shadow-2xl hover:scale-105 transition-transform duration-200">
-                <i className="fas fa-building text-3xl md:text-4xl mb-3 md:mb-4 text-white drop-shadow-lg"></i>
-                <h4 className="font-bold text-white text-sm md:text-lg mb-1 md:mb-2 drop-shadow-lg">Infraestructura</h4>
-                <p className="text-lg md:text-2xl font-bold text-white mt-1 md:mt-2 drop-shadow-lg">1 planta</p>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-orange-600 to-amber-700 text-orange-100 py-6 md:py-8 mt-8 md:mt-12 border-t-4 border-orange-400">
