@@ -12,6 +12,7 @@ export default function Home() {
   const [currentUser, setCurrentUser] = useState('');
   const [userRole, setUserRole] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedArea, setSelectedArea] = useState<string | null>(null);
 
   // Verificar si ya hay una sesión activa al cargar la página
   useEffect(() => {
@@ -199,7 +200,7 @@ export default function Home() {
     window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank');
   };
 
-  // Estructura de carpetas por área - Versión compacta
+  // Estructura de las 15 áreas
   const areasData = [
     {
       id: 'plantacion',
@@ -632,7 +633,7 @@ export default function Home() {
                 <div 
                   key={area.id} 
                   className="bg-white rounded-2xl shadow-lg p-4 md:p-5 border-l-4 border-orange-400 hover:shadow-xl transition-all duration-200 cursor-pointer transform hover:scale-105"
-                  onClick={() => setSearchTerm(area.nombre)}
+                  onClick={() => setSelectedArea(selectedArea === area.id ? null : area.id)}
                 >
                   <div className="flex flex-col items-center text-center">
                     <div className={`w-14 h-14 md:w-16 md:h-16 bg-${area.color}-100 rounded-2xl flex items-center justify-center mb-3 shadow-lg`}>
@@ -658,14 +659,14 @@ export default function Home() {
             </div>
 
             {/* Vista detallada cuando se selecciona un área */}
-            {searchTerm && (
+            {selectedArea && (
               <div className="mt-8 bg-white rounded-3xl shadow-2xl p-6 border-4 border-orange-200">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl md:text-2xl font-bold text-orange-900">
-                    {filteredAreas.find(a => a.nombre === searchTerm)?.nombre}
+                    {filteredAreas.find(a => a.id === selectedArea)?.nombre}
                   </h3>
                   <button 
-                    onClick={() => setSearchTerm('')}
+                    onClick={() => setSelectedArea(null)}
                     className="text-orange-600 hover:text-orange-800 font-medium"
                   >
                     <i className="fas fa-times mr-2"></i>Cerrar
@@ -674,7 +675,7 @@ export default function Home() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredAreas
-                    .find(a => a.nombre === searchTerm)
+                    .find(a => a.id === selectedArea)
                     ?.carpetas.map((carpeta, index) => (
                       <div 
                         key={index}
@@ -682,8 +683,8 @@ export default function Home() {
                         onClick={() => redirectToOneDrive(carpeta.id)}
                       >
                         <div className="flex items-center">
-                          <div className={`w-10 h-10 bg-${filteredAreas.find(a => a.nombre === searchTerm)?.color}-100 rounded-full flex items-center justify-center mr-3`}>
-                            <i className={`${carpeta.icono} text-${filteredAreas.find(a => a.nombre === searchTerm)?.color}-600`}></i>
+                          <div className={`w-10 h-10 bg-${filteredAreas.find(a => a.id === selectedArea)?.color}-100 rounded-full flex items-center justify-center mr-3`}>
+                            <i className={`${carpeta.icono} text-${filteredAreas.find(a => a.id === selectedArea)?.color}-600`}></i>
                           </div>
                           <div className="flex-1">
                             <h4 className="font-medium text-gray-800 text-sm">{carpeta.nombre}</h4>
