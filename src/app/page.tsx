@@ -16,6 +16,15 @@ type AreaType =
 
 type SectionType = 'areas' | 'mision' | 'paneles';
 
+// Interfaz para las áreas
+interface AreaInfo {
+  id: AreaType;
+  nombre: string;
+  icono: string;
+  color: string;
+  subcarpetas: { nombre: string; clave: string; icono: string }[];
+}
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState<SectionType>('areas');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -147,14 +156,14 @@ export default function Home() {
       'cultivo': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eqtt_21ReeZHgFzXYqTfNWcBEHqjmdJ-lJbRIfZOHNpamQ?e=jde0LB',
       'estudios-beneficiosos': 'https://1drv.ms/f/c/092e39edf7b9ea99/Et6eASKZLnNLr6T0cae23ogBMj4F6Y5YDMyGIwJYaCTHJA?e=nJRCJJ',
       'literatura': 'https://1drv.ms/f/c/092e39edf7b9ea99/EsyhkvmrDCpIlz8oZOTySscBFMCofizhddLs00HTZTiq4w?e=uSnqLx',
-      'manejo frutales': 'https://1drv.ms/f/c/092e39edf7b9ea99/Em_37q2tOnNJnY8Vjj3e_KoB_-pF42Bj5dt3AmYoXAwAvg?e=Jp8yIs',
+      'manejo-frutales': 'https://1drv.ms/f/c/092e39edf7b9ea99/Em_37q2tOnNJnY8Vjj3e_KoB_-pF42Bj5dt3AmYoXAwAvg?e=Jp8yIs',
       'nectares': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep5eMY4WvBlAgn9grvut8iYB_VpbUD63nj0QFJkhTN_BgA?e=wIclfb',
       
       // VENTAS
-      'ANALISIS DE VENTAS': 'https://1drv.ms/f/c/092e39edf7b9ea99/EqK3-ATbukdLljXYs5pemeIB104TBNN_H5tjPuaQ0TuxoQ?e=9fXxhE',
-      'VENTA JUGOS CARNAVAL': 'https://1drv.ms/f/c/092e39edf7b9ea99/Er-6WwxDo51Jgtkz3u_lH14BB61MOa8oWPdeOZ4EsXiXJw?e=bClnyy',
-      'VENTAS': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ejq1nFzKBBFCnIWMN_72G5wBzF8mrx8AD6XegQkAqYUWgw?e=74iuvj',
-      'VENTAS SUPERMERCADOS': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElvUiiOd_U1IrxLkOd0I7I4BH-i6U-SLBbQdqjw6k7o8zw?e=OxRRvY',
+      'analisis-de-ventas': 'https://1drv.ms/f/c/092e39edf7b9ea99/EqK3-ATbukdLljXYs5pemeIB104TBNN_H5tjPuaQ0TuxoQ?e=9fXxhE',
+      'venta-jugos-carnaval': 'https://1drv.ms/f/c/092e39edf7b9ea99/Er-6WwxDo51Jgtkz3u_lH14BB61MOa8oWPdeOZ4EsXiXJw?e=bClnyy',
+      'ventas': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ejq1nFzKBBFCnIWMN_72G5wBzF8mrx8AD6XegQkAqYUWgw?e=74iuvj',
+      'ventas-supermercados': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElvUiiOd_U1IrxLkOd0I7I4BH-i6U-SLBbQdqjw6k7o8zw?e=OxRRvY',
       
       // IMPORT-EXPORT
       'documentacion-aduanas': 'https://1drv.ms/f/c/092e39edf7b9ea99/EvjMS23XnJxAnDdLN4CroekBxdGR46PvOtYcs1jSPHKs-w?e=mNSwj0',
@@ -162,7 +171,7 @@ export default function Home() {
       'importacion': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuxGZzkjHfNEsv4zalXwf0sBIwie8TOKx1_X8UikJyDxzw?e=PkAcCG',
       
       // RESPALDOS-PROCEDIMIENTOS
-      'RESPALDOS': 'https://1drv.ms/f/c/092e39edf7b9ea99/EvroIT8r_xRIh29OL1wNRdEBk5NePzDywGdSq5UWDBZUrw?e=FtGpeq',
+      'respaldos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EvroIT8r_xRIh29OL1wNRdEBk5NePzDywGdSq5UWDBZUrw?e=FtGpeq',
 
       // SISTEMA DE GESTION
       'procedimientos': 'https://effortless-croissant-fdfd7d.netlify.app/',
@@ -202,6 +211,191 @@ export default function Home() {
   const hasAccess = (area: AreaType) => {
     return userPermissions[userRole as keyof typeof userPermissions]?.includes(area) || false;
   };
+
+  // Datos de las áreas
+  const areasData: AreaInfo[] = [
+    {
+      id: 'plantacion',
+      nombre: 'PLANTACIÓN',
+      icono: 'fas fa-seedling',
+      color: 'green',
+      subcarpetas: [
+        { nombre: 'Histórico antes de 2025', clave: 'historico-antes-de-2025', icono: 'fas fa-history' },
+        { nombre: 'Propiedad', clave: 'propiedad', icono: 'fas fa-landmark' }
+      ]
+    },
+    {
+      id: 'planta',
+      nombre: 'PLANTA',
+      icono: 'fas fa-industry',
+      color: 'orange',
+      subcarpetas: [
+        { nombre: 'Almacén', clave: 'almacen', icono: 'fas fa-warehouse' },
+        { nombre: 'Mantenimiento de Equipos', clave: 'mantenimiento-de-equipos', icono: 'fas fa-tools' },
+        { nombre: 'Producción', clave: 'produccion', icono: 'fas fa-cogs' }
+      ]
+    },
+    {
+      id: 'logistica',
+      nombre: 'LOGÍSTICA',
+      icono: 'fas fa-truck-loading',
+      color: 'amber',
+      subcarpetas: [
+        { nombre: 'Compra Abastecimiento Insumos Planta', clave: 'compra-abastecimiento-insumos-planta', icono: 'fas fa-boxes' },
+        { nombre: 'Cotizaciones Activos Infraestructura', clave: 'cotizaciones-activos-infraestructura', icono: 'fas fa-file-invoice-dollar' },
+        { nombre: 'Distribución Transporte', clave: 'distribucio-transporte', icono: 'fas fa-truck' },
+        { nombre: 'Proveedores', clave: 'proveedores', icono: 'fas fa-handshake' }
+      ]
+    },
+    {
+      id: 'calidad',
+      nombre: 'CALIDAD',
+      icono: 'fas fa-award',
+      color: 'amber',
+      subcarpetas: [
+        { nombre: 'Calidad y Seguridad', clave: 'calidad-seguridad', icono: 'fas fa-shield-alt' },
+        { nombre: 'Certificaciones', clave: 'certificaciones', icono: 'fas fa-certificate' },
+        { nombre: 'Fichas Técnicas', clave: 'fichas-tecnicas', icono: 'fas fa-clipboard-list' },
+        { nombre: 'Normas', clave: 'normas', icono: 'fas fa-book' }
+      ]
+    },
+    {
+      id: 'admin',
+      nombre: 'ADMINISTRACIÓN',
+      icono: 'fas fa-calculator',
+      color: 'orange',
+      subcarpetas: [
+        { nombre: '2024 AD', clave: '2024-ad', icono: 'fas fa-folder' },
+        { nombre: '2025 AD', clave: '2025-ad', icono: 'fas fa-folder-open' }
+      ]
+    },
+    {
+      id: 'rh',
+      nombre: 'RECURSOS HUMANOS',
+      icono: 'fas fa-users',
+      color: 'orange',
+      subcarpetas: [
+        { nombre: '2024 RH', clave: '2024-rh', icono: 'fas fa-folder' },
+        { nombre: 'Afiliaciones', clave: 'afiliaciones', icono: 'fas fa-id-card' },
+        { nombre: 'Capacitaciones', clave: 'capacitaciones', icono: 'fas fa-graduation-cap' },
+        { nombre: 'CNS', clave: 'cns', icono: 'fas fa-file-medical' },
+        { nombre: 'Contratos', clave: 'contratos', icono: 'fas fa-file-contract' },
+        { nombre: 'Credenciales', clave: 'credenciales', icono: 'fas fa-id-badge' },
+        { nombre: 'File Personal', clave: 'file-personal', icono: 'fas fa-folder' },
+        { nombre: 'Pago Cargos Sociales', clave: 'pago-cargos-socailes', icono: 'fas fa-money-bill-wave' },
+        { nombre: 'Planillas Asistencia', clave: 'planillas-asistencia', icono: 'fas fa-clipboard-check' },
+        { nombre: 'Planilla Fiscal', clave: 'planilla-fiscal', icono: 'fas fa-file-invoice' },
+        { nombre: 'Planillas Generales', clave: 'planillas-generales', icono: 'fas fa-clipboard-list' },
+        { nombre: 'Trabajopolis', clave: 'trabajopolis', icono: 'fas fa-briefcase' }
+      ]
+    },
+    {
+      id: 'marketing',
+      nombre: 'MARKETING',
+      icono: 'fas fa-bullhorn',
+      color: 'amber',
+      subcarpetas: [
+        { nombre: 'Catálogos', clave: 'catalogos', icono: 'fas fa-book' },
+        { nombre: 'Estudio Mercado Gerencia', clave: 'estudio-mercado-grenia', icono: 'fas fa-chart-bar' },
+        { nombre: 'Etiquetas', clave: 'etiquetas', icono: 'fas fa-tag' },
+        { nombre: 'Ferias', clave: 'ferias', icono: 'fas fa-calendar-alt' },
+        { nombre: 'Folletos Volantes Trípticos', clave: 'folletos-volantes-tripticos', icono: 'fas fa-newspaper' },
+        { nombre: 'Galería Imágenes', clave: 'galeria-imagenes', icono: 'fas fa-images' },
+        { nombre: 'Logo', clave: 'logo', icono: 'fas fa-palette' },
+        { nombre: 'Manual Marca', clave: 'manual-marca', icono: 'fas fa-book-open' },
+        { nombre: 'Plan Marketing', clave: 'plan-marketing', icono: 'fas fa-chart-line' },
+        { nombre: 'Precios Venta', clave: 'precios-venta', icono: 'fas fa-tags' },
+        { nombre: 'Redes Sociales', clave: 'redes-sociales', icono: 'fas fa-share-alt' },
+        { nombre: 'Videos', clave: 'videos', icono: 'fas fa-video' }
+      ]
+    },
+    {
+      id: 'investigacion',
+      nombre: 'INVESTIGACIÓN Y DESARROLLO',
+      icono: 'fas fa-flask',
+      color: 'blue',
+      subcarpetas: [
+        { nombre: 'Cultivo', clave: 'cultivo', icono: 'fas fa-seedling' },
+        { nombre: 'Estudios Beneficiosos', clave: 'estudios-beneficiosos', icono: 'fas fa-microscope' },
+        { nombre: 'Literatura', clave: 'literatura', icono: 'fas fa-book' },
+        { nombre: 'Manejo Frutales', clave: 'manejo-frutales', icono: 'fas fa-tree' },
+        { nombre: 'Néctares', clave: 'nectares', icono: 'fas fa-wine-bottle' }
+      ]
+    },
+    {
+      id: 'ventas',
+      nombre: 'VENTAS',
+      icono: 'fas fa-chart-line',
+      color: 'amber',
+      subcarpetas: [
+        { nombre: 'Análisis de Ventas', clave: 'analisis-de-ventas', icono: 'fas fa-chart-bar' },
+        { nombre: 'Venta Jugos Carnaval', clave: 'venta-jugos-carnaval', icono: 'fas fa-glass-cheers' },
+        { nombre: 'Ventas', clave: 'ventas', icono: 'fas fa-shopping-cart' },
+        { nombre: 'Ventas Supermercados', clave: 'ventas-supermercados', icono: 'fas fa-store' }
+      ]
+    },
+    {
+      id: 'import-export',
+      nombre: 'IMPORT - EXPORT',
+      icono: 'fas fa-globe-americas',
+      color: 'purple',
+      subcarpetas: [
+        { nombre: 'Documentación Aduanas', clave: 'documentacion-aduanas', icono: 'fas fa-file-contract' },
+        { nombre: 'Exportación', clave: 'exportacion', icono: 'fas fa-plane-departure' },
+        { nombre: 'Importación', clave: 'importacion', icono: 'fas fa-plane-arrival' }
+      ]
+    },
+    {
+      id: 'respaldos',
+      nombre: 'RESPALDOS DE PROCEDIMIENTOS',
+      icono: 'fas fa-hdd',
+      color: 'gray',
+      subcarpetas: [
+        { nombre: 'Respaldos', clave: 'respaldos', icono: 'fas fa-database' }
+      ]
+    },
+    {
+      id: 'gestion',
+      nombre: 'SISTEMA DE GESTIÓN',
+      icono: 'fas fa-clipboard-list',
+      color: 'purple',
+      subcarpetas: [
+        { nombre: 'Procedimientos', clave: 'procedimientos', icono: 'fas fa-file-alt' }
+      ]
+    },
+    {
+      id: 'gerencia',
+      nombre: 'GERENCIA',
+      icono: 'fas fa-user-tie',
+      color: 'blue',
+      subcarpetas: [
+        { nombre: 'Documentos', clave: 'documentos', icono: 'fas fa-folder' }
+      ]
+    },
+    {
+      id: 'finanzas',
+      nombre: 'FINANZAS - CONTABILIDAD - LEGAL',
+      icono: 'fas fa-money-bill-wave',
+      color: 'green',
+      subcarpetas: [
+        { nombre: 'Años Pasados', clave: 'años-pasados', icono: 'fas fa-history' },
+        { nombre: '2025 FI', clave: '2025-fi', icono: 'fas fa-folder-open' }
+      ]
+    },
+    {
+      id: 'personales',
+      nombre: 'CARPETAS PERSONALES',
+      icono: 'fas fa-user-circle',
+      color: 'orange',
+      subcarpetas: [
+        { nombre: 'Nano', clave: 'nano', icono: 'fas fa-user' },
+        { nombre: 'Rodrigo', clave: 'rodrigo', icono: 'fas fa-user' },
+        { nombre: 'Santiago', clave: 'santiago', icono: 'fas fa-user' },
+        { nombre: 'Emili', clave: 'emili', icono: 'fas fa-user' },
+        { nombre: 'Daniela', clave: 'daniela', icono: 'fas fa-user' }
+      ]
+    }
+  ];
 
   // Imágenes para el carrusel
   const carouselImages = [
@@ -432,7 +626,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Sección de Áreas (Principal) - DISEÑO MEJORADO */}
+        {/* Sección de Áreas (Principal) - NUEVO DISEÑO CON 15 CUADROS */}
         {activeSection === 'areas' && (
           <div className="flex flex-col xl:flex-row gap-6 md:gap-8">
             {/* Galería */}
@@ -489,574 +683,87 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Áreas - DISEÑO MEJORADO CON SCROLL ILIMITADO */}
+            {/* Áreas - NUEVO DISEÑO CON 15 CUADROS VISIBLES */}
             <div className="w-full xl:w-2/3">
               <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">Nuestras Áreas</h2>
               
               {/* Contenedor con scroll mejorado */}
               <div className="max-h-[75vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                  
-                  {/* PLANTACIÓN */}
-                  {hasAccess('plantacion') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-green-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('plantacion')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-seedling text-green-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-green-800">Plantación</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'plantacion' ? 'up' : 'down'} ml-auto text-green-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'plantacion' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-green-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('historico-antes-de-2025')}>
-                            <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-history mr-3 md:mr-4 text-green-600 text-lg"></i>Histórico antes de 2025
-                            </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                  {areasData.map((area) => (
+                    hasAccess(area.id) && (
+                      <div 
+                        key={area.id}
+                        className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                        style={{ 
+                          borderLeftColor: `var(--color-${area.color}-500)`,
+                          borderLeftWidth: '8px'
+                        }}
+                        onClick={() => toggleSubmenu(area.id)}
+                      >
+                        {/* Header del área */}
+                        <div className="flex items-center mb-3 md:mb-4">
+                          <div 
+                            className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg"
+                            style={{ 
+                              background: `linear-gradient(135deg, var(--color-${area.color}-100), var(--color-${area.color}-200))`
+                            }}
+                          >
+                            <i 
+                              className={`${area.icono} text-xl md:text-2xl`}
+                              style={{ color: `var(--color-${area.color}-600)` }}
+                            ></i>
                           </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('propiedad')}>
-                            <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-landmark mr-3 md:mr-4 text-green-600 text-lg"></i>Propiedad
-                            </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 
+                              className="text-lg md:text-xl font-bold truncate"
+                              style={{ color: `var(--color-${area.color}-800)` }}
+                            >
+                              {area.nombre}
+                            </h3>
+                            <p className="text-xs text-gray-500 mt-1">
+                              {area.subcarpetas.length} {area.subcarpetas.length === 1 ? 'carpeta' : 'carpetas'}
+                            </p>
                           </div>
+                          <i 
+                            className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-lg ml-2`}
+                            style={{ color: `var(--color-${area.color}-600)` }}
+                          ></i>
                         </div>
-                      </div>
-                    </div>
-                  )}
 
-                  {/* PLANTA */}
-                  {hasAccess('planta') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('planta')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-industry text-orange-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-orange-800">Planta</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'planta' ? 'up' : 'down'} ml-auto text-orange-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'planta' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('almacen')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-warehouse mr-3 md:mr-4 text-orange-600 text-lg"></i>Almacén
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('mantenimiento-de-equipos')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-tools mr-3 md:mr-4 text-orange-600 text-lg"></i>Mantenimiento de Equipos
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('produccion')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-cogs mr-3 md:mr-4 text-orange-600 text-lg"></i>Producción
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* LOGÍSTICA */}
-                  {hasAccess('logistica') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('logistica')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-truck-loading text-amber-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-amber-800">Logística</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'logistica' ? 'up' : 'down'} ml-auto text-amber-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'logistica' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-amber-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('compra-abastecimiento-insumos-planta')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-boxes mr-3 md:mr-4 text-amber-600 text-lg"></i>Compra Abastecimiento Insumos Planta
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('cotizaciones-activos-infraestructura')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-file-invoice-dollar mr-3 md:mr-4 text-amber-600 text-lg"></i>Cotizaciones Activos Infraestructura
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('distribucio-transporte')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-truck mr-3 md:mr-4 text-amber-600 text-lg"></i>Distribución Transporte
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-yellow-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('proveedores')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-handshake mr-3 md:mr-4 text-amber-600 text-lg"></i>Proveedores
-                            </div>
+                        {/* Subcarpetas */}
+                        <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-96' : 'max-h-0'}`}>
+                          <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin" 
+                               style={{ 
+                                 scrollbarColor: `var(--color-${area.color}-300) var(--color-${area.color}-100)`
+                               }}>
+                            {area.subcarpetas.map((subcarpeta, index) => (
+                              <div 
+                                key={index}
+                                className="p-3 md:p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2 hover:shadow-lg"
+                                style={{ 
+                                  borderColor: `var(--color-${area.color}-200)`,
+                                  backgroundColor: `var(--color-${area.color}-50)`
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  redirectToOneDrive(subcarpeta.clave);
+                                }}
+                              >
+                                <div 
+                                  className="flex items-center font-semibold text-sm md:text-base"
+                                  style={{ color: `var(--color-${area.color}-700)` }}
+                                >
+                                  <i className={`${subcarpeta.icono} mr-3 md:mr-4 text-lg`}></i>
+                                  <span className="truncate">{subcarpeta.nombre}</span>
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-
-                  {/* CALIDAD */}
-                  {hasAccess('calidad') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-600 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('calidad')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-100 to-orange-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-award text-amber-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-amber-800">Calidad</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'calidad' ? 'up' : 'down'} ml-auto text-amber-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'calidad' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-amber-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('calidad-seguridad')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-shield-alt mr-3 md:mr-4 text-amber-600 text-lg"></i>Calidad y Seguridad
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('certificaciones')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-certificate mr-3 md:mr-4 text-amber-600 text-lg"></i>Certificaciones
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('fichas-tecnicas')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-clipboard-list mr-3 md:mr-4 text-amber-600 text-lg"></i>Fichas Técnicas
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-amber-200 hover:border-amber-300 hover:shadow-lg" onClick={() => redirectToOneDrive('normas')}>
-                            <div className="text-amber-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-book mr-3 md:mr-4 text-amber-600 text-lg"></i>Normas
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* ADMINISTRACIÓN */}
-                  {hasAccess('admin') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-600 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('admin')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-calculator text-orange-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-orange-800">Administración</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'admin' ? 'up' : 'down'} ml-auto text-orange-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'admin' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2024-ad')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-folder mr-3 md:mr-4 text-orange-600 text-lg"></i>2024 AD
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2025-ad')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-folder-open mr-3 md:mr-4 text-orange-600 text-lg"></i>2025 AD
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* RECURSOS HUMANOS - CON SCROLL INTERNO */}
-                  {hasAccess('rh') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-700 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('rh')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-red-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-users text-orange-700 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-orange-900">Recursos Humanos</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'rh' ? 'up' : 'down'} ml-auto text-orange-700 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'rh' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2024-rh')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-folder mr-3 md:mr-4 text-orange-700 text-lg"></i>2024 RH
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('afiliaciones')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-id-card mr-3 md:mr-4 text-orange-700 text-lg"></i>Afiliaciones
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('capacitaciones')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-graduation-cap mr-3 md:mr-4 text-orange-700 text-lg"></i>Capacitaciones
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('cns')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-file-medical mr-3 md:mr-4 text-orange-700 text-lg"></i>CNS
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('contratos')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-file-contract mr-3 md:mr-4 text-orange-700 text-lg"></i>Contratos
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('credenciales')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-id-badge mr-3 md:mr-4 text-orange-700 text-lg"></i>Credenciales
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('file-personal')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-folder mr-3 md:mr-4 text-orange-700 text-lg"></i>File Personal
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('pago-cargos-socailes')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-money-bill-wave mr-3 md:mr-4 text-orange-700 text-lg"></i>Pago Cargos Sociales
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('planillas-asistencia')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-clipboard-check mr-3 md:mr-4 text-orange-700 text-lg"></i>Planillas Asistencia
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('planilla-fiscal')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-file-invoice mr-3 md:mr-4 text-orange-700 text-lg"></i>Planilla Fiscal
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('planillas-generales')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-clipboard-list mr-3 md:mr-4 text-orange-700 text-lg"></i>Planillas Generales
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('trabajopolis')}>
-                            <div className="text-orange-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-briefcase mr-3 md:mr-4 text-orange-700 text-lg"></i>Trabajopolis
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* MARKETING - CON SCROLL INTERNO */}
-                  {hasAccess('marketing') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-700 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('marketing')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-red-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-bullhorn text-amber-700 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-amber-900">Marketing</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'marketing' ? 'up' : 'down'} ml-auto text-amber-700 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'marketing' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-amber-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('catalogos')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-book mr-3 md:mr-4 text-amber-700 text-lg"></i>Catálogos
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('estudio-mercado-grenia')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-chart-bar mr-3 md:mr-4 text-amber-700 text-lg"></i>Estudio Mercado Gerencia
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('etiquetas')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-tag mr-3 md:mr-4 text-amber-700 text-lg"></i>Etiquetas
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('ferias')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-calendar-alt mr-3 md:mr-4 text-amber-700 text-lg"></i>Ferias
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('folletos-volantes-tripticos')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-newspaper mr-3 md:mr-4 text-amber-700 text-lg"></i>Folletos Volantes Trípticos
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('galeria-imagenes')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-images mr-3 md:mr-4 text-amber-700 text-lg"></i>Galería Imágenes
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('logo')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-palette mr-3 md:mr-4 text-amber-700 text-lg"></i>Logo
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('manual-marca')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-book-open mr-3 md:mr-4 text-amber-700 text-lg"></i>Manual Marca
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('plan-marketing')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-chart-line mr-3 md:mr-4 text-amber-700 text-lg"></i>Plan Marketing
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('precios-venta')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-tags mr-3 md:mr-4 text-amber-700 text-lg"></i>Precios Venta
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('redes-sociales')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-share-alt mr-3 md:mr-4 text-amber-700 text-lg"></i>Redes Sociales
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('videos')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-video mr-3 md:mr-4 text-amber-700 text-lg"></i>Videos
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* INVESTIGACIÓN Y DESARROLLO */}
-                  {hasAccess('investigacion') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-blue-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('investigacion')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-flask text-blue-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-blue-800">Investigación y Desarrollo</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'investigacion' ? 'up' : 'down'} ml-auto text-blue-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'investigacion' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-blue-200 hover:border-blue-300 hover:shadow-lg" onClick={() => redirectToOneDrive('cultivo')}>
-                            <div className="text-blue-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-seedling mr-3 md:mr-4 text-blue-600 text-lg"></i>Cultivo
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-blue-200 hover:border-blue-300 hover:shadow-lg" onClick={() => redirectToOneDrive('estudios-beneficiosos')}>
-                            <div className="text-blue-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-microscope mr-3 md:mr-4 text-blue-600 text-lg"></i>Estudios Beneficiosos
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-blue-200 hover:border-blue-300 hover:shadow-lg" onClick={() => redirectToOneDrive('literatura')}>
-                            <div className="text-blue-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-book mr-3 md:mr-4 text-blue-600 text-lg"></i>Literatura
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-blue-200 hover:border-blue-300 hover:shadow-lg" onClick={() => redirectToOneDrive('manejo frutales')}>
-                            <div className="text-blue-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-tree mr-3 md:mr-4 text-blue-600 text-lg"></i>Manejo Frutales
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-blue-200 hover:border-blue-300 hover:shadow-lg" onClick={() => redirectToOneDrive('nectares')}>
-                            <div className="text-blue-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-wine-bottle mr-3 md:mr-4 text-blue-600 text-lg"></i>Néctares
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* VENTAS */}
-                  {hasAccess('ventas') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-amber-700 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('ventas')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-red-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-chart-line text-amber-700 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-amber-900">Ventas</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'ventas' ? 'up' : 'down'} ml-auto text-amber-700 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'ventas' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-amber-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('ANALISIS DE VENTAS')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-chart-bar mr-3 md:mr-4 text-amber-700 text-lg"></i>Análisis de Ventas
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('VENTA JUGOS CARNAVAL')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-glass-cheers mr-3 md:mr-4 text-amber-700 text-lg"></i>Venta Jugos Carnaval
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('VENTAS')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-shopping-cart mr-3 md:mr-4 text-amber-700 text-lg"></i>Ventas
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('VENTAS SUPERMERCADOS')}>
-                            <div className="text-amber-800 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-store mr-3 md:mr-4 text-amber-700 text-lg"></i>Ventas Supermercados
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* IMPORT-EXPORT */}
-                  {hasAccess('import-export') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-purple-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('import-export')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-globe-americas text-purple-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-purple-800">Import-Export</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'import-export' ? 'up' : 'down'} ml-auto text-purple-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'import-export' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-purple-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-purple-200 hover:border-purple-300 hover:shadow-lg" onClick={() => redirectToOneDrive('documentacion-aduanas')}>
-                            <div className="text-purple-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-file-contract mr-3 md:mr-4 text-purple-600 text-lg"></i>Documentación Aduanas
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-purple-200 hover:border-purple-300 hover:shadow-lg" onClick={() => redirectToOneDrive('exportacion')}>
-                            <div className="text-purple-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-plane-departure mr-3 md:mr-4 text-purple-600 text-lg"></i>Exportación
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-purple-200 hover:border-purple-300 hover:shadow-lg" onClick={() => redirectToOneDrive('importacion')}>
-                            <div className="text-purple-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-plane-arrival mr-3 md:mr-4 text-purple-600 text-lg"></i>Importación
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* RESPALDOS-PROCEDIMIENTOS */}
-                  {hasAccess('respaldos') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-gray-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('respaldos')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-hdd text-gray-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-gray-800">Respaldos-Procedimientos</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'respaldos' ? 'up' : 'down'} ml-auto text-gray-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'respaldos' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-gray-200 hover:border-gray-300 hover:shadow-lg" onClick={() => redirectToOneDrive('RESPALDOS')}>
-                            <div className="text-gray-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-database mr-3 md:mr-4 text-gray-600 text-lg"></i>Respaldos
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* SISTEMA DE GESTION */}
-                  {hasAccess('gestion') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-purple-500 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('gestion')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-clipboard-list text-purple-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-purple-800">Sistema de Gestión</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'gestion' ? 'up' : 'down'} ml-auto text-purple-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'gestion' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-purple-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-purple-200 hover:border-purple-300 hover:shadow-lg" onClick={() => redirectToOneDrive('procedimientos')}>
-                            <div className="text-purple-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-file-alt mr-3 md:mr-4 text-purple-600 text-lg"></i>Procedimientos
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* GERENCIA */}
-                  {hasAccess('gerencia') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-blue-600 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('gerencia')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-user-tie text-blue-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-blue-800">Gerencia</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'gerencia' ? 'up' : 'down'} ml-auto text-blue-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'gerencia' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-blue-200 hover:border-blue-300 hover:shadow-lg" onClick={() => redirectToOneDrive('documentos')}>
-                            <div className="text-blue-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-folder mr-3 md:mr-4 text-blue-600 text-lg"></i>Documentos
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* FINANZAS-CONTABILIDAD-LEGAL */}
-                  {hasAccess('finanzas') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-green-600 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('finanzas')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-money-bill-wave text-green-600 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-green-800">Finanzas-Contabilidad-Legal</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'finanzas' ? 'up' : 'down'} ml-auto text-green-600 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'finanzas' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-green-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('años-pasados')}>
-                            <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-history mr-3 md:mr-4 text-green-600 text-lg"></i>Años Pasados
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-green-200 hover:border-green-300 hover:shadow-lg" onClick={() => redirectToOneDrive('2025-fi')}>
-                            <div className="text-green-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-folder-open mr-3 md:mr-4 text-green-600 text-lg"></i>2025 FI
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* CARPETAS PERSONALES */}
-                  {hasAccess('personales') && (
-                    <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 border-orange-400 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-center mb-3 md:mb-4 cursor-pointer" onClick={() => toggleSubmenu('personales')}>
-                        <div className="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-amber-200 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg">
-                          <i className="fas fa-user-circle text-orange-500 text-xl md:text-2xl"></i>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-orange-800">Carpetas Personales</h3>
-                        <i className={`fas fa-chevron-${openMenu === 'personales' ? 'up' : 'down'} ml-auto text-orange-500 text-lg`}></i>
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === 'personales' ? 'max-h-96' : 'max-h-0'}`}>
-                        <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('nano')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-user mr-3 md:mr-4 text-orange-600 text-lg"></i>Nano
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('rodrigo')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-user mr-3 md:mr-4 text-orange-600 text-lg"></i>Rodrigo
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('santiago')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-user mr-3 md:mr-4 text-orange-600 text-lg"></i>Santiago
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('emili')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-user mr-3 md:mr-4 text-orange-600 text-lg"></i>Emili
-                            </div>
-                          </div>
-                          <div className="p-3 md:p-4 hover:bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl cursor-pointer transition-all duration-200 border-2 border-orange-200 hover:border-orange-300 hover:shadow-lg" onClick={() => redirectToOneDrive('daniela')}>
-                            <div className="text-orange-700 flex items-center font-semibold text-sm md:text-base">
-                              <i className="fas fa-user mr-3 md:mr-4 text-orange-600 text-lg"></i>Daniela
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
+                    )
+                  ))}
                 </div>
               </div>
             </div>
@@ -1087,6 +794,53 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Estilos CSS para los colores */}
+      <style jsx>{`
+        :root {
+          --color-green-100: #dcfce7;
+          --color-green-200: #bbf7d0;
+          --color-green-500: #22c55e;
+          --color-green-600: #16a34a;
+          --color-green-700: #15803d;
+          --color-green-800: #166534;
+          
+          --color-orange-100: #ffedd5;
+          --color-orange-200: #fed7aa;
+          --color-orange-500: #f97316;
+          --color-orange-600: #ea580c;
+          --color-orange-700: #c2410c;
+          --color-orange-800: #9a3412;
+          
+          --color-amber-100: #fef3c7;
+          --color-amber-200: #fde68a;
+          --color-amber-500: #f59e0b;
+          --color-amber-600: #d97706;
+          --color-amber-700: #b45309;
+          --color-amber-800: #92400e;
+          
+          --color-blue-100: #dbeafe;
+          --color-blue-200: #bfdbfe;
+          --color-blue-500: #3b82f6;
+          --color-blue-600: #2563eb;
+          --color-blue-700: #1d4ed8;
+          --color-blue-800: #1e40af;
+          
+          --color-purple-100: #f3e8ff;
+          --color-purple-200: #e9d5ff;
+          --color-purple-500: #a855f7;
+          --color-purple-600: #9333ea;
+          --color-purple-700: #7c3aed;
+          --color-purple-800: #6b21a8;
+          
+          --color-gray-100: #f3f4f6;
+          --color-gray-200: #e5e7eb;
+          --color-gray-500: #6b7280;
+          --color-gray-600: #4b5563;
+          --color-gray-700: #374151;
+          --color-gray-800: #1f2937;
+        }
+      `}</style>
     </div>
   );
 }
