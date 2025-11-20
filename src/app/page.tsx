@@ -1,791 +1,473 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-// Definir tipos para TypeScript
-type MenuType = 
-  | 'plantacion' | 'planta' | 'logistica' | 'calidad' | 'admin' 
+// --------------------
+// Types
+// --------------------
+
+type MenuType =
+  | 'plantacion' | 'planta' | 'logistica' | 'calidad' | 'admin'
   | 'rh' | 'marketing' | 'investigacion' | 'ventas' | 'import-export'
   | 'respaldos' | 'gestion' | 'gerencia' | 'finanzas' | 'personales'
   | null;
 
-type AreaType = 
-  | 'plantacion' | 'planta' | 'logistica' | 'calidad' | 'admin' 
-  | 'rh' | 'marketing' | 'investigacion' | 'ventas' | 'import-export'
-  | 'respaldos' | 'gestion' | 'gerencia' | 'finanzas' | 'personales';
+type AreaType = Exclude<MenuType, null>;
 
 type SectionType = 'areas' | 'mision' | 'paneles';
 
-// Interfaz para las áreas
+interface Subcarpeta {
+  nombre: string;
+  clave: string;
+  icono: string;
+}
+
 interface AreaInfo {
   id: AreaType;
   nombre: string;
   icono: string;
-  color: string;
-  subcarpetas: { nombre: string; clave: string; icono: string }[];
+  color: string; // color token name (green, orange, amber, etc.)
+  subcarpetas: Subcarpeta[];
 }
 
-export default function Home() {
-  const [activeSection, setActiveSection] = useState<SectionType>('areas');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+interface UserDef {
+  username: string;
+  password: string;
+  role: string;
+}
+
+// --------------------
+// Sample users (development only)
+// --------------------
+
+const SAMPLE_USERS: UserDef[] = [
+  { username: 'Emily', password: 'admin2025', role: 'administracion' },
+  { username: 'Rodrigo', password: 'prod2025', role: 'produccion' },
+  { username: 'Fernando', password: 'nano2025', role: 'gerencia' },
+  { username: 'Daniela', password: 'dan2025', role: 'gestion' },
+  { username: 'invitado', password: 'invitado2025', role: 'invitado' },
+];
+
+// --------------------
+// Permissions
+// --------------------
+
+const USER_PERMISSIONS: Record<string, AreaType[]> = {
+  administracion: ['plantacion','planta','logistica','calidad','admin','rh','marketing','investigacion','ventas','import-export','respaldos','gestion','gerencia','finanzas','personales'],
+  produccion: ['plantacion','planta','logistica','calidad','investigacion'],
+  gerencia: ['plantacion','planta','logistica','calidad','admin','rh','marketing','investigacion','ventas','import-export','gerencia','finanzas'],
+  gestion: ['plantacion','planta','logistica','calidad','admin','rh','marketing','investigacion','ventas'],
+  invitado: ['plantacion','planta'],
+};
+
+// --------------------
+// Areas data (15 areas) — puedes editar nombres / iconos / enlaces aquí
+// --------------------
+
+const AREAS_DATA: AreaInfo[] = [
+  { id: 'plantacion', nombre: 'PLANTACIÓN', icono: 'fas fa-seedling', color: 'green', subcarpetas: [
+    { nombre: 'Histórico antes de 2025', clave: 'historico-antes-de-2025', icono: 'fas fa-history' },
+    { nombre: 'Propiedad', clave: 'propiedad', icono: 'fas fa-landmark' },
+  ] },
+
+  { id: 'planta', nombre: 'PLANTA', icono: 'fas fa-industry', color: 'orange', subcarpetas: [
+    { nombre: 'Almacén', clave: 'almacen', icono: 'fas fa-warehouse' },
+    { nombre: 'Mantenimiento de Equipos', clave: 'mantenimiento-de-equipos', icono: 'fas fa-tools' },
+    { nombre: 'Producción', clave: 'produccion', icono: 'fas fa-cogs' },
+  ] },
+
+  { id: 'logistica', nombre: 'LOGÍSTICA', icono: 'fas fa-truck-loading', color: 'amber', subcarpetas: [
+    { nombre: 'Compra / Abastecimiento', clave: 'compra-abastecimiento-insumos-planta', icono: 'fas fa-boxes' },
+    { nombre: 'Cotizaciones', clave: 'cotizaciones-activos-infraestructura', icono: 'fas fa-file-invoice-dollar' },
+    { nombre: 'Distribución / Transporte', clave: 'distribucio-transporte', icono: 'fas fa-truck' },
+    { nombre: 'Proveedores', clave: 'proveedores', icono: 'fas fa-handshake' },
+  ] },
+
+  { id: 'calidad', nombre: 'CALIDAD', icono: 'fas fa-award', color: 'amber', subcarpetas: [
+    { nombre: 'Calidad y Seguridad', clave: 'calidad-seguridad', icono: 'fas fa-shield-alt' },
+    { nombre: 'Certificaciones', clave: 'certificaciones', icono: 'fas fa-certificate' },
+    { nombre: 'Fichas Técnicas', clave: 'fichas-tecnicas', icono: 'fas fa-clipboard-list' },
+    { nombre: 'Normas', clave: 'normas', icono: 'fas fa-book' },
+  ] },
+
+  { id: 'admin', nombre: 'ADMINISTRACIÓN', icono: 'fas fa-calculator', color: 'orange', subcarpetas: [
+    { nombre: '2024 AD', clave: '2024-ad', icono: 'fas fa-folder' },
+    { nombre: '2025 AD', clave: '2025-ad', icono: 'fas fa-folder-open' },
+  ] },
+
+  { id: 'rh', nombre: 'RECURSOS HUMANOS', icono: 'fas fa-users', color: 'orange', subcarpetas: [
+    { nombre: '2024 RH', clave: '2024-rh', icono: 'fas fa-folder' },
+    { nombre: 'Afiliaciones', clave: 'afiliaciones', icono: 'fas fa-id-card' },
+    { nombre: 'Capacitaciones', clave: 'capacitaciones', icono: 'fas fa-graduation-cap' },
+    { nombre: 'CNS', clave: 'cns', icono: 'fas fa-file-medical' },
+    { nombre: 'Contratos', clave: 'contratos', icono: 'fas fa-file-contract' },
+  ] },
+
+  { id: 'marketing', nombre: 'MARKETING', icono: 'fas fa-bullhorn', color: 'amber', subcarpetas: [
+    { nombre: 'Catálogos', clave: 'catalogos', icono: 'fas fa-book' },
+    { nombre: 'Etiquetas', clave: 'etiquetas', icono: 'fas fa-tag' },
+    { nombre: 'Galería Imágenes', clave: 'galeria-imagenes', icono: 'fas fa-images' },
+    { nombre: 'Plan Marketing', clave: 'plan-marketing', icono: 'fas fa-chart-line' },
+  ] },
+
+  { id: 'investigacion', nombre: 'INVESTIGACIÓN Y DESARROLLO', icono: 'fas fa-flask', color: 'blue', subcarpetas: [
+    { nombre: 'Cultivo', clave: 'cultivo', icono: 'fas fa-seedling' },
+    { nombre: 'Estudios', clave: 'estudios-beneficiosos', icono: 'fas fa-microscope' },
+    { nombre: 'Literatura', clave: 'literatura', icono: 'fas fa-book' },
+  ] },
+
+  { id: 'ventas', nombre: 'VENTAS', icono: 'fas fa-chart-line', color: 'amber', subcarpetas: [
+    { nombre: 'Análisis de Ventas', clave: 'analisis-de-ventas', icono: 'fas fa-chart-bar' },
+    { nombre: 'Ventas', clave: 'ventas', icono: 'fas fa-shopping-cart' },
+    { nombre: 'Ventas Supermercados', clave: 'ventas-supermercados', icono: 'fas fa-store' },
+  ] },
+
+  { id: 'import-export', nombre: 'IMPORT - EXPORT', icono: 'fas fa-globe-americas', color: 'purple', subcarpetas: [
+    { nombre: 'Documentación Aduanas', clave: 'documentacion-aduanas', icono: 'fas fa-file-contract' },
+    { nombre: 'Exportación', clave: 'exportacion', icono: 'fas fa-plane-departure' },
+    { nombre: 'Importación', clave: 'importacion', icono: 'fas fa-plane-arrival' },
+  ] },
+
+  { id: 'respaldos', nombre: 'RESPALDOS DE PROCEDIMIENTOS', icono: 'fas fa-hdd', color: 'gray', subcarpetas: [
+    { nombre: 'Respaldos', clave: 'respaldos', icono: 'fas fa-database' },
+  ] },
+
+  { id: 'gestion', nombre: 'SISTEMA DE GESTIÓN', icono: 'fas fa-clipboard-list', color: 'purple', subcarpetas: [
+    { nombre: 'Procedimientos', clave: 'procedimientos', icono: 'fas fa-file-alt' },
+  ] },
+
+  { id: 'gerencia', nombre: 'GERENCIA', icono: 'fas fa-user-tie', color: 'blue', subcarpetas: [
+    { nombre: 'Documentos', clave: 'documentos', icono: 'fas fa-folder' },
+  ] },
+
+  { id: 'finanzas', nombre: 'FINANZAS - CONTABILIDAD - LEGAL', icono: 'fas fa-money-bill-wave', color: 'green', subcarpetas: [
+    { nombre: 'Años Pasados', clave: 'años-pasados', icono: 'fas fa-history' },
+    { nombre: '2025 FI', clave: '2025-fi', icono: 'fas fa-folder-open' },
+  ] },
+
+  { id: 'personales', nombre: 'CARPETAS PERSONALES', icono: 'fas fa-user-circle', color: 'orange', subcarpetas: [
+    { nombre: 'Nano', clave: 'nano', icono: 'fas fa-user' },
+    { nombre: 'Rodrigo', clave: 'rodrigo', icono: 'fas fa-user' },
+    { nombre: 'Santiago', clave: 'santiago', icono: 'fas fa-user' },
+    { nombre: 'Emili', clave: 'emili', icono: 'fas fa-user' },
+    { nombre: 'Daniela', clave: 'daniela', icono: 'fas fa-user' },
+  ] },
+];
+
+// --------------------
+// OneDrive / Drive links map (centralizado)
+// --------------------
+
+const LINKS_MAP: Record<string, string> = {
+  // ejemplo: 'almacen': 'https://1drv.ms/f/..'
+  'historico-antes-de-2025': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElIubDi-PlpAp3zW9TP55h8BBSRCpYkxuTshu8F7UruV9A?e=o8lsN1',
+  'propiedad': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep7Sh3wa9-ZNroCBnJXxVAYBOluaOnizaCe--NcXa_996A?e=yuEsD0',
+  'almacen': 'https://1drv.ms/f/c/092e39edf7b9ea99/EnlE7wF0eBhArVaqhXxnymEBbxzq_2y6X7GNf-kieXY3Tw?e=oBo1na',
+  // ... puedes rellenar el resto o mantener el objeto como ejemplo
+  'procedimientos': 'https://effortless-croissant-fdfd7d.netlify.app/',
+  'nano': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjVQpvntLZhOnDLC7r0ZjSkBcTBz8bKlgu2E-d90epzJRQ?e=yYQ8yb',
+  'daniela': 'https://1drv.ms/f/c/092e39edf7b9ea99/EgwujdpFBVJCjOF8KQuYmqcB5G2gmrtVrk4bTHbwymP5cw?e=9yJJ00',
+  // agrega aquí el resto de enlaces según necesites
+};
+
+// --------------------
+// Utilities
+// --------------------
+
+const setAuthStorage = (username: string, role: string) => {
+  localStorage.setItem('agiru-auth', JSON.stringify({ username, role, timestamp: Date.now() }));
+};
+
+const clearAuthStorage = () => {
+  localStorage.removeItem('agiru-auth');
+};
+
+const readAuthStorage = () => {
+  try {
+    const raw = localStorage.getItem('agiru-auth');
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+};
+
+// --------------------
+// Subcomponents
+// --------------------
+
+function Icon({ className }: { className?: string }) {
+  // Placeholder for FontAwesome usage — tu proyecto debe incluir FA o usar heroicons
+  return <i className={className}></i>;
+}
+
+function LoginForm({ onSuccess }: { onSuccess: (username: string, role: string) => void; }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    setTimeout(() => {
+      const found = SAMPLE_USERS.find(u => u.username === username && u.password === password);
+      if (found) {
+        setAuthStorage(found.username, found.role);
+        onSuccess(found.username, found.role);
+      } else {
+        setError('Usuario o contraseña incorrectos');
+      }
+      setLoading(false);
+    }, 700);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border-4 border-orange-300 transform hover:scale-101 transition-transform duration-200">
+        <div className="text-center mb-6">
+          <div className="h-24 w-24 mx-auto flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-3 shadow-2xl border-4 border-white">
+            <img src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" alt="Logo" className="w-full h-full object-contain" />
+          </div>
+          <h1 className="text-3xl font-bold text-orange-900 mt-4">Airú</h1>
+          <p className="text-orange-700 font-semibold">Sistema Interno - Acceso Restringido</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (<div className="bg-red-50 text-red-700 p-3 rounded-2xl text-sm border-2 border-red-200">{error}</div>)}
+
+          <label className="block">
+            <span className="text-sm font-bold text-orange-800">Usuario</span>
+            <input value={username} onChange={e => setUsername(e.target.value)} className="mt-1 block w-full rounded-2xl border-2 border-orange-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Ingrese su usuario" required />
+          </label>
+
+          <label className="block">
+            <span className="text-sm font-bold text-orange-800">Contraseña</span>
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="mt-1 block w-full rounded-2xl border-2 border-orange-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Ingrese su contraseña" required />
+          </label>
+
+          <button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white py-3 rounded-2xl font-bold disabled:opacity-70">
+            {loading ? 'Verificando...' : 'Iniciar Sesión'}
+          </button>
+
+          <div className="text-xs text-center text-orange-600 mt-2">Acceso exclusivo para personal autorizado</div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function Header({ currentUser, role, onLogout, activeSection, setActiveSection }: { currentUser: string; role: string; onLogout: () => void; activeSection: SectionType; setActiveSection: (s: SectionType) => void; }) {
+  return (
+    <header className="bg-gradient-to-r from-orange-500 to-amber-600 shadow-2xl border-b-4 border-orange-400">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+          <div className="flex items-center">
+            <div className="h-16 w-16 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-2 shadow-2xl border-4 border-white">
+              <img src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" alt="Logo" className="w-full h-full object-contain" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-orange-100 text-sm">Bienvenido</span>
+              <span className="text-white font-bold text-lg truncate max-w-xs">{currentUser}</span>
+              <span className="text-orange-200 text-xs">Rol: {role}</span>
+            </div>
+          </div>
+
+          <nav className="flex flex-wrap justify-center gap-2">
+            <button onClick={() => setActiveSection('areas')} className={`px-4 py-2 rounded-2xl font-bold text-sm ${activeSection === 'areas' ? 'bg-white text-orange-600 shadow-2xl' : 'text-orange-100 hover:bg-white hover:text-orange-600'}`}>Áreas</button>
+            <button onClick={() => setActiveSection('mision')} className={`px-4 py-2 rounded-2xl font-bold text-sm ${activeSection === 'mision' ? 'bg-white text-orange-600 shadow-2xl' : 'text-orange-100 hover:bg-white hover:text-orange-600'}`}>Misión</button>
+            <button onClick={() => setActiveSection('paneles')} className={`px-4 py-2 rounded-2xl font-bold text-sm ${activeSection === 'paneles' ? 'bg-white text-orange-600 shadow-2xl' : 'text-orange-100 hover:bg-white hover:text-orange-600'}`}>Paneles</button>
+            <button onClick={onLogout} className="px-4 py-2 rounded-2xl font-bold text-sm bg-white text-orange-600">Salir</button>
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function AreaCard({ area, openMenu, toggleSubmenu, onOpenLink }: { area: AreaInfo; openMenu: MenuType; toggleSubmenu: (m: MenuType) => void; onOpenLink: (clave: string) => void; }) {
+  const isOpen = openMenu === area.id;
+  return (
+    <div className="bg-white rounded-3xl shadow-md p-4 md:p-6 border-l-8 transition-all duration-200 hover:shadow-lg cursor-pointer" style={{ borderLeftColor: `var(--color-${area.color}-500)` }} onClick={() => toggleSubmenu(area.id)}>
+      <div className="flex items-center">
+        <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mr-3" style={{ background: `linear-gradient(135deg, var(--color-${area.color}-100), var(--color-${area.color}-200))` }}>
+          <i className={`${area.icono} text-xl md:text-2xl`} style={{ color: `var(--color-${area.color}-600)` }}></i>
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg md:text-xl font-bold truncate" style={{ color: `var(--color-${area.color}-800)` }}>{area.nombre}</h3>
+          <p className="text-xs text-gray-500 mt-1">{area.subcarpetas.length} {area.subcarpetas.length === 1 ? 'carpeta' : 'carpetas'}</p>
+        </div>
+
+        <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'} text-lg ml-2`} style={{ color: `var(--color-${area.color}-600)` }}></i>
+      </div>
+
+      <div className={`overflow-hidden transition-[max-height] duration-300 mt-3 ${isOpen ? 'max-h-80' : 'max-h-0'}`}>
+        <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+          {area.subcarpetas.map((s, i) => (
+            <div key={i} className="p-3 rounded-2xl border-2 hover:shadow-md" style={{ borderColor: `var(--color-${area.color}-200)`, backgroundColor: `var(--color-${area.color}-50)` }} onClick={(e) => { e.stopPropagation(); onOpenLink(s.clave); }}>
+              <div className="flex items-center font-semibold text-sm truncate" style={{ color: `var(--color-${area.color}-700)` }}>
+                <i className={`${s.icono} mr-3 text-lg`}></i>
+                <span className="truncate">{s.nombre}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --------------------
+// Main component
+// --------------------
+
+export default function AiruHome() {
+  const [activeSection, setActiveSection] = useState<SectionType>('areas');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
   const [userRole, setUserRole] = useState('');
   const [openMenu, setOpenMenu] = useState<MenuType>(null);
 
-  // Verificar si ya hay una sesión activa al cargar la página
   useEffect(() => {
-    const savedAuth = localStorage.getItem('agiru-auth');
-    if (savedAuth) {
-      const authData = JSON.parse(savedAuth);
+    const auth = readAuthStorage();
+    if (auth && auth.username && auth.role) {
       setIsAuthenticated(true);
-      setCurrentUser(authData.username);
-      setUserRole(authData.role);
+      setCurrentUser(auth.username);
+      setUserRole(auth.role);
     }
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setLoginError('');
-
-    // Simular validación de credenciales
-    setTimeout(() => {
-      const validUsers = [
-        { username: 'Emily', password: 'admin2025', role: 'administracion' },
-        { username: 'Rodrigo', password: 'prod2025', role: 'produccion' },
-        { username: 'Fernando', password: 'nano2025', role: 'gerencia' },
-        { username: 'Daniela', password: 'dan2025', role: 'gestion' },
-        { username: 'invitado', password: 'invitado2025', role: 'invitado' },
-      ];
-
-      const user = validUsers.find(
-        (u) => u.username === username && u.password === password
-      );
-
-      if (user) {
-        setIsAuthenticated(true);
-        setCurrentUser(user.username);
-        setUserRole(user.role);
-        localStorage.setItem('agiru-auth', JSON.stringify({
-          username: user.username,
-          role: user.role,
-          timestamp: new Date().getTime()
-        }));
-      } else {
-        setLoginError('Usuario o contraseña incorrectos');
-      }
-      setIsLoading(false);
-    }, 1000);
+  const handleLoginSuccess = (username: string, role: string) => {
+    setIsAuthenticated(true);
+    setCurrentUser(username);
+    setUserRole(role);
   };
 
   const handleLogout = () => {
+    clearAuthStorage();
     setIsAuthenticated(false);
-    setUsername('');
-    setPassword('');
     setCurrentUser('');
     setUserRole('');
-    localStorage.removeItem('agiru-auth');
+    setOpenMenu(null);
   };
 
-  // Función para alternar menús desplegables
-  const toggleSubmenu = (menu: MenuType) => {
-    setOpenMenu(openMenu === menu ? null : menu);
-  };
+  const toggleSubmenu = (menu: MenuType) => setOpenMenu(prev => prev === menu ? null : menu);
 
-  // Función para redirigir a carpetas de OneDrive
-  const redirectToOneDrive = (carpeta: string) => {
-    const enlaces: { [key: string]: string } = {
-      // PLANTACIÓN
-      'historico-antes-de-2025': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElIubDi-PlpAp3zW9TP55h8BBSRCpYkxuTshu8F7UruV9A?e=o8lsN1',
-      'propiedad': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep7Sh3wa9-ZNroCBnJXxVAYBOluaOnizaCe--NcXa_996A?e=yuEsD0',
-      
-      // PLANTA
-      'almacen': 'https://1drv.ms/f/c/092e39edf7b9ea99/EnlE7wF0eBhArVaqhXxnymEBbxzq_2y6X7GNf-kieXY3Tw?e=oBo1na',
-      'mantenimiento-de-equipos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuMSSTakqQtOmh_GQWNuDHgBHP3N_GbbbPO7UcvnuWNVuA?e=MVDDw5',
-      'produccion': 'https://1drv.ms/f/c/092e39edf7b9ea99/EglYlVkhQlJDtnk1VpJ_9h8BeIFIiYFyXgD9E9qZbC96BQ?e=eH3V8V',
-      
-      // LOGÍSTICA
-      'compra-abastecimiento-insumos-planta': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuSmBU0d3LlOmcKxD9lfCwYB83Qh4LoTAXxExYBSJikhBQ?e=7lMj8f',
-      'cotizaciones-activos-infraestructura': 'https://1drv.ms/f/c/092e39edf7b9ea99/EtISskJw5ydFmF-TlRwSC7cBLetUs-SwtT9ezpEcn874Cg?e=Xqlbm9',
-      'distribucio-transporte': 'https://1drv.ms/f/c/092e39edf7b9ea99/EnfmdmrT-xJOv9k314ozZLoBnnyZ3_I6qMlrAs6r1VBBgg?e=rjnwmx',
-      'proveedores': 'https://1drv.ms/f/c/092e39edf7b9ea99/EhzWrMgD91ZGmkX-NoHsbv4BLZF79ZT6EobQYgfLMAnM1w?e=2I9C6e',
-
-      // CALIDAD
-      'calidad-seguridad': 'https://1drv.ms/f/c/092e39edf7b9ea99/EtK6Mnk8H6dNpe52C_0d6fMBTkVLyi9-oE7hHEwQPYEJKA?e=cvjXZ2',
-      'certificaciones': 'https://1drv.ms/f/c/092e39edf7b9ea99/EmTjp_LUBK1FqVFtVqPkJCkBHeMpSJmu3CnOrErvnpzCHg?e=npvQbP',
-      'fichas-tecnicas': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuVUAXKJXqZHh3SPLlOuaZsB3-zXaj-QgBU-ztJGAMTJRw?e=YvrcTd',
-      'normas': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eoor7JGq5e9JhnIcVz0bPToB3QWiKaq1P_0mX_kIfe22Iw?e=hQX5IH',
-      
-      // ADMINISTRACIÓN
-      '2024-ad': 'https://1drv.ms/f/c/092e39edf7b9ea99/EmKkcM3A0s1JvF-4n0deKIgBFpCOimNTlM1g_4m-Ds6OQg?e=0PMVRA',
-      '2025-ad': 'https://1drv.ms/f/c/092e39edf7b9ea99/Elh1ozrRgctIrJ3WAZzYnpcBf3evTJ70w6puQyhyIjnQg?e=KgkKDx',
-      
-      // RECURSOS HUMANOS
-      '2024-rh': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjkuxkYK1xZLhmZbUCmwgkwBnlvIEs0VRW91UTdaavx8KA?e=UTGcHW',
-      'afiliaciones': 'https://1drv.ms/f/c/092e39edf7b9ea99/Epk-ygeYVZpPv7C_nsrTdbwBPF16Xec2g_4HIn8OHE3eyQ?e=Bv6YCR',
-      'capacitaciones': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ek2Lzcd1zjtGtKUqi-luoDgBZGw10pM1r671q1wylO24xw?e=MepnE9',
-      'cns': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjJ3NIiYvrtPp7CMFpe7EXYBqjMuRK-FLD_PMlgI9hmGSw?e=MSWMGa',
-      'contratos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjWHT85jGiNIk2YFWUYqgE4BikkgamwpUvHh3Y4PNiC36A?e=7jbb0l',
-      'credenciales': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ev7ENG3JGElJof6MoF5j4GcBbbZ_8xxaRE_LU-LhZS2gqg?e=JZftif',
-      'file-personal': 'https://1drv.ms/f/c/092e39edf7b9ea99/EmtTiRRPtzRGh0OBkg-yzwkB04wXhnYYqzcL8qsR52dHqQ?e=SHuyo5',
-      'pago-cargos-socailes': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eq9lotGZLXlLhW55QSTJ89cByW71gN1mINDPA6pbzBOsIw?e=D9Lj5F',
-      'planillas-asistencia': 'https://1drv.ms/f/c/092e39edf7b9ea99/EqA4Rm2W3pVIjnQ-rCJv1ykBim0JxDn-c0XCr70yR-96nw?e=hGBX2a',
-      'planilla-fiscal': 'https://1drv.ms/f/c/092e39edf7b9ea99/EhocSMxWyAJErWO1AEqOtbYBoYP4_AXtbBMjj_THj6GOlA?e=XFKnYL',
-      'planillas-generales': 'https://1drv.ms/f/c/092e39edf7b9ea99/EtN_Yc6p29NNjkolwFEYNvIBgnn3VzylJYe1FUuq_Wx2rw?e=l0wXxp',
-      'trabajopolis': 'https://1drv.ms/f/c/092e39edf7b9ea99/EgLtgPKbMh1NlBodAatSlEsBQPTMHSsripaGCN6hm3FN-w?e=Z0VqkS',
-
-      // MARKETING
-      'catalogos': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep0eTfc8NGFGsV6mDqqxLEEBhTXbrkkF1vAV8VB51uaetQ?e=df6lKb',
-      'estudio-mercado-grenia': 'https://1drv.ms/f/c/092e39edf7b9ea99/EmPTCiUz_UxBo8OZ_mVTp80BN9B1NcPaku_JvvLAxtwkag?e=U9oIhC',
-      'etiquetas': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuhhX6B70A5Orktv0pkqiN4BfUQzhLS6VYvlgjHudwpznA?e=0TalJn',
-      'ferias': 'https://1drv.ms/f/c/092e39edf7b9ea99/EqOgfxlr26ZGv2nF0S4lNsgB4nGsvvm7yTmMHt-w-kwMsg?e=ViVofg',
-      'folletos-volantes-tripticos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EpptkM2quq1NgObdcy66utEBGs_SkIJ63KsYewlHUCSoOg?e=wlyqDc',
-      'galeria-imagenes': 'https://1drv.ms/f/c/092e39edf7b9ea99/EghuD9bg35pIuN_PGWZpKGYBuj3pQGKANIWwBFHlePv5Gg?e=vD2OcQ',
-      'logo': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElOAO9oVZLxJm-WtJKjilWYB0dsjV-F8a-3KD-iN02Wg9g?e=IeEvYt',
-      'manual-marca': 'https://1drv.ms/f/c/092e39edf7b9ea99/En1h_WNaFwZJnEoDwg4g9SEBN6XjCsyuuCS6Dzt_4oXyBQ?e=ImP91D',
-      'plan-marketing': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eo7be_3nfatCtvXjlZJsjf8BnvTqND4fmnQrhVVjPxBgLg?e=UcqmFm',
-      'precios-venta': 'https://1drv.ms/f/c/092e39edf7b9ea99/EstnttROS4pIvxigqzxvBCoBqyXDfENyIHdkcP-HibbH0g?e=dJc3NV',
-      'redes-sociales': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eg0OO-cC399OniEMXubb7DsB1d6XnBWnnZdduEwxidpYCg?e=t40FI9',
-      'videos': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eub1tZDxnlBLprRn05e1icwBg5IScUiGMlUx1HnZqav2fw?e=K9XmY6',
-      
-      // INVESTIGACIÓN Y DESARROLLO
-      'cultivo': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eqtt_21ReeZHgFzXYqTfNWcBEHqjmdJ-lJbRIfZOHNpamQ?e=jde0LB',
-      'estudios-beneficiosos': 'https://1drv.ms/f/c/092e39edf7b9ea99/Et6eASKZLnNLr6T0cae23ogBMj4F6Y5YDMyGIwJYaCTHJA?e=nJRCJJ',
-      'literatura': 'https://1drv.ms/f/c/092e39edf7b9ea99/EsyhkvmrDCpIlz8oZOTySscBFMCofizhddLs00HTZTiq4w?e=uSnqLx',
-      'manejo-frutales': 'https://1drv.ms/f/c/092e39edf7b9ea99/Em_37q2tOnNJnY8Vjj3e_KoB_-pF42Bj5dt3AmYoXAwAvg?e=Jp8yIs',
-      'nectares': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep5eMY4WvBlAgn9grvut8iYB_VpbUD63nj0QFJkhTN_BgA?e=wIclfb',
-      
-      // VENTAS
-      'analisis-de-ventas': 'https://1drv.ms/f/c/092e39edf7b9ea99/EqK3-ATbukdLljXYs5pemeIB104TBNN_H5tjPuaQ0TuxoQ?e=9fXxhE',
-      'venta-jugos-carnaval': 'https://1drv.ms/f/c/092e39edf7b9ea99/Er-6WwxDo51Jgtkz3u_lH14BB61MOa8oWPdeOZ4EsXiXJw?e=bClnyy',
-      'ventas': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ejq1nFzKBBFCnIWMN_72G5wBzF8mrx8AD6XegQkAqYUWgw?e=74iuvj',
-      'ventas-supermercados': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElvUiiOd_U1IrxLkOd0I7I4BH-i6U-SLBbQdqjw6k7o8zw?e=OxRRvY',
-      
-      // IMPORT-EXPORT
-      'documentacion-aduanas': 'https://1drv.ms/f/c/092e39edf7b9ea99/EvjMS23XnJxAnDdLN4CroekBxdGR46PvOtYcs1jSPHKs-w?e=mNSwj0',
-      'exportacion': 'https://1drv.ms/f/c/092e39edf7b9ea99/EreMjEM7BK5Ajx33EokX8qQBS-QjK8rf3kb_4MmOgtawsg?e=kR2Xbn',
-      'importacion': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuxGZzkjHfNEsv4zalXwf0sBIwie8TOKx1_X8UikJyDxzw?e=PkAcCG',
-      
-      // RESPALDOS-PROCEDIMIENTOS
-      'respaldos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EvroIT8r_xRIh29OL1wNRdEBk5NePzDywGdSq5UWDBZUrw?e=FtGpeq',
-
-      // SISTEMA DE GESTION
-      'procedimientos': 'https://effortless-croissant-fdfd7d.netlify.app/',
- 
-      // GERENCIA
-      'documentos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EgyOKupvikJJv_RVpIyOj8wBy3_98e-AjynybcC8mbQdkA?e=0wivgf',
-
-      // FINANZAS-CONTABILIDAD-LEGAL
-      'años-pasados': 'https://1drv.ms/f/c/092e39edf7b9ea99/Er8O15pDskVIvSPRtL3IZ04B1uImrcfpfJKjrwlTprwbeQ?e=SpG7GB',
-      '2025-fi': 'https://1drv.ms/f/c/092e39edf7b9ea99/Er8O15pDskVIvSPRtL3IZ04B1uImrcfpfJKjrwlTprwbeQ?e=h0dSmR',
- 
-      // CARPETAS PERSONALES
-      'nano': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjVQpvntLZhOnDLC7r0ZjSkBcTBz8bKlgu2E-d90epzJRQ?e=yYQ8yb',
-      'rodrigo': 'https://1drv.ms/f/c/092e39edf7b9ea99/Eq_MWBeYI0xDslrd9AsfqZQBh2pNofJHYSVXNsLWOD0vCw?e=aCEP0s',
-      'santiago': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjdfmscNdIhGokkMFTRTLXUBOnQI4SE6RX9tlxzgvFW9VQ?e=LHwZeY',
-      'emili': 'https://1drv.ms/f/c/092e39edf7b9ea99/EguLXjSL0_NJotfcTyeCXB8BQJBPReT-JQuQrZpUbBe7Pw?e=9vBydD',
-      'daniela': 'https://1drv.ms/f/c/092e39edf7b9ea99/EgwujdpFBVJCjOF8KQuYmqcB5G2gmrtVrk4bTHbwymP5cw?e=9yJJ00',
-    };
-    
-    const enlace = enlaces[carpeta] || '#';
-    if (carpeta === 'procedimientos') {
-      window.location.href = enlace;
+  const redirectToOneDrive = (clave: string) => {
+    const url = LINKS_MAP[clave] || '#';
+    if (clave === 'procedimientos') {
+      // si quieres redirigir en la misma pestaña
+      window.location.href = url;
     } else {
-      window.open(enlace, '_blank');
+      window.open(url, '_blank');
     }
   };
 
-  // Control de accesos por rol de usuario
-  const userPermissions = {
-    administracion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas', 'personales'],
-    produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion'],
-    gerencia: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'gerencia', 'finanzas'],
-    gestion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas'],
-    invitado: ['plantacion', 'planta']
+  const hasAccess = (areaId: AreaType) => {
+    const perms = USER_PERMISSIONS[userRole] || [];
+    return perms.includes(areaId);
   };
 
-  const hasAccess = (area: AreaType) => {
-    return userPermissions[userRole as keyof typeof userPermissions]?.includes(area) || false;
-  };
-
-  // Datos de las áreas
-  const areasData: AreaInfo[] = [
-    {
-      id: 'plantacion',
-      nombre: 'PLANTACIÓN',
-      icono: 'fas fa-seedling',
-      color: 'green',
-      subcarpetas: [
-        { nombre: 'Histórico antes de 2025', clave: 'historico-antes-de-2025', icono: 'fas fa-history' },
-        { nombre: 'Propiedad', clave: 'propiedad', icono: 'fas fa-landmark' }
-      ]
-    },
-    {
-      id: 'planta',
-      nombre: 'PLANTA',
-      icono: 'fas fa-industry',
-      color: 'orange',
-      subcarpetas: [
-        { nombre: 'Almacén', clave: 'almacen', icono: 'fas fa-warehouse' },
-        { nombre: 'Mantenimiento de Equipos', clave: 'mantenimiento-de-equipos', icono: 'fas fa-tools' },
-        { nombre: 'Producción', clave: 'produccion', icono: 'fas fa-cogs' }
-      ]
-    },
-    {
-      id: 'logistica',
-      nombre: 'LOGÍSTICA',
-      icono: 'fas fa-truck-loading',
-      color: 'amber',
-      subcarpetas: [
-        { nombre: 'Compra Abastecimiento Insumos Planta', clave: 'compra-abastecimiento-insumos-planta', icono: 'fas fa-boxes' },
-        { nombre: 'Cotizaciones Activos Infraestructura', clave: 'cotizaciones-activos-infraestructura', icono: 'fas fa-file-invoice-dollar' },
-        { nombre: 'Distribución Transporte', clave: 'distribucio-transporte', icono: 'fas fa-truck' },
-        { nombre: 'Proveedores', clave: 'proveedores', icono: 'fas fa-handshake' }
-      ]
-    },
-    {
-      id: 'calidad',
-      nombre: 'CALIDAD',
-      icono: 'fas fa-award',
-      color: 'amber',
-      subcarpetas: [
-        { nombre: 'Calidad y Seguridad', clave: 'calidad-seguridad', icono: 'fas fa-shield-alt' },
-        { nombre: 'Certificaciones', clave: 'certificaciones', icono: 'fas fa-certificate' },
-        { nombre: 'Fichas Técnicas', clave: 'fichas-tecnicas', icono: 'fas fa-clipboard-list' },
-        { nombre: 'Normas', clave: 'normas', icono: 'fas fa-book' }
-      ]
-    },
-    {
-      id: 'admin',
-      nombre: 'ADMINISTRACIÓN',
-      icono: 'fas fa-calculator',
-      color: 'orange',
-      subcarpetas: [
-        { nombre: '2024 AD', clave: '2024-ad', icono: 'fas fa-folder' },
-        { nombre: '2025 AD', clave: '2025-ad', icono: 'fas fa-folder-open' }
-      ]
-    },
-    {
-      id: 'rh',
-      nombre: 'RECURSOS HUMANOS',
-      icono: 'fas fa-users',
-      color: 'orange',
-      subcarpetas: [
-        { nombre: '2024 RH', clave: '2024-rh', icono: 'fas fa-folder' },
-        { nombre: 'Afiliaciones', clave: 'afiliaciones', icono: 'fas fa-id-card' },
-        { nombre: 'Capacitaciones', clave: 'capacitaciones', icono: 'fas fa-graduation-cap' },
-        { nombre: 'CNS', clave: 'cns', icono: 'fas fa-file-medical' },
-        { nombre: 'Contratos', clave: 'contratos', icono: 'fas fa-file-contract' },
-        { nombre: 'Credenciales', clave: 'credenciales', icono: 'fas fa-id-badge' },
-        { nombre: 'File Personal', clave: 'file-personal', icono: 'fas fa-folder' },
-        { nombre: 'Pago Cargos Sociales', clave: 'pago-cargos-socailes', icono: 'fas fa-money-bill-wave' },
-        { nombre: 'Planillas Asistencia', clave: 'planillas-asistencia', icono: 'fas fa-clipboard-check' },
-        { nombre: 'Planilla Fiscal', clave: 'planilla-fiscal', icono: 'fas fa-file-invoice' },
-        { nombre: 'Planillas Generales', clave: 'planillas-generales', icono: 'fas fa-clipboard-list' },
-        { nombre: 'Trabajopolis', clave: 'trabajopolis', icono: 'fas fa-briefcase' }
-      ]
-    },
-    {
-      id: 'marketing',
-      nombre: 'MARKETING',
-      icono: 'fas fa-bullhorn',
-      color: 'amber',
-      subcarpetas: [
-        { nombre: 'Catálogos', clave: 'catalogos', icono: 'fas fa-book' },
-        { nombre: 'Estudio Mercado Gerencia', clave: 'estudio-mercado-grenia', icono: 'fas fa-chart-bar' },
-        { nombre: 'Etiquetas', clave: 'etiquetas', icono: 'fas fa-tag' },
-        { nombre: 'Ferias', clave: 'ferias', icono: 'fas fa-calendar-alt' },
-        { nombre: 'Folletos Volantes Trípticos', clave: 'folletos-volantes-tripticos', icono: 'fas fa-newspaper' },
-        { nombre: 'Galería Imágenes', clave: 'galeria-imagenes', icono: 'fas fa-images' },
-        { nombre: 'Logo', clave: 'logo', icono: 'fas fa-palette' },
-        { nombre: 'Manual Marca', clave: 'manual-marca', icono: 'fas fa-book-open' },
-        { nombre: 'Plan Marketing', clave: 'plan-marketing', icono: 'fas fa-chart-line' },
-        { nombre: 'Precios Venta', clave: 'precios-venta', icono: 'fas fa-tags' },
-        { nombre: 'Redes Sociales', clave: 'redes-sociales', icono: 'fas fa-share-alt' },
-        { nombre: 'Videos', clave: 'videos', icono: 'fas fa-video' }
-      ]
-    },
-    {
-      id: 'investigacion',
-      nombre: 'INVESTIGACIÓN Y DESARROLLO',
-      icono: 'fas fa-flask',
-      color: 'blue',
-      subcarpetas: [
-        { nombre: 'Cultivo', clave: 'cultivo', icono: 'fas fa-seedling' },
-        { nombre: 'Estudios Beneficiosos', clave: 'estudios-beneficiosos', icono: 'fas fa-microscope' },
-        { nombre: 'Literatura', clave: 'literatura', icono: 'fas fa-book' },
-        { nombre: 'Manejo Frutales', clave: 'manejo-frutales', icono: 'fas fa-tree' },
-        { nombre: 'Néctares', clave: 'nectares', icono: 'fas fa-wine-bottle' }
-      ]
-    },
-    {
-      id: 'ventas',
-      nombre: 'VENTAS',
-      icono: 'fas fa-chart-line',
-      color: 'amber',
-      subcarpetas: [
-        { nombre: 'Análisis de Ventas', clave: 'analisis-de-ventas', icono: 'fas fa-chart-bar' },
-        { nombre: 'Venta Jugos Carnaval', clave: 'venta-jugos-carnaval', icono: 'fas fa-glass-cheers' },
-        { nombre: 'Ventas', clave: 'ventas', icono: 'fas fa-shopping-cart' },
-        { nombre: 'Ventas Supermercados', clave: 'ventas-supermercados', icono: 'fas fa-store' }
-      ]
-    },
-    {
-      id: 'import-export',
-      nombre: 'IMPORT - EXPORT',
-      icono: 'fas fa-globe-americas',
-      color: 'purple',
-      subcarpetas: [
-        { nombre: 'Documentación Aduanas', clave: 'documentacion-aduanas', icono: 'fas fa-file-contract' },
-        { nombre: 'Exportación', clave: 'exportacion', icono: 'fas fa-plane-departure' },
-        { nombre: 'Importación', clave: 'importacion', icono: 'fas fa-plane-arrival' }
-      ]
-    },
-    {
-      id: 'respaldos',
-      nombre: 'RESPALDOS DE PROCEDIMIENTOS',
-      icono: 'fas fa-hdd',
-      color: 'gray',
-      subcarpetas: [
-        { nombre: 'Respaldos', clave: 'respaldos', icono: 'fas fa-database' }
-      ]
-    },
-    {
-      id: 'gestion',
-      nombre: 'SISTEMA DE GESTIÓN',
-      icono: 'fas fa-clipboard-list',
-      color: 'purple',
-      subcarpetas: [
-        { nombre: 'Procedimientos', clave: 'procedimientos', icono: 'fas fa-file-alt' }
-      ]
-    },
-    {
-      id: 'gerencia',
-      nombre: 'GERENCIA',
-      icono: 'fas fa-user-tie',
-      color: 'blue',
-      subcarpetas: [
-        { nombre: 'Documentos', clave: 'documentos', icono: 'fas fa-folder' }
-      ]
-    },
-    {
-      id: 'finanzas',
-      nombre: 'FINANZAS - CONTABILIDAD - LEGAL',
-      icono: 'fas fa-money-bill-wave',
-      color: 'green',
-      subcarpetas: [
-        { nombre: 'Años Pasados', clave: 'años-pasados', icono: 'fas fa-history' },
-        { nombre: '2025 FI', clave: '2025-fi', icono: 'fas fa-folder-open' }
-      ]
-    },
-    {
-      id: 'personales',
-      nombre: 'CARPETAS PERSONALES',
-      icono: 'fas fa-user-circle',
-      color: 'orange',
-      subcarpetas: [
-        { nombre: 'Nano', clave: 'nano', icono: 'fas fa-user' },
-        { nombre: 'Rodrigo', clave: 'rodrigo', icono: 'fas fa-user' },
-        { nombre: 'Santiago', clave: 'santiago', icono: 'fas fa-user' },
-        { nombre: 'Emili', clave: 'emili', icono: 'fas fa-user' },
-        { nombre: 'Daniela', clave: 'daniela', icono: 'fas fa-user' }
-      ]
-    }
-  ];
-
-  // Imágenes para el carrusel
-  const carouselImages = [
-    'https://i.ibb.co/prWnw63p/MG-0034.jpg',
-    'https://i.ibb.co/m5mw3sw3/MG-0028.jpg',
-    'https://i.ibb.co/XfcVnR8g/MG-0019.jpg',
-    'https://i.ibb.co/bjdtqpGP/MG-0006.jpg'
-  ];
-
-  // Función para redirigir a Google Drive
-  const redirectToGoogleDrive = () => {
-    window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank');
-  };
-
-  // Si el usuario no está autenticado, mostrar SOLO el formulario de login
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border-4 border-orange-300 transform hover:scale-105 transition-transform duration-300">
-          <div className="text-center mb-8">
-            <div className="flex flex-col items-center justify-center mb-6">
-              <div className="h-28 w-28 mb-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-3 shadow-2xl border-4 border-white">
-                <img 
-                  src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
-                  alt="Logo" 
-                  className="w-full h-full object-contain drop-shadow-lg"
-                />
-              </div>
-            </div>
-            <h1 className="text-3xl font-bold text-orange-900 mb-2">Airú</h1>
-            <p className="text-orange-700 font-semibold">Sistema Interno - Acceso Restringido</p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-6">
-            {loginError && (
-              <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-sm border-2 border-red-200 shadow-lg">
-                <div className="flex items-center">
-                  <i className="fas fa-exclamation-triangle mr-2"></i>
-                  {loginError}
-                </div>
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-bold text-orange-800">
-                <i className="fas fa-user mr-2"></i>Usuario
-              </label>
-              <input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-4 border-2 border-orange-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-white shadow-lg"
-                placeholder="Ingrese su usuario"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-bold text-orange-800">
-                <i className="fas fa-lock mr-2"></i>Contraseña
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-4 border-2 border-orange-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-white shadow-lg"
-                placeholder="Ingrese su contraseña"
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white py-4 px-4 rounded-2xl font-bold hover:from-orange-600 hover:to-amber-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50 disabled:opacity-70 shadow-2xl transform hover:scale-105 hover:shadow-2xl"
-            >
-              {isLoading ? (
-                <span className="flex items-center justify-center">
-                  <i className="fas fa-spinner fa-spin mr-3"></i>
-                  Verificando...
-                </span>
-              ) : (
-                <span className="flex items-center justify-center">
-                  <i className="fas fa-sign-in-alt mr-3"></i>
-                  Iniciar Sesión
-                </span>
-              )}
-            </button>
-          </form>
-
-          <div className="mt-8 p-5 bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl text-sm text-orange-800 border-2 border-orange-200 shadow-lg">
-            <p className="font-bold text-center text-orange-900">Acceso exclusivo para personal autorizado</p>
-            <p className="mt-2 text-center text-orange-700 text-xs">Sistema interno corporativo Airú</p>
-          </div>
-        </div>
-      </div>
-    );
+    return <LoginForm onSuccess={handleLoginSuccess} />;
   }
 
-  // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      {/* Header Profesional */}
-      <header className="bg-gradient-to-r from-orange-500 to-amber-600 shadow-2xl border-b-4 border-orange-400">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
-            <div className="flex items-center">
-              <div className="flex items-center">
-                <div className="h-16 w-16 md:h-20 md:w-20 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-2 shadow-2xl border-4 border-white">
-                  <img 
-                    src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
-                    alt="Logo" 
-                    className="w-full h-full object-contain drop-shadow-lg"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-orange-100 text-sm">Bienvenido</span>
-                <span className="text-white font-bold text-lg">{currentUser}</span>
-                <span className="text-orange-200 text-xs">Rol: {userRole}</span>
-              </div>
-            </div>
-            
-            <nav className="flex flex-wrap justify-center gap-2">
-              <button 
-                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
-                  activeSection === 'areas' 
-                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
-                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
-                }`}
-                onClick={() => setActiveSection('areas')}
-              >
-                <i className="fas fa-folder mr-2"></i>Áreas
-              </button>
-              <button 
-                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
-                  activeSection === 'mision' 
-                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
-                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
-                }`}
-                onClick={() => setActiveSection('mision')}
-              >
-                <i className="fas fa-bullseye mr-2"></i>Misión & Visión
-              </button>
-              <button 
-                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
-                  activeSection === 'paneles' 
-                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
-                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
-                }`}
-                onClick={() => setActiveSection('paneles')}
-              >
-                <i className="fas fa-chart-bar mr-2"></i>Paneles
-              </button>
-              <button 
-                className="px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold bg-white text-orange-600 shadow-2xl hover:shadow-xl transition-all duration-200 text-sm md:text-base"
-                onClick={handleLogout}
-              >
-                <i className="fas fa-sign-out-alt mr-2"></i>Salir
-              </button>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header currentUser={currentUser} role={userRole} onLogout={handleLogout} activeSection={activeSection} setActiveSection={setActiveSection} />
 
-      <div className="container mx-auto px-3 md:px-4 py-6 md:py-8">
-        {/* Sección de Misión, Visión y Valores */}
+      <main className="container mx-auto px-4 py-6">
+        {/* Misión */}
         {activeSection === 'mision' && (
-          <div className="w-full xl:w-2/3 mx-auto mb-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-              Nuestros Valores
-            </h2>
-            
-            <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-                En Airú, nos comprometemos a ofrecer productos frescos, saludables y de alta calidad, 
-                cultivados con cuidado por agricultores locales. Nos destacamos por nuestra producción 
-                orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad 
-                ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva. 
-                Descubre nuestro compromiso con la excelencia y el cuidado del achachairú.
-              </p>
+          <section className="w-full xl:w-2/3 mx-auto mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 border-b-4 border-orange-400 pb-2">Nuestros Valores</h2>
+
+            <div className="bg-white rounded-3xl shadow p-6 mb-6">
+              <p className="text-lg text-gray-700 text-center">En Airú, nos comprometemos a ofrecer productos frescos, saludables y de alta calidad, cultivados con cuidado por agricultores locales. Nos destacamos por nuestra producción orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva.</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-green-500">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                    <i className="fas fa-award text-green-600 text-xl"></i>
-                  </div>
+              <div className="bg-white rounded-2xl shadow p-6 border-l-4 border-green-500">
+                <div className="flex items-center mb-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mr-4"><i className="fas fa-award text-green-600"></i></div>
                   <h3 className="text-xl font-bold text-green-800">Calidad y Frescura</h3>
                 </div>
-                <p className="text-gray-700">
-                  Somos comprometidos con ofrecer productos frescos, cultivados de forma responsable y sin agroquímicos.
-                </p>
+                <p className="text-gray-700">Ofrecemos productos frescos, cultivados de forma responsable.</p>
               </div>
-              
-              <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-blue-500">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                    <i className="fas fa-leaf text-blue-600 text-xl"></i>
-                  </div>
+
+              <div className="bg-white rounded-2xl shadow p-6 border-l-4 border-blue-500">
+                <div className="flex items-center mb-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mr-4"><i className="fas fa-leaf text-blue-600"></i></div>
                   <h3 className="text-xl font-bold text-blue-800">Sostenibilidad Ambiental</h3>
                 </div>
-                <p className="text-gray-700">
-                  Nos preocupamos por el medio ambiente y practicamos métodos de producción sostenibles que respetan la naturaleza.
-                </p>
+                <p className="text-gray-700">Practicamos métodos sostenibles que respetan la naturaleza.</p>
               </div>
             </div>
-          </div>
+          </section>
         )}
 
-        {/* Sección de Paneles */}
+        {/* Paneles */}
         {activeSection === 'paneles' && (
-          <div className="w-full xl:w-2/3 mx-auto mb-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-              Paneles
-            </h2>
-            
-            <div className="bg-white rounded-3xl shadow-2xl p-8 text-center">
+          <section className="w-full xl:w-2/3 mx-auto mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 border-b-4 border-orange-400 pb-2">Paneles</h2>
+            <div className="bg-white rounded-3xl shadow p-8 text-center">
               <i className="fas fa-tachometer-alt text-5xl text-orange-400 mb-4"></i>
-              <h3 className="text-xl font-bold text-orange-800 mb-2">Paneles en Desarrollo</h3>
-              <p className="text-gray-600">
-                Esta sección estará disponible próximamente con métricas y análisis en tiempo real.
-              </p>
+              <h3 className="text-xl font-bold text-orange-800">Paneles en Desarrollo</h3>
+              <p className="text-gray-600">Esta sección estará disponible próximamente con métricas y análisis en tiempo real.</p>
             </div>
-          </div>
+          </section>
         )}
 
-        {/* Sección de Áreas (Principal) - NUEVO DISEÑO CON 15 CUADROS */}
+        {/* Áreas */}
         {activeSection === 'areas' && (
-          <div className="flex flex-col xl:flex-row gap-6 md:gap-8">
-            {/* Galería */}
-            <div className="w-full xl:w-1/3">
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 h-full border-4 border-orange-200">
-                <h2 className="text-xl md:text-2xl font-bold text-orange-900 mb-4 md:mb-6 text-center border-b-2 border-orange-200 pb-2 md:pb-3">Galería</h2>
-                
-                {/* Carrusel de imágenes */}
-                <div className="mb-4 md:mb-6 rounded-2xl overflow-hidden shadow-2xl border-4 border-orange-300 cursor-pointer" onClick={redirectToGoogleDrive}>
-                  <div className="relative h-40 md:h-48 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
-                    <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide h-full">
-                      {carouselImages.map((img, index) => (
-                        <div key={index} className="flex-shrink-0 w-full h-full snap-center">
-                          <img 
-                            src={img} 
-                            alt={`Imagen ${index + 1}`}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                      <span className="text-white text-sm font-bold">Haz clic para ver más imágenes</span>
-                    </div>
+          <section className="flex flex-col xl:flex-row gap-6">
+            <aside className="w-full xl:w-1/3">
+              <div className="bg-white rounded-3xl shadow p-4 h-full border-4 border-orange-200">
+                <h3 className="text-xl font-bold text-orange-900 mb-4 text-center border-b-2 border-orange-200 pb-2">Galería</h3>
+                <div className="rounded-2xl overflow-hidden shadow mb-4 cursor-pointer" onClick={() => window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank')}>
+                  <div className="relative h-44 bg-gradient-to-r from-orange-400 to-amber-500">
+                    <div className="absolute inset-0 flex items-center justify-center text-white font-bold">Haz clic para ver más imágenes</div>
                   </div>
                 </div>
-                
-                {/* Indicadores */}
-                <div className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-2xl p-4 md:p-6 border-4 border-orange-300">
-                  <h3 className="text-lg font-bold mb-4 text-center text-white drop-shadow-lg">Indicadores Clave</h3>
+
+                <div className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-2xl p-4">
+                  <h4 className="text-lg font-bold mb-3 text-center">Indicadores Clave</h4>
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
-                      <i className="fas fa-file-contract text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Arancelaria</h4>
-                      <p className="text-sm font-bold text-white">0813.40.00.00</p>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
-                      <i className="fas fa-industry text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Chips/mes</h4>
-                      <p className="text-sm font-bold text-white">1,000</p>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
-                      <i className="fas fa-weight text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Pulpa/mes</h4>
-                      <p className="text-sm font-bold text-white">1,000 Kg</p>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
-                      <i className="fas fa-building text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Plantas</h4>
-                      <p className="text-sm font-bold text-white">1</p>
-                    </div>
+                    <div className="bg-white/20 p-3 rounded-2xl text-center"> <i className="fas fa-file-contract mb-2 block"></i> <div className="font-bold">Arancelaria</div> <div className="text-sm">0813.40.00.00</div></div>
+                    <div className="bg-white/20 p-3 rounded-2xl text-center"> <i className="fas fa-industry mb-2 block"></i> <div className="font-bold">Chips/mes</div> <div className="text-sm">1,000</div></div>
+                    <div className="bg-white/20 p-3 rounded-2xl text-center"> <i className="fas fa-weight mb-2 block"></i> <div className="font-bold">Pulpa/mes</div> <div className="text-sm">1,000 Kg</div></div>
+                    <div className="bg-white/20 p-3 rounded-2xl text-center"> <i className="fas fa-building mb-2 block"></i> <div className="font-bold">Plantas</div> <div className="text-sm">1</div></div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Áreas - NUEVO DISEÑO CON 15 CUADROS VISIBLES */}
-            <div className="w-full xl:w-2/3">
-              <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">Nuestras Áreas</h2>
-              
-              {/* Contenedor con scroll mejorado */}
-              <div className="max-h-[75vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                  {areasData.map((area) => (
-                    hasAccess(area.id) && (
-                      <div 
-                        key={area.id}
-                        className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-4 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                        style={{ 
-                          borderLeftColor: `var(--color-${area.color}-500)`,
-                          borderLeftWidth: '8px'
-                        }}
-                        onClick={() => toggleSubmenu(area.id)}
-                      >
-                        {/* Header del área */}
-                        <div className="flex items-center mb-3 md:mb-4">
-                          <div 
-                            className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg"
-                            style={{ 
-                              background: `linear-gradient(135deg, var(--color-${area.color}-100), var(--color-${area.color}-200))`
-                            }}
-                          >
-                            <i 
-                              className={`${area.icono} text-xl md:text-2xl`}
-                              style={{ color: `var(--color-${area.color}-600)` }}
-                            ></i>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 
-                              className="text-lg md:text-xl font-bold truncate"
-                              style={{ color: `var(--color-${area.color}-800)` }}
-                            >
-                              {area.nombre}
-                            </h3>
-                            <p className="text-xs text-gray-500 mt-1">
-                              {area.subcarpetas.length} {area.subcarpetas.length === 1 ? 'carpeta' : 'carpetas'}
-                            </p>
-                          </div>
-                          <i 
-                            className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-lg ml-2`}
-                            style={{ color: `var(--color-${area.color}-600)` }}
-                          ></i>
-                        </div>
+            </aside>
 
-                        {/* Subcarpetas */}
-                        <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-96' : 'max-h-0'}`}>
-                          <div className="space-y-2 md:space-y-3 max-h-80 overflow-y-auto pr-1 scrollbar-thin" 
-                               style={{ 
-                                 scrollbarColor: `var(--color-${area.color}-300) var(--color-${area.color}-100)`
-                               }}>
-                            {area.subcarpetas.map((subcarpeta, index) => (
-                              <div 
-                                key={index}
-                                className="p-3 md:p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2 hover:shadow-lg"
-                                style={{ 
-                                  borderColor: `var(--color-${area.color}-200)`,
-                                  backgroundColor: `var(--color-${area.color}-50)`
-                                }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  redirectToOneDrive(subcarpeta.clave);
-                                }}
-                              >
-                                <div 
-                                  className="flex items-center font-semibold text-sm md:text-base"
-                                  style={{ color: `var(--color-${area.color}-700)` }}
-                                >
-                                  <i className={`${subcarpeta.icono} mr-3 md:mr-4 text-lg`}></i>
-                                  <span className="truncate">{subcarpeta.nombre}</span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
+            <div className="w-full xl:w-2/3">
+              <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 border-b-4 border-orange-400 pb-2">Nuestras Áreas</h2>
+
+              <div className="max-h-[75vh] overflow-y-auto pr-2 scrollbar-thin">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {AREAS_DATA.map(area => (
+                    hasAccess(area.id) && (
+                      <AreaCard key={area.id} area={area} openMenu={openMenu} toggleSubmenu={toggleSubmenu} onOpenLink={redirectToOneDrive} />
                     )
                   ))}
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         )}
-      </div>
+      </main>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-orange-600 to-amber-700 text-orange-100 py-6 md:py-8 mt-8 md:mt-12 border-t-4 border-orange-400">
+      <footer className="bg-gradient-to-r from-orange-600 to-amber-700 text-orange-100 py-6 mt-8 border-t-4 border-orange-400">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <div className="flex items-center">
-                <div className="h-10 w-10 md:h-12 md:w-12 mr-3 flex items-center justify-center bg-white rounded-2xl p-2 shadow-lg">
-                  <img 
-                    src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
-                    alt="Logo" 
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </div>
-              <p className="text-sm text-orange-200 mt-2 font-semibold">Innovación y calidad en cada producto</p>
+            <div className="flex items-center mb-4 md:mb-0">
+              <div className="h-10 w-10 mr-3 flex items-center justify-center bg-white rounded-2xl p-2 shadow-lg"><img src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" alt="Logo" className="w-full h-full object-contain" /></div>
+              <p className="text-sm text-orange-200 font-semibold">Innovación y calidad en cada producto</p>
             </div>
             <div className="text-center md:text-right">
               <p className="text-sm text-orange-200 font-semibold">© 2025. Todos los derechos reservados.</p>
@@ -795,50 +477,24 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Estilos CSS para los colores */}
       <style jsx>{`
         :root {
-          --color-green-100: #dcfce7;
-          --color-green-200: #bbf7d0;
-          --color-green-500: #22c55e;
-          --color-green-600: #16a34a;
-          --color-green-700: #15803d;
-          --color-green-800: #166534;
-          
-          --color-orange-100: #ffedd5;
-          --color-orange-200: #fed7aa;
-          --color-orange-500: #f97316;
-          --color-orange-600: #ea580c;
-          --color-orange-700: #c2410c;
-          --color-orange-800: #9a3412;
-          
-          --color-amber-100: #fef3c7;
-          --color-amber-200: #fde68a;
-          --color-amber-500: #f59e0b;
-          --color-amber-600: #d97706;
-          --color-amber-700: #b45309;
-          --color-amber-800: #92400e;
-          
-          --color-blue-100: #dbeafe;
-          --color-blue-200: #bfdbfe;
-          --color-blue-500: #3b82f6;
-          --color-blue-600: #2563eb;
-          --color-blue-700: #1d4ed8;
-          --color-blue-800: #1e40af;
-          
-          --color-purple-100: #f3e8ff;
-          --color-purple-200: #e9d5ff;
-          --color-purple-500: #a855f7;
-          --color-purple-600: #9333ea;
-          --color-purple-700: #7c3aed;
-          --color-purple-800: #6b21a8;
-          
-          --color-gray-100: #f3f4f6;
-          --color-gray-200: #e5e7eb;
-          --color-gray-500: #6b7280;
-          --color-gray-600: #4b5563;
-          --color-gray-700: #374151;
-          --color-gray-800: #1f2937;
+          --color-green-100: #dcfce7; --color-green-200: #bbf7d0; --color-green-500: #22c55e; --color-green-600: #16a34a; --color-green-700: #15803d; --color-green-800: #166534;
+          --color-orange-100: #ffedd5; --color-orange-200: #fed7aa; --color-orange-500: #f97316; --color-orange-600: #ea580c; --color-orange-700: #c2410c; --color-orange-800: #9a3412;
+          --color-amber-100: #fef3c7; --color-amber-200: #fde68a; --color-amber-500: #f59e0b; --color-amber-600: #d97706; --color-amber-700: #b45309; --color-amber-800: #92400e;
+          --color-blue-100: #dbeafe; --color-blue-200: #bfdbfe; --color-blue-500: #3b82f6; --color-blue-600: #2563eb; --color-blue-700: #1d4ed8; --color-blue-800: #1e40af;
+          --color-purple-100: #f3e8ff; --color-purple-200: #e9d5ff; --color-purple-500: #a855f7; --color-purple-600: #9333ea; --color-purple-700: #7c3aed; --color-purple-800: #6b21a8;
+          --color-gray-100: #f3f4f6; --color-gray-200: #e5e7eb; --color-gray-500: #6b7280; --color-gray-600: #4b5563; --color-gray-700: #374151; --color-gray-800: #1f2937;
+        }
+
+        /* Scrollbar thin for webkit */
+        .scrollbar-thin::-webkit-scrollbar { height: 6px; width: 6px; }
+        .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 8px; }
+
+        /* small responsive tweaks */
+        @media (max-width: 640px) {
+          .container { padding-left: 1rem; padding-right: 1rem; }
         }
       `}</style>
     </div>
