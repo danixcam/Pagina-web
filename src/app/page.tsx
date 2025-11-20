@@ -203,13 +203,13 @@ export default function Home() {
     }
   };
 
-  // Control de accesos por rol de usuario
+  // Control de accesos por rol de usuario - ACTUALIZADO
   const userPermissions = {
     administracion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas', 'personales'],
-    produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion'],
-    gerencia: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'gerencia', 'finanzas'],
-    gestion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas'],
-    invitado: ['plantacion', 'planta']
+    produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion', 'gestion'], // AÑADIDO: gestion
+    gerencia: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'gerencia', 'finanzas', 'gestion'], // AÑADIDO: gestion
+    gestion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas'], // AÑADIDO: todas las áreas
+    invitado: ['plantacion', 'planta', 'gestion'] // AÑADIDO: gestion
   };
 
   const hasAccess = (area: AreaType) => {
@@ -223,7 +223,7 @@ export default function Home() {
       id: 'plantacion',
       nombre: 'PLANTACIÓN',
       icono: 'fas fa-seedling',
-      color: 'green',
+      color: 'emerald',
       subcarpetas: [
         { nombre: 'Histórico antes de 2025', clave: 'historico-antes-de-2025', icono: 'fas fa-history' },
         { nombre: 'Propiedad', clave: 'propiedad', icono: 'fas fa-landmark' }
@@ -233,7 +233,7 @@ export default function Home() {
       id: 'planta',
       nombre: 'PLANTA',
       icono: 'fas fa-industry',
-      color: 'orange',
+      color: 'blue',
       subcarpetas: [
         { nombre: 'Almacén', clave: 'almacen', icono: 'fas fa-warehouse' },
         { nombre: 'Mantenimiento de Equipos', clave: 'mantenimiento-de-equipos', icono: 'fas fa-tools' },
@@ -244,7 +244,7 @@ export default function Home() {
       id: 'logistica',
       nombre: 'LOGÍSTICA',
       icono: 'fas fa-truck-loading',
-      color: 'amber',
+      color: 'indigo',
       subcarpetas: [
         { nombre: 'Compra Abastecimiento Insumos Planta', clave: 'compra-abastecimiento-insumos-planta', icono: 'fas fa-boxes' },
         { nombre: 'Cotizaciones Activos Infraestructura', clave: 'cotizaciones-activos-infraestructura', icono: 'fas fa-file-invoice-dollar' },
@@ -268,7 +268,7 @@ export default function Home() {
       id: 'admin',
       nombre: 'ADMINISTRACIÓN',
       icono: 'fas fa-calculator',
-      color: 'orange',
+      color: 'gray',
       subcarpetas: [
         { nombre: '2024 AD', clave: '2024-ad', icono: 'fas fa-folder' },
         { nombre: '2025 AD', clave: '2025-ad', icono: 'fas fa-folder-open' }
@@ -278,7 +278,7 @@ export default function Home() {
       id: 'rh',
       nombre: 'RECURSOS HUMANOS',
       icono: 'fas fa-users',
-      color: 'orange',
+      color: 'pink',
       subcarpetas: [
         { nombre: '2024 RH', clave: '2024-rh', icono: 'fas fa-folder' },
         { nombre: 'Afiliaciones', clave: 'afiliaciones', icono: 'fas fa-id-card' },
@@ -298,7 +298,7 @@ export default function Home() {
       id: 'marketing',
       nombre: 'MARKETING',
       icono: 'fas fa-bullhorn',
-      color: 'amber',
+      color: 'purple',
       subcarpetas: [
         { nombre: 'Catálogos', clave: 'catalogos', icono: 'fas fa-book' },
         { nombre: 'Estudio Mercado Gerencia', clave: 'estudio-mercado-grenia', icono: 'fas fa-chart-bar' },
@@ -318,7 +318,7 @@ export default function Home() {
       id: 'investigacion',
       nombre: 'INVESTIGACIÓN Y DESARROLLO',
       icono: 'fas fa-flask',
-      color: 'blue',
+      color: 'teal',
       subcarpetas: [
         { nombre: 'Cultivo', clave: 'cultivo', icono: 'fas fa-seedling' },
         { nombre: 'Estudios Beneficiosos', clave: 'estudios-beneficiosos', icono: 'fas fa-microscope' },
@@ -331,7 +331,7 @@ export default function Home() {
       id: 'ventas',
       nombre: 'VENTAS',
       icono: 'fas fa-chart-line',
-      color: 'amber',
+      color: 'green',
       subcarpetas: [
         { nombre: 'Análisis de Ventas', clave: 'analisis-de-ventas', icono: 'fas fa-chart-bar' },
         { nombre: 'Venta Jugos Carnaval', clave: 'venta-jugos-carnaval', icono: 'fas fa-glass-cheers' },
@@ -343,7 +343,7 @@ export default function Home() {
       id: 'import-export',
       nombre: 'IMPORT - EXPORT',
       icono: 'fas fa-globe-americas',
-      color: 'purple',
+      color: 'red',
       subcarpetas: [
         { nombre: 'Documentación Aduanas', clave: 'documentacion-aduanas', icono: 'fas fa-file-contract' },
         { nombre: 'Exportación', clave: 'exportacion', icono: 'fas fa-plane-departure' },
@@ -363,7 +363,7 @@ export default function Home() {
       id: 'gestion',
       nombre: 'SISTEMA DE GESTIÓN',
       icono: 'fas fa-clipboard-list',
-      color: 'purple',
+      color: 'indigo',
       subcarpetas: [
         { nombre: 'Procedimientos', clave: 'procedimientos', icono: 'fas fa-file-alt' }
       ]
@@ -381,7 +381,7 @@ export default function Home() {
       id: 'finanzas',
       nombre: 'FINANZAS - CONTABILIDAD - LEGAL',
       icono: 'fas fa-money-bill-wave',
-      color: 'green',
+      color: 'emerald',
       subcarpetas: [
         { nombre: 'Años Pasados', clave: 'años-pasados', icono: 'fas fa-history' },
         { nombre: '2025 FI', clave: '2025-fi', icono: 'fas fa-folder-open' }
@@ -418,32 +418,14 @@ export default function Home() {
   // Función auxiliar para obtener colores
   const getColor = (color: string, shade: number): string => {
     const colorMap: { [key: string]: { [key: number]: string } } = {
-      green: {
-        50: '#f0fdf4',
-        100: '#dcfce7',
-        200: '#bbf7d0',
-        500: '#22c55e',
-        600: '#16a34a',
-        700: '#15803d',
-        800: '#166534',
-      },
-      orange: {
-        50: '#fff7ed',
-        100: '#ffedd5',
-        200: '#fed7aa',
-        500: '#f97316',
-        600: '#ea580c',
-        700: '#c2410c',
-        800: '#9a3412',
-      },
-      amber: {
-        50: '#fffbeb',
-        100: '#fef3c7',
-        200: '#fde68a',
-        500: '#f59e0b',
-        600: '#d97706',
-        700: '#b45309',
-        800: '#92400e',
+      emerald: {
+        50: '#ecfdf5',
+        100: '#d1fae5',
+        200: '#a7f3d0',
+        500: '#10b981',
+        600: '#059669',
+        700: '#047857',
+        800: '#065f46',
       },
       blue: {
         50: '#eff6ff',
@@ -454,14 +436,23 @@ export default function Home() {
         700: '#1d4ed8',
         800: '#1e40af',
       },
-      purple: {
-        50: '#faf5ff',
-        100: '#f3e8ff',
-        200: '#e9d5ff',
-        500: '#a855f7',
-        600: '#9333ea',
-        700: '#7c3aed',
-        800: '#6b21a8',
+      indigo: {
+        50: '#eef2ff',
+        100: '#e0e7ff',
+        200: '#c7d2fe',
+        500: '#6366f1',
+        600: '#4f46e5',
+        700: '#4338ca',
+        800: '#3730a3',
+      },
+      amber: {
+        50: '#fffbeb',
+        100: '#fef3c7',
+        200: '#fde68a',
+        500: '#f59e0b',
+        600: '#d97706',
+        700: '#b45309',
+        800: '#92400e',
       },
       gray: {
         50: '#f9fafb',
@@ -471,6 +462,60 @@ export default function Home() {
         600: '#4b5563',
         700: '#374151',
         800: '#1f2937',
+      },
+      pink: {
+        50: '#fdf2f8',
+        100: '#fce7f3',
+        200: '#fbcfe8',
+        500: '#ec4899',
+        600: '#db2777',
+        700: '#be185d',
+        800: '#9d174d',
+      },
+      purple: {
+        50: '#faf5ff',
+        100: '#f3e8ff',
+        200: '#e9d5ff',
+        500: '#a855f7',
+        600: '#9333ea',
+        700: '#7c3aed',
+        800: '#6b21a8',
+      },
+      teal: {
+        50: '#f0fdfa',
+        100: '#ccfbf1',
+        200: '#99f6e4',
+        500: '#14b8a6',
+        600: '#0d9488',
+        700: '#0f766e',
+        800: '#115e59',
+      },
+      green: {
+        50: '#f0fdf4',
+        100: '#dcfce7',
+        200: '#bbf7d0',
+        500: '#22c55e',
+        600: '#16a34a',
+        700: '#15803d',
+        800: '#166534',
+      },
+      red: {
+        50: '#fef2f2',
+        100: '#fee2e2',
+        200: '#fecaca',
+        500: '#ef4444',
+        600: '#dc2626',
+        700: '#b91c1c',
+        800: '#991b1b',
+      },
+      orange: {
+        50: '#fff7ed',
+        100: '#ffedd5',
+        200: '#fed7aa',
+        500: '#f97316',
+        600: '#ea580c',
+        700: '#c2410c',
+        800: '#9a3412',
       }
     };
     
@@ -480,25 +525,25 @@ export default function Home() {
   // Si el usuario no está autenticado, mostrar SOLO el formulario de login
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border-4 border-orange-300 transform hover:scale-105 transition-transform duration-300">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border border-gray-200">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center justify-center mb-6">
-              <div className="h-28 w-28 mb-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-3 shadow-2xl border-4 border-white">
+              <div className="h-24 w-24 mb-4 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl p-3 shadow-lg border-4 border-white">
                 <img 
                   src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
                   alt="Logo" 
-                  className="w-full h-full object-contain drop-shadow-lg"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>
-            <h1 className="text-3xl font-bold text-orange-900 mb-2">Airú</h1>
-            <p className="text-orange-700 font-semibold">Sistema Interno - Acceso Restringido</p>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Airú</h1>
+            <p className="text-gray-600 font-medium">Sistema Interno Corporativo</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
             {loginError && (
-              <div className="bg-red-50 text-red-700 p-4 rounded-2xl text-sm border-2 border-red-200 shadow-lg">
+              <div className="bg-red-50 text-red-700 p-4 rounded-lg text-sm border border-red-200">
                 <div className="flex items-center">
                   <i className="fas fa-exclamation-triangle mr-2"></i>
                   {loginError}
@@ -507,7 +552,7 @@ export default function Home() {
             )}
 
             <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-bold text-orange-800">
+              <label htmlFor="username" className="block text-sm font-semibold text-gray-700">
                 <i className="fas fa-user mr-2"></i>Usuario
               </label>
               <input
@@ -515,14 +560,14 @@ export default function Home() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-4 border-2 border-orange-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-white shadow-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white"
                 placeholder="Ingrese su usuario"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-bold text-orange-800">
+              <label htmlFor="password" className="block text-sm font-semibold text-gray-700">
                 <i className="fas fa-lock mr-2"></i>Contraseña
               </label>
               <input
@@ -530,7 +575,7 @@ export default function Home() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-4 border-2 border-orange-200 rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-white shadow-lg"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white"
                 placeholder="Ingrese su contraseña"
                 required
               />
@@ -539,7 +584,7 @@ export default function Home() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white py-4 px-4 rounded-2xl font-bold hover:from-orange-600 hover:to-amber-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50 disabled:opacity-70 shadow-2xl transform hover:scale-105 hover:shadow-2xl"
+              className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-70"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -555,9 +600,9 @@ export default function Home() {
             </button>
           </form>
 
-          <div className="mt-8 p-5 bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl text-sm text-orange-800 border-2 border-orange-200 shadow-lg">
-            <p className="font-bold text-center text-orange-900">Acceso exclusivo para personal autorizado</p>
-            <p className="mt-2 text-center text-orange-700 text-xs">Sistema interno corporativo Airú</p>
+          <div className="mt-8 p-4 bg-blue-50 rounded-lg text-sm text-blue-800 border border-blue-200">
+            <p className="font-semibold text-center">Acceso exclusivo para personal autorizado</p>
+            <p className="mt-1 text-center text-blue-600 text-xs">Sistema interno corporativo Airú</p>
           </div>
         </div>
       </div>
@@ -566,61 +611,61 @@ export default function Home() {
 
   // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      {/* Header Profesional */}
-      <header className="bg-gradient-to-r from-orange-500 to-amber-600 shadow-2xl border-b-4 border-orange-400">
+    <div className="min-h-screen bg-gray-50">
+      {/* Header Corporativo */}
+      <header className="bg-white shadow-lg border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div className="flex items-center">
               <div className="flex items-center">
-                <div className="h-16 w-16 md:h-20 md:w-20 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl p-2 shadow-2xl border-4 border-white">
+                <div className="h-14 w-14 md:h-16 md:w-16 mr-4 flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl p-2 shadow-lg border-2 border-white">
                   <img 
                     src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
                     alt="Logo" 
-                    className="w-full h-full object-contain drop-shadow-lg"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-orange-100 text-sm">Bienvenido</span>
-                <span className="text-white font-bold text-lg">{currentUser}</span>
-                <span className="text-orange-200 text-xs">Rol: {userRole}</span>
+                <span className="text-gray-500 text-sm">Bienvenido</span>
+                <span className="text-gray-900 font-bold text-lg">{currentUser}</span>
+                <span className="text-gray-400 text-xs">Rol: {userRole}</span>
               </div>
             </div>
             
             <nav className="flex flex-wrap justify-center gap-2">
               <button 
-                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
+                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
                   activeSection === 'areas' 
-                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
-                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
+                    ? 'bg-blue-500 text-white shadow-md' 
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
                 }`}
                 onClick={() => setActiveSection('areas')}
               >
                 <i className="fas fa-folder mr-2"></i>Áreas
               </button>
               <button 
-                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
+                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
                   activeSection === 'mision' 
-                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
-                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
+                    ? 'bg-blue-500 text-white shadow-md' 
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
                 }`}
                 onClick={() => setActiveSection('mision')}
               >
                 <i className="fas fa-bullseye mr-2"></i>Misión & Visión
               </button>
               <button 
-                className={`px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold transition-all duration-200 shadow-lg text-sm md:text-base ${
+                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
                   activeSection === 'paneles' 
-                    ? 'bg-white text-orange-600 shadow-2xl transform scale-105' 
-                    : 'text-orange-100 hover:bg-white hover:text-orange-600 hover:shadow-xl'
+                    ? 'bg-blue-500 text-white shadow-md' 
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
                 }`}
                 onClick={() => setActiveSection('paneles')}
               >
                 <i className="fas fa-chart-bar mr-2"></i>Paneles
               </button>
               <button 
-                className="px-4 py-2 md:px-5 md:py-3 rounded-2xl font-bold bg-white text-orange-600 shadow-2xl hover:shadow-xl transition-all duration-200 text-sm md:text-base"
+                className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-200 text-sm md:text-base"
                 onClick={handleLogout}
               >
                 <i className="fas fa-sign-out-alt mr-2"></i>Salir
@@ -630,46 +675,45 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="container mx-auto px-3 md:px-4 py-6 md:py-8">
+      <div className="container mx-auto px-4 py-8">
         {/* Sección de Misión, Visión y Valores */}
         {activeSection === 'mision' && (
           <div className="w-full xl:w-2/3 mx-auto mb-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-              Nuestros Valores
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
+              Nuestra Filosofía Corporativa
             </h2>
             
-            <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
-                En Airú, nos comprometemos a ofrecer productos frescos, saludables y de alta calidad, 
-                cultivados con cuidado por agricultores locales. Nos destacamos por nuestra producción 
+            <div className="bg-white rounded-xl shadow-sm p-8 mb-8 border border-gray-200">
+              <p className="text-lg text-gray-700 leading-relaxed text-center">
+                En <strong>Airú</strong>, nos dedicamos a ofrecer productos frescos, saludables y de alta calidad, 
+                cultivados con esmero por agricultores locales. Nos enorgullece nuestra producción 
                 orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad 
-                ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva. 
-                Descubre nuestro compromiso con la excelencia y el cuidado del achachairú.
+                ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-green-500">
+              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-emerald-500">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                    <i className="fas fa-award text-green-600 text-xl"></i>
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
+                    <i className="fas fa-award text-emerald-600 text-lg"></i>
                   </div>
-                  <h3 className="text-xl font-bold text-green-800">Calidad y Frescura</h3>
+                  <h3 className="text-xl font-bold text-emerald-800">Calidad y Frescura</h3>
                 </div>
-                <p className="text-gray-700">
-                  Somos comprometidos con ofrecer productos frescos, cultivados de forma responsable y sin agroquímicos.
+                <p className="text-gray-600">
+                  Comprometidos con ofrecer productos frescos, cultivados de forma responsable y sin agroquímicos.
                 </p>
               </div>
               
-              <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 border-l-4 border-blue-500">
+              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                    <i className="fas fa-leaf text-blue-600 text-xl"></i>
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                    <i className="fas fa-leaf text-blue-600 text-lg"></i>
                   </div>
                   <h3 className="text-xl font-bold text-blue-800">Sostenibilidad Ambiental</h3>
                 </div>
-                <p className="text-gray-700">
-                  Nos preocupamos por el medio ambiente y practicamos métodos de producción sostenibles que respetan la naturaleza.
+                <p className="text-gray-600">
+                  Practicamos métodos de producción sostenibles que respetan y protegen el medio ambiente.
                 </p>
               </div>
             </div>
@@ -679,13 +723,13 @@ export default function Home() {
         {/* Sección de Paneles */}
         {activeSection === 'paneles' && (
           <div className="w-full xl:w-2/3 mx-auto mb-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">
-              Paneles
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
+              Paneles de Control
             </h2>
             
-            <div className="bg-white rounded-3xl shadow-2xl p-8 text-center">
-              <i className="fas fa-tachometer-alt text-5xl text-orange-400 mb-4"></i>
-              <h3 className="text-xl font-bold text-orange-800 mb-2">Paneles en Desarrollo</h3>
+            <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-gray-200">
+              <i className="fas fa-tachometer-alt text-4xl text-blue-400 mb-4"></i>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Paneles en Desarrollo</h3>
               <p className="text-gray-600">
                 Esta sección estará disponible próximamente con métricas y análisis en tiempo real.
               </p>
@@ -693,18 +737,18 @@ export default function Home() {
           </div>
         )}
 
-        {/* Sección de Áreas (Principal) - CORREGIDA Y MEJORADA */}
+        {/* Sección de Áreas (Principal) - DISEÑO CORPORATIVO MEJORADO */}
         {activeSection === 'areas' && (
-          <div className="flex flex-col xl:flex-row gap-6 md:gap-8">
-            {/* Galería */}
+          <div className="flex flex-col xl:flex-row gap-8">
+            {/* Galería e Indicadores */}
             <div className="w-full xl:w-1/3">
-              <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 h-full border-4 border-orange-200">
-                <h2 className="text-xl md:text-2xl font-bold text-orange-900 mb-4 md:mb-6 text-center border-b-2 border-orange-200 pb-2 md:pb-3">Galería</h2>
+              <div className="bg-white rounded-xl shadow-sm p-6 h-full border border-gray-200">
+                <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">Galería Corporativa</h2>
                 
                 {/* Carrusel de imágenes */}
-                <div className="mb-4 md:mb-6 rounded-2xl overflow-hidden shadow-2xl border-4 border-orange-300 cursor-pointer" onClick={redirectToGoogleDrive}>
-                  <div className="relative h-40 md:h-48 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
-                    <div className="flex overflow-x-auto snap-x snap-mandatory h-full scrollbar-hide">
+                <div className="mb-6 rounded-lg overflow-hidden shadow-md border border-gray-200 cursor-pointer" onClick={redirectToGoogleDrive}>
+                  <div className="relative h-48 bg-gradient-to-r from-blue-500 to-cyan-600 overflow-hidden">
+                    <div className="flex overflow-x-auto snap-x snap-mandatory h-full">
                       {carouselImages.map((img, index) => (
                         <div key={index} className="flex-shrink-0 w-full h-full snap-center">
                           <img 
@@ -715,34 +759,34 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                      <span className="text-white text-sm font-bold">Haz clic para ver más imágenes</span>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <span className="text-white text-sm font-semibold">Ver galería completa</span>
                     </div>
                   </div>
                 </div>
                 
                 {/* Indicadores */}
-                <div className="bg-gradient-to-r from-orange-400 to-amber-500 text-white rounded-2xl p-4 md:p-6 border-4 border-orange-300">
-                  <h3 className="text-lg font-bold mb-4 text-center text-white drop-shadow-lg">Indicadores Clave</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                <div className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-lg p-6">
+                  <h3 className="text-lg font-bold mb-4 text-center">Indicadores Clave</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
                       <i className="fas fa-file-contract text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Arancelaria</h4>
+                      <h4 className="font-bold text-white text-sm mb-1">Arancelaria</h4>
                       <p className="text-sm font-bold text-white">0813.40.00.00</p>
                     </div>
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
                       <i className="fas fa-industry text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Chips/mes</h4>
+                      <h4 className="font-bold text-white text-sm mb-1">Chips/mes</h4>
                       <p className="text-sm font-bold text-white">1,000</p>
                     </div>
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
                       <i className="fas fa-weight text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Pulpa/mes</h4>
+                      <h4 className="font-bold text-white text-sm mb-1">Pulpa/mes</h4>
                       <p className="text-sm font-bold text-white">1,000 Kg</p>
                     </div>
-                    <div className="bg-white/20 backdrop-blur-lg p-3 rounded-2xl text-center border-2 border-white/30">
+                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
                       <i className="fas fa-building text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-xs mb-1">Plantas</h4>
+                      <h4 className="font-bold text-white text-sm mb-1">Plantas</h4>
                       <p className="text-sm font-bold text-white">1</p>
                     </div>
                   </div>
@@ -750,38 +794,41 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Áreas - CORREGIDO Y FUNCIONAL */}
+            {/* Áreas - DISEÑO CORPORATIVO MEJORADO */}
             <div className="w-full xl:w-2/3">
-              <h2 className="text-2xl md:text-4xl font-bold text-center text-orange-900 mb-6 md:mb-8 border-b-4 border-orange-400 pb-2 md:pb-3">Nuestras Áreas</h2>
+              <div className="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-200">
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-2">Sistema de Gestión Documental</h2>
+                <p className="text-gray-600 text-center">Acceda a las diferentes áreas corporativas y sus documentos</p>
+              </div>
               
               <div className="max-h-[75vh] overflow-y-auto pr-2 custom-scrollbar">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {areasData.map((area) => (
                     hasAccess(area.id) && (
                       <div 
                         key={area.id}
-                        className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 border-l-8 hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+                        className="bg-white rounded-xl shadow-sm p-5 border-l-4 hover:shadow-md transition-all duration-300 cursor-pointer border border-gray-200"
                         style={{ 
                           borderLeftColor: getColor(area.color, 500),
                         }}
                         onClick={() => toggleSubmenu(area.id)}
                       >
                         {/* Header del área */}
-                        <div className="flex items-center mb-3 md:mb-4">
+                        <div className="flex items-center mb-4">
                           <div 
-                            className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mr-3 md:mr-4 shadow-lg"
+                            className="w-12 h-12 rounded-lg flex items-center justify-center mr-4 shadow-sm"
                             style={{ 
                               background: `linear-gradient(135deg, ${getColor(area.color, 100)}, ${getColor(area.color, 200)})`
                             }}
                           >
                             <i 
-                              className={`${area.icono} text-xl md:text-2xl`}
+                              className={`${area.icono} text-lg`}
                               style={{ color: getColor(area.color, 600) }}
                             ></i>
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 
-                              className="text-lg md:text-xl font-bold truncate"
+                              className="text-lg font-bold truncate"
                               style={{ color: getColor(area.color, 800) }}
                             >
                               {area.nombre}
@@ -791,18 +838,18 @@ export default function Home() {
                             </p>
                           </div>
                           <i 
-                            className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-lg ml-2`}
+                            className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-sm ml-2`}
                             style={{ color: getColor(area.color, 600) }}
                           ></i>
                         </div>
 
                         {/* Subcarpetas */}
                         <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                          <div className="space-y-2 md:space-y-3 pt-2 max-h-80 overflow-y-auto pr-1 custom-scrollbar-thin">
+                          <div className="space-y-3 pt-3 max-h-80 overflow-y-auto pr-1 custom-scrollbar-thin">
                             {area.subcarpetas.map((subcarpeta, index) => (
                               <div 
                                 key={index}
-                                className="p-3 md:p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2 hover:shadow-lg transform hover:scale-105"
+                                className="p-3 rounded-lg cursor-pointer transition-all duration-200 border hover:shadow-sm"
                                 style={{ 
                                   borderColor: getColor(area.color, 200),
                                   backgroundColor: getColor(area.color, 50)
@@ -813,10 +860,10 @@ export default function Home() {
                                 }}
                               >
                                 <div 
-                                  className="flex items-center font-semibold text-sm md:text-base"
+                                  className="flex items-center font-medium text-sm"
                                   style={{ color: getColor(area.color, 700) }}
                                 >
-                                  <i className={`${subcarpeta.icono} mr-3 md:mr-4 text-lg`}></i>
+                                  <i className={`${subcarpeta.icono} mr-3 text-base`}></i>
                                   <span className="truncate">{subcarpeta.nombre}</span>
                                 </div>
                               </div>
@@ -833,25 +880,28 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-orange-600 to-amber-700 text-orange-100 py-6 md:py-8 mt-8 md:mt-12 border-t-4 border-orange-400">
+      {/* Footer Corporativo */}
+      <footer className="bg-gray-800 text-white py-8 mt-12">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <div className="flex items-center">
-                <div className="h-10 w-10 md:h-12 md:w-12 mr-3 flex items-center justify-center bg-white rounded-2xl p-2 shadow-lg">
+                <div className="h-8 w-8 md:h-10 md:w-10 mr-3 flex items-center justify-center bg-white rounded-lg p-1">
                   <img 
                     src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
                     alt="Logo" 
                     className="w-full h-full object-contain"
                   />
                 </div>
+                <div>
+                  <p className="text-sm text-gray-300 font-medium">Airú - Sistema Corporativo</p>
+                  <p className="text-xs text-gray-400">Innovación y calidad en cada producto</p>
+                </div>
               </div>
-              <p className="text-sm text-orange-200 mt-2 font-semibold">Innovación y calidad en cada producto</p>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-sm text-orange-200 font-semibold">© 2025. Todos los derechos reservados.</p>
-              <p className="text-sm mt-1 text-orange-200">Sistema interno corporativo</p>
+              <p className="text-sm text-gray-300 font-medium">© 2025 Airú. Todos los derechos reservados.</p>
+              <p className="text-xs mt-1 text-gray-400">Sistema interno corporativo</p>
             </div>
           </div>
         </div>
@@ -860,31 +910,31 @@ export default function Home() {
       {/* Estilos CSS personalizados */}
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #fed7aa;
-          border-radius: 10px;
+          background: #f1f5f9;
+          border-radius: 8px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #f97316;
-          border-radius: 10px;
+          background: #cbd5e1;
+          border-radius: 8px;
         }
         
         .custom-scrollbar-thin::-webkit-scrollbar {
-          width: 4px;
+          width: 3px;
         }
         
         .custom-scrollbar-thin::-webkit-scrollbar-track {
-          background: #ffedd5;
-          border-radius: 10px;
+          background: #f8fafc;
+          border-radius: 8px;
         }
         
         .custom-scrollbar-thin::-webkit-scrollbar-thumb {
-          background: #ea580c;
-          border-radius: 10px;
+          background: #e2e8f0;
+          border-radius: 8px;
         }
         
         .scrollbar-hide {
