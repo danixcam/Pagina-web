@@ -501,20 +501,18 @@ export default function Home() {
     return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
   };
 
-  // Si el usuario no está autenticado - CON NUEVOS LOGOS
+  // Si el usuario no está autenticado
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border border-orange-200">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center justify-center mb-6">
-              {/* Logo Airú nuevo */}
               <img 
                 src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
                 alt="Airú" 
                 className="h-20 w-auto object-contain mb-2"
               />
-              {/* Logo Masctóra */}
               <img 
                 src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
                 alt="Masctóra" 
@@ -736,18 +734,18 @@ export default function Home() {
         {/* Sección de Áreas (Principal) */}
         {activeSection === 'areas' && (
           <div className="flex flex-col xl:flex-row gap-6">
-            {/* COLUMNA IZQUIERDA: Plano GRANDE con coordenadas EXACTAS */}
+            {/* COLUMNA IZQUIERDA: Plano con scroll horizontal si es necesario */}
             <div className="w-full xl:w-2/3">
               <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
                 <h3 className="text-sm font-bold text-orange-800 mb-3 text-center">Plano de Airú</h3>
-                <div className="relative rounded-lg overflow-hidden border border-orange-200">
-                  {/* Contenedor con tamaño fijo para mantener proporciones de la imagen original */}
-                  <div className="relative" style={{ paddingBottom: '64.94%' }}>
+                <div className="relative rounded-lg overflow-auto border border-orange-200" style={{ maxWidth: '100%' }}>
+                  {/* Contenedor con TAMAÑO FIJO de 1540x1000 */}
+                  <div className="relative" style={{ width: '1540px', height: '1000px', minWidth: '1540px', minHeight: '1000px' }}>
                     <img 
                       src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
                       alt="Plano Airú"
-                      className="absolute top-0 left-0 w-full h-full object-contain"
-                      style={{ imageRendering: 'auto' }}
+                      className="absolute top-0 left-0 w-full h-full"
+                      style={{ width: '1540px', height: '1000px', imageRendering: 'auto' }}
                     />
                     {/* Zonas cliqueables con coordenadas EXACTAS en píxeles */}
                     {planoZones.map((zone) => {
