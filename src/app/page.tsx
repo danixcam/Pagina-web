@@ -713,18 +713,27 @@ export default function Home() {
           </div>
         )}
 
-        {/* Sección de Paneles */}
+        {/* Sección de Paneles - POWER BI INTEGRADO */}
         {activeSection === 'paneles' && (
-          <div className="w-full xl:w-2/3 mx-auto mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-900 mb-8">
-              Paneles de Control
+          <div className="w-full">
+            <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-900 mb-6">
+              Panel de Control - Power BI
             </h2>
             
-            <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-orange-300">
-              <i className="fas fa-tachometer-alt text-4xl text-orange-400 mb-4"></i>
-              <h3 className="text-xl font-bold text-orange-800 mb-2">Paneles en Desarrollo</h3>
-              <p className="text-orange-600">
-                Esta sección estará disponible próximamente con métricas y análisis en tiempo real.
+            <div className="bg-white rounded-xl shadow-lg p-4 border border-orange-300">
+              <div className="relative w-full" style={{ height: '600px' }}>
+                <iframe
+                  title="Power BI Dashboard - Airú"
+                  src="https://app.powerbi.com/reportEmbed?reportId=a3c7946e-4486-4549-9fe6-59d4327d41aa&autoAuth=true&ctid=77cab36c-76b2-48c3-9c54-cb9e4ee09b72"
+                  className="absolute top-0 left-0 w-full h-full rounded-lg"
+                  frameBorder="0"
+                  allowFullScreen={true}
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <p className="text-xs text-orange-500 text-center mt-3">
+                📊 Dashboard interactivo de Power BI - Actualización en tiempo real
               </p>
             </div>
           </div>
