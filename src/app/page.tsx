@@ -487,12 +487,12 @@ export default function Home() {
     return colorMap[color]?.[shade] || '#f97316';
   };
 
-  // Función para obtener el bounding box de un polígono
-  const getPolygonBounds = (coords: number[]) => {
+  // Función para calcular el bounding box y escalar coordenadas
+  const getScaledBounds = (coords: number[], scale: number) => {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (let i = 0; i < coords.length; i += 2) {
-      const x = coords[i];
-      const y = coords[i + 1];
+      const x = coords[i] * scale;
+      const y = coords[i + 1] * scale;
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
       if (y < minY) minY = y;
@@ -500,6 +500,9 @@ export default function Home() {
     }
     return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
   };
+
+  // ESCALA: la imagen se muestra a 770x500 (mitad del tamaño original)
+  const SCALE = 0.5;
 
   // Si el usuario no está autenticado
   if (!isAuthenticated) {
@@ -598,7 +601,6 @@ export default function Home() {
       <header className="bg-white shadow-sm border-b-4 border-orange-500">
         <div className="container mx-auto px-4 py-3">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-3">
-            {/* Logo Masctóra - Izquierda MÁS GRANDE */}
             <div className="flex-shrink-0">
               <img 
                 src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
@@ -607,7 +609,6 @@ export default function Home() {
               />
             </div>
             
-            {/* Logo Airú - Centro */}
             <div className="flex flex-col items-center">
               <img 
                 src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
@@ -617,7 +618,6 @@ export default function Home() {
               <span className="text-orange-600 text-xs font-medium mt-0.5">Sistema Corporativo</span>
             </div>
             
-            {/* Información de usuario - Derecha */}
             <div className="flex items-center gap-4">
               <div className="text-right hidden sm:block">
                 <span className="text-orange-500 text-xs block">Bienvenido</span>
@@ -633,7 +633,6 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Navegación */}
           <nav className="flex flex-wrap justify-center gap-2 mt-3 pt-3 border-t border-orange-200">
             <button 
               className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
@@ -734,22 +733,22 @@ export default function Home() {
         {/* Sección de Áreas (Principal) */}
         {activeSection === 'areas' && (
           <div className="flex flex-col xl:flex-row gap-6">
-            {/* COLUMNA IZQUIERDA: Plano con scroll horizontal si es necesario */}
+            {/* COLUMNA IZQUIERDA: Plano */}
             <div className="w-full xl:w-2/3">
               <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
                 <h3 className="text-sm font-bold text-orange-800 mb-3 text-center">Plano de Airú</h3>
-                <div className="relative rounded-lg overflow-auto border border-orange-200" style={{ maxWidth: '100%' }}>
-                  {/* Contenedor con TAMAÑO FIJO de 1540x1000 */}
-                  <div className="relative" style={{ width: '1540px', height: '1000px', minWidth: '1540px', minHeight: '1000px' }}>
+                <div className="relative rounded-lg overflow-hidden border border-orange-200">
+                  {/* Contenedor con TAMAÑO ESCALADO (770x500) */}
+                  <div className="relative" style={{ width: '770px', height: '500px' }}>
                     <img 
                       src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
                       alt="Plano Airú"
-                      className="absolute top-0 left-0 w-full h-full"
-                      style={{ width: '1540px', height: '1000px', imageRendering: 'auto' }}
+                      className="absolute top-0 left-0"
+                      style={{ width: '770px', height: '500px' }}
                     />
-                    {/* Zonas cliqueables con coordenadas EXACTAS en píxeles */}
+                    {/* Zonas cliqueables con coordenadas ESCALADAS */}
                     {planoZones.map((zone) => {
-                      const bounds = getPolygonBounds(zone.coords);
+                      const bounds = getScaledBounds(zone.coords, SCALE);
                       return (
                         <div
                           key={zone.id}
@@ -835,7 +834,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* COLUMNA DERECHA: Áreas en UNA SOLA COLUMNA */}
+            {/* COLUMNA DERECHA: Áreas */}
             <div className="w-full xl:w-1/3">
               <div className="bg-white rounded-xl shadow-sm p-3 mb-3 border border-orange-300">
                 <h2 className="text-lg font-bold text-center text-orange-800 mb-1">Áreas Corporativas</h2>
@@ -914,7 +913,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer con logos */}
+      {/* Footer */}
       <footer className="bg-gradient-to-r from-orange-700 to-amber-800 text-white py-6 mt-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
