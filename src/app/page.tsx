@@ -31,6 +31,7 @@ interface PlanoZone {
   nombre: string;
   coords: number[];
   enlace: string;
+  shape: 'poly';
 }
 
 export default function Home() {
@@ -51,67 +52,78 @@ export default function Home() {
       id: 'cam1',
       nombre: 'Cámara 1',
       coords: [496, 64, 639, 61, 644, 112, 484, 120],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBV_XciVjgNQJ6xnB5CxsMOAcFyqVJ1CWnQn3_IVGryM38?e=6XXEzx'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBV_XciVjgNQJ6xnB5CxsMOAcFyqVJ1CWnQn3_IVGryM38?e=6XXEzx',
+      shape: 'poly'
     },
     {
       id: 'cam2',
       nombre: 'Cámara 2',
       coords: [825, 66, 973, 66, 983, 122, 827, 115],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBGB-33IOpnT4Jg4Tz1VEWGAWC-S3iZzSZbH1KRC-cZFSY?e=wbDaEC'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBGB-33IOpnT4Jg4Tz1VEWGAWC-S3iZzSZbH1KRC-cZFSY?e=wbDaEC',
+      shape: 'poly'
     },
     {
       id: 'cam3',
       nombre: 'Cámara 3',
       coords: [1302, 71, 1478, 75, 1480, 117, 1305, 129],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCL0vBmHYUQSKvzbb82btwkAdmst0H6w-CB8kU05je1pTY?e=En1fL1'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCL0vBmHYUQSKvzbb82btwkAdmst0H6w-CB8kU05je1pTY?e=En1fL1',
+      shape: 'poly'
     },
     {
       id: 'cam4',
       nombre: 'Cámara 4',
       coords: [276, 593, 354, 593, 355, 895, 277, 890],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgB7Ud4hetRAQ72zt3N1nhe0AXIKsEPC1Aqkh6MnAthtjEo?e=iCDVWV'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgB7Ud4hetRAQ72zt3N1nhe0AXIKsEPC1Aqkh6MnAthtjEo?e=iCDVWV',
+      shape: 'poly'
     },
     {
       id: 'lio01',
       nombre: 'Lio 01',
       coords: [435, 572, 552, 573, 554, 628, 435, 632, 432, 599],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1',
+      shape: 'poly'
     },
     {
       id: 'lio02',
       nombre: 'Lio 02',
       coords: [496, 824, 619, 823, 617, 880, 493, 882],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1',
+      shape: 'poly'
     },
     {
       id: 'des01',
       nombre: 'Des 01',
       coords: [852, 824, 901, 822, 907, 934, 847, 937],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCl4bvxXLaZRZtbyryJ7EGKAdQJaecY6OyN85S7S3K8Pes?e=dhXuh2'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCl4bvxXLaZRZtbyryJ7EGKAdQJaecY6OyN85S7S3K8Pes?e=dhXuh2',
+      shape: 'poly'
     },
     {
       id: 'sco02',
       nombre: 'Sco 02',
       coords: [903, 702, 1007, 697, 1008, 738, 907, 748],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgA4jKmLeOM4SZLDCqr0TvonAVMLewDPjxwnoX6NzCgX7So?e=qOFKSh'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgA4jKmLeOM4SZLDCqr0TvonAVMLewDPjxwnoX6NzCgX7So?e=qOFKSh',
+      shape: 'poly'
     },
     {
       id: 'deh01',
       nombre: 'Deh 01',
       coords: [532, 690, 657, 690, 661, 744, 528, 753],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCdQ806SVgfSY20SmT99rYcAXlGktjs2h4ujSoEnOi9XIs?e=fybtuy'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCdQ806SVgfSY20SmT99rYcAXlGktjs2h4ujSoEnOi9XIs?e=fybtuy',
+      shape: 'poly'
     },
     {
       id: 'cod01',
       nombre: 'Cod 01',
       coords: [1022, 544, 1081, 541, 1081, 634, 1027, 631],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCa7Rrudl8dR7k148eeTOjLAeYl4ZHI4NkL-iyInKJWdBw?e=HGN9Y2'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCa7Rrudl8dR7k148eeTOjLAeYl4ZHI4NkL-iyInKJWdBw?e=HGN9Y2',
+      shape: 'poly'
     },
     {
       id: 'mes01',
       nombre: 'Mes 01',
       coords: [918, 885, 1007, 895, 1015, 951, 920, 944],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCRZ3tlRP96QaR9iaNVMOpLAQlhugYP_32VXu2TZwijA4g?e=DJHCgi'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCRZ3tlRP96QaR9iaNVMOpLAQlhugYP_32VXu2TZwijA4g?e=DJHCgi',
+      shape: 'poly'
     }
   ];
 
@@ -509,23 +521,6 @@ export default function Home() {
     return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
   };
 
-  // Función para verificar si un punto está dentro de un polígono (algoritmo de ray casting)
-  const isPointInPolygon = (px: number, py: number, coords: number[]) => {
-    let inside = false;
-    const n = coords.length / 2;
-    for (let i = 0, j = n - 1; i < n; j = i++) {
-      const xi = coords[i * 2];
-      const yi = coords[i * 2 + 1];
-      const xj = coords[j * 2];
-      const yj = coords[j * 2 + 1];
-      
-      const intersect = ((yi > py) !== (yj > py)) &&
-        (px < (xj - xi) * (py - yi) / (yj - yi) + xi);
-      if (intersect) inside = !inside;
-    }
-    return inside;
-  };
-
   // Si el usuario no está autenticado, mostrar SOLO el formulario de login
   if (!isAuthenticated) {
     return (
@@ -616,66 +611,78 @@ export default function Home() {
   // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      {/* Header Corporativo */}
-      <header className="bg-gradient-to-r from-orange-600 to-amber-700 shadow-lg border-b border-orange-500">
+      {/* Header Corporativo con dos logos */}
+      <header className="bg-gradient-to-r from-orange-600 to-amber-700 shadow-lg border-b border-orange-500 relative">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
-            <div className="flex items-center">
-              <div className="flex items-center">
-                <div className="h-14 w-14 md:h-16 md:w-16 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl p-2 shadow-lg border-2 border-white">
-                  <img 
-                    src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
-                    alt="Logo" 
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-orange-100 text-sm">Bienvenido</span>
-                <span className="text-white font-bold text-lg">{currentUser}</span>
-                <span className="text-orange-200 text-xs">Rol: {userRole}</span>
-              </div>
+            {/* Logo Masctóra - Izquierda */}
+            <div className="flex-shrink-0">
+              <img 
+                src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
+                alt="Masctóra" 
+                className="h-14 w-auto object-contain"
+              />
             </div>
             
-            <nav className="flex flex-wrap justify-center gap-2">
+            {/* Logo Airú - Centro */}
+            <div className="flex flex-col items-center">
+              <img 
+                src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
+                alt="Airú" 
+                className="h-14 w-auto object-contain"
+              />
+              <span className="text-white text-xs mt-1 font-medium">Sistema Corporativo</span>
+            </div>
+            
+            {/* Información de usuario - Derecha */}
+            <div className="flex items-center gap-4">
+              <div className="text-right hidden sm:block">
+                <span className="text-orange-100 text-sm block">Bienvenido</span>
+                <span className="text-white font-bold text-lg block">{currentUser}</span>
+                <span className="text-orange-200 text-xs block">Rol: {userRole}</span>
+              </div>
               <button 
-                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
-                  activeSection === 'areas' 
-                    ? 'bg-white text-orange-700 shadow-md' 
-                    : 'text-orange-100 hover:bg-orange-500 hover:text-white'
-                }`}
-                onClick={() => setActiveSection('areas')}
-              >
-                <i className="fas fa-folder mr-2"></i>Áreas
-              </button>
-              <button 
-                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
-                  activeSection === 'mision' 
-                    ? 'bg-white text-orange-700 shadow-md' 
-                    : 'text-orange-100 hover:bg-orange-500 hover:text-white'
-                }`}
-                onClick={() => setActiveSection('mision')}
-              >
-                <i className="fas fa-bullseye mr-2"></i>Misión & Visión
-              </button>
-              <button 
-                className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
-                  activeSection === 'paneles' 
-                    ? 'bg-white text-orange-700 shadow-md' 
-                    : 'text-orange-100 hover:bg-orange-500 hover:text-white'
-                }`}
-                onClick={() => setActiveSection('paneles')}
-              >
-                <i className="fas fa-chart-bar mr-2"></i>Paneles
-              </button>
-              <button 
-                className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold bg-white text-orange-700 hover:bg-orange-50 transition-all duration-200 text-sm md:text-base"
+                className="px-4 py-2 rounded-lg font-semibold bg-white text-orange-700 hover:bg-orange-50 transition-all duration-200 text-sm"
                 onClick={handleLogout}
               >
                 <i className="fas fa-sign-out-alt mr-2"></i>Salir
               </button>
-            </nav>
+            </div>
           </div>
+          
+          {/* Navegación - Debajo de los logos */}
+          <nav className="flex flex-wrap justify-center gap-2 mt-3 pt-3 border-t border-orange-400/30">
+            <button 
+              className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
+                activeSection === 'areas' 
+                  ? 'bg-white text-orange-700 shadow-md' 
+                  : 'text-orange-100 hover:bg-orange-500 hover:text-white'
+              }`}
+              onClick={() => setActiveSection('areas')}
+            >
+              <i className="fas fa-folder mr-2"></i>Áreas
+            </button>
+            <button 
+              className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
+                activeSection === 'mision' 
+                  ? 'bg-white text-orange-700 shadow-md' 
+                  : 'text-orange-100 hover:bg-orange-500 hover:text-white'
+              }`}
+              onClick={() => setActiveSection('mision')}
+            >
+              <i className="fas fa-bullseye mr-2"></i>Misión & Visión
+            </button>
+            <button 
+              className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
+                activeSection === 'paneles' 
+                  ? 'bg-white text-orange-700 shadow-md' 
+                  : 'text-orange-100 hover:bg-orange-500 hover:text-white'
+              }`}
+              onClick={() => setActiveSection('paneles')}
+            >
+              <i className="fas fa-chart-bar mr-2"></i>Paneles
+            </button>
+          </nav>
         </div>
       </header>
 
@@ -750,45 +757,46 @@ export default function Home() {
               <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
                 <h3 className="text-sm font-bold text-orange-800 mb-3 text-center">Plano de Airú</h3>
                 <div className="relative rounded-lg overflow-hidden border border-orange-200">
-                  <img 
-                    src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
-                    alt="Plano Airú"
-                    className="w-full h-auto object-contain"
-                    style={{ maxWidth: '100%' }}
-                  />
-                  {/* Zonas cliqueables usando polígonos exactos del image-map */}
-                  {planoZones.map((zone) => {
-                    const bbox = getBoundingBox(zone.coords);
-                    // Usamos el primer punto como referencia para posicionar el área
-                    // El área se posiciona con el bounding box
-                    return (
-                      <div
-                        key={zone.id}
-                        className="absolute cursor-pointer transition-all duration-200"
-                        style={{
-                          left: `${(bbox.x / 1540) * 100}%`,
-                          top: `${(bbox.y / 1000) * 100}%`,
-                          width: `${(bbox.width / 1540) * 100}%`,
-                          height: `${(bbox.height / 1000) * 100}%`,
-                          backgroundColor: hoveredZone === zone.id ? 'rgba(234, 88, 12, 0.2)' : 'transparent',
-                          border: hoveredZone === zone.id ? '2px solid rgba(234, 88, 12, 0.8)' : '2px solid transparent',
-                          borderRadius: '4px',
-                          zIndex: 10,
-                          pointerEvents: 'auto'
-                        }}
-                        onMouseEnter={() => setHoveredZone(zone.id)}
-                        onMouseLeave={() => setHoveredZone(null)}
-                        onClick={() => window.open(zone.enlace, '_blank')}
-                        title={zone.nombre}
-                      >
-                        {hoveredZone === zone.id && (
-                          <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-orange-700 text-white text-[10px] px-2 py-0.5 rounded whitespace-nowrap shadow-lg z-20">
-                            {zone.nombre}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                  {/* Contenedor de la imagen con tamaño fijo para mantener proporciones */}
+                  <div className="relative w-full" style={{ paddingBottom: '65%' }}>
+                    <img 
+                      src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
+                      alt="Plano Airú"
+                      className="absolute top-0 left-0 w-full h-full object-contain"
+                    />
+                    {/* Zonas cliqueables usando polígonos exactos del image-map */}
+                    {planoZones.map((zone) => {
+                      const bbox = getBoundingBox(zone.coords);
+                      // La imagen original es de aproximadamente 1540x1000
+                      return (
+                        <div
+                          key={zone.id}
+                          className="absolute cursor-pointer transition-all duration-200"
+                          style={{
+                            left: `${(bbox.x / 1540) * 100}%`,
+                            top: `${(bbox.y / 1000) * 100}%`,
+                            width: `${(bbox.width / 1540) * 100}%`,
+                            height: `${(bbox.height / 1000) * 100}%`,
+                            backgroundColor: hoveredZone === zone.id ? 'rgba(234, 88, 12, 0.25)' : 'transparent',
+                            border: hoveredZone === zone.id ? '2px solid rgba(234, 88, 12, 0.9)' : '2px solid transparent',
+                            borderRadius: '4px',
+                            zIndex: 10,
+                            pointerEvents: 'auto'
+                          }}
+                          onMouseEnter={() => setHoveredZone(zone.id)}
+                          onMouseLeave={() => setHoveredZone(null)}
+                          onClick={() => window.open(zone.enlace, '_blank')}
+                          title={zone.nombre}
+                        >
+                          {hoveredZone === zone.id && (
+                            <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-orange-700 text-white text-[10px] px-2 py-0.5 rounded whitespace-nowrap shadow-lg z-20">
+                              {zone.nombre}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
                 <p className="text-xs text-orange-500 text-center mt-2">⬇️ Haz clic en las zonas del plano para acceder a los documentos</p>
               </div>
@@ -934,14 +942,19 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <div className="flex items-center">
-                <div className="h-8 w-8 md:h-10 md:w-10 mr-3 flex items-center justify-center bg-white rounded-lg p-1">
-                  <img 
-                    src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
-                    alt="Logo" 
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+              <div className="flex items-center gap-3">
+                <img 
+                  src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
+                  alt="Airú" 
+                  className="h-8 w-auto object-contain"
+                />
+                <div className="h-8 w-px bg-orange-400/30"></div>
+                <img 
+                  src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
+                  alt="Masctóra" 
+                  className="h-8 w-auto object-contain"
+                />
+                <div className="h-8 w-px bg-orange-400/30"></div>
                 <div>
                   <p className="text-sm text-orange-100 font-medium">Airú - Sistema Corporativo</p>
                   <p className="text-xs text-orange-200">Innovación y calidad en cada producto</p>
