@@ -535,13 +535,13 @@ export default function Home() {
   // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      {/* Header Corporativo Atardecer */}
-      <header className="bg-gradient-to-r from-orange-500 to-amber-600 shadow-lg border-b border-orange-400">
+      {/* Header Corporativo Atardecer - Colores más intensos */}
+      <header className="bg-gradient-to-r from-orange-600 to-amber-700 shadow-lg border-b border-orange-500">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div className="flex items-center">
               <div className="flex items-center">
-                <div className="h-14 w-14 md:h-16 md:w-16 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl p-2 shadow-lg border-2 border-white">
+                <div className="h-14 w-14 md:h-16 md:w-16 mr-4 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl p-2 shadow-lg border-2 border-white">
                   <img 
                     src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
                     alt="Logo" 
@@ -560,8 +560,8 @@ export default function Home() {
               <button 
                 className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
                   activeSection === 'areas' 
-                    ? 'bg-white text-orange-600 shadow-md' 
-                    : 'text-orange-100 hover:bg-orange-400 hover:text-white'
+                    ? 'bg-white text-orange-700 shadow-md' 
+                    : 'text-orange-100 hover:bg-orange-500 hover:text-white'
                 }`}
                 onClick={() => setActiveSection('areas')}
               >
@@ -570,8 +570,8 @@ export default function Home() {
               <button 
                 className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
                   activeSection === 'mision' 
-                    ? 'bg-white text-orange-600 shadow-md' 
-                    : 'text-orange-100 hover:bg-orange-400 hover:text-white'
+                    ? 'bg-white text-orange-700 shadow-md' 
+                    : 'text-orange-100 hover:bg-orange-500 hover:text-white'
                 }`}
                 onClick={() => setActiveSection('mision')}
               >
@@ -580,15 +580,15 @@ export default function Home() {
               <button 
                 className={`px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold transition-all duration-200 text-sm md:text-base ${
                   activeSection === 'paneles' 
-                    ? 'bg-white text-orange-600 shadow-md' 
-                    : 'text-orange-100 hover:bg-orange-400 hover:text-white'
+                    ? 'bg-white text-orange-700 shadow-md' 
+                    : 'text-orange-100 hover:bg-orange-500 hover:text-white'
                 }`}
                 onClick={() => setActiveSection('paneles')}
               >
                 <i className="fas fa-chart-bar mr-2"></i>Paneles
               </button>
               <button 
-                className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold bg-white text-orange-600 hover:bg-orange-50 transition-all duration-200 text-sm md:text-base"
+                className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg font-semibold bg-white text-orange-700 hover:bg-orange-50 transition-all duration-200 text-sm md:text-base"
                 onClick={handleLogout}
               >
                 <i className="fas fa-sign-out-alt mr-2"></i>Salir
@@ -606,9 +606,9 @@ export default function Home() {
               Nuestra Filosofía Corporativa
             </h2>
             
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-8 border border-orange-200">
+            <div className="bg-white rounded-xl shadow-sm p-8 mb-8 border border-orange-300">
               <p className="text-lg text-orange-800 leading-relaxed text-center">
-                En <strong className="text-orange-600">Airú</strong>, nos dedicamos a ofrecer productos frescos, saludables y de alta calidad, 
+                En <strong className="text-orange-700">Airú</strong>, nos dedicamos a ofrecer productos frescos, saludables y de alta calidad, 
                 cultivados con esmero por agricultores locales. Nos enorgullece nuestra producción 
                 orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad 
                 ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva.
@@ -616,10 +616,10 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-500">
+              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-600">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                    <i className="fas fa-award text-orange-600 text-lg"></i>
+                    <i className="fas fa-award text-orange-700 text-lg"></i>
                   </div>
                   <h3 className="text-xl font-bold text-orange-800">Calidad y Frescura</h3>
                 </div>
@@ -628,10 +628,10 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-amber-500">
+              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-amber-600">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
-                    <i className="fas fa-leaf text-amber-600 text-lg"></i>
+                    <i className="fas fa-leaf text-amber-700 text-lg"></i>
                   </div>
                   <h3 className="text-xl font-bold text-amber-800">Sostenibilidad Ambiental</h3>
                 </div>
@@ -650,7 +650,7 @@ export default function Home() {
               Paneles de Control
             </h2>
             
-            <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-orange-200">
+            <div className="bg-white rounded-xl shadow-sm p-8 text-center border border-orange-300">
               <i className="fas fa-tachometer-alt text-4xl text-orange-400 mb-4"></i>
               <h3 className="text-xl font-bold text-orange-800 mb-2">Paneles en Desarrollo</h3>
               <p className="text-orange-600">
@@ -660,18 +660,30 @@ export default function Home() {
           </div>
         )}
 
-        {/* Sección de Áreas (Principal) - DISEÑO ATARDECER PROFESIONAL */}
+        {/* Sección de Áreas (Principal) - NUEVO LAYOUT */}
         {activeSection === 'areas' && (
-          <div className="flex flex-col xl:flex-row gap-8">
-            {/* Galería e Indicadores */}
+          <div className="flex flex-col xl:flex-row gap-6">
+            {/* COLUMNA IZQUIERDA: Plano + Carrusel + Indicadores */}
             <div className="w-full xl:w-1/3">
-              <div className="bg-white rounded-xl shadow-sm p-6 h-full border border-orange-200">
-                <h2 className="text-xl font-bold text-orange-900 mb-6 text-center">Galería Corporativa</h2>
-                
-                {/* Carrusel de imágenes */}
-                <div className="mb-6 rounded-lg overflow-hidden shadow-md border border-orange-200 cursor-pointer" onClick={redirectToGoogleDrive}>
-                  <div className="relative h-48 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
-                    <div className="flex overflow-x-auto snap-x snap-mandatory h-full">
+              {/* Plano de Airú - ARRIBA */}
+              <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300 cursor-pointer hover:shadow-md transition-shadow" onClick={redirectToGoogleDrive}>
+                <h3 className="text-sm font-bold text-orange-800 mb-2 text-center">Plano de Airú</h3>
+                <div className="rounded-lg overflow-hidden border border-orange-200">
+                  <img 
+                    src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
+                    alt="Plano Airú"
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+                <p className="text-xs text-orange-500 text-center mt-2">⬇️ Haz clic para ver en Drive</p>
+              </div>
+
+              {/* Carrusel - ABAJO (más pequeño) */}
+              <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
+                <h3 className="text-sm font-bold text-orange-800 mb-2 text-center">Galería Corporativa</h3>
+                <div className="rounded-lg overflow-hidden shadow-md border border-orange-200 cursor-pointer" onClick={redirectToGoogleDrive}>
+                  <div className="relative h-40 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
+                    <div className="flex overflow-x-auto snap-x snap-mandatory h-full scrollbar-hide">
                       {carouselImages.map((img, index) => (
                         <div key={index} className="flex-shrink-0 w-full h-full snap-center">
                           <img 
@@ -682,129 +694,125 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <span className="text-white text-sm font-semibold">Ver galería completa</span>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+                      <span className="text-white text-xs font-semibold">Ver galería completa</span>
                     </div>
                   </div>
                 </div>
-                
-                {/* Indicadores */}
-                <div className="bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg p-6">
-                  <h3 className="text-lg font-bold mb-4 text-center">Indicadores Clave</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
-                      <i className="fas fa-file-contract text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-sm mb-1">Arancelaria</h4>
-                      <p className="text-sm font-bold text-white">0813.40.00.00</p>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
-                      <i className="fas fa-industry text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-sm mb-1">Chips/mes</h4>
-                      <p className="text-sm font-bold text-white">1,000</p>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
-                      <i className="fas fa-weight text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-sm mb-1">Pulpa/mes</h4>
-                      <p className="text-sm font-bold text-white">1,000 Kg</p>
-                    </div>
-                    <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg text-center">
-                      <i className="fas fa-building text-xl mb-2 text-white"></i>
-                      <h4 className="font-bold text-white text-sm mb-1">Plantas</h4>
-                      <p className="text-sm font-bold text-white">1</p>
-                    </div>
+              </div>
+
+              {/* Indicadores - UNA FILA HORIZONTAL */}
+              <div className="bg-gradient-to-r from-orange-600 to-amber-700 text-white rounded-xl shadow-sm p-4 border border-orange-400">
+                <h3 className="text-sm font-bold mb-3 text-center">Indicadores Clave</h3>
+                <div className="grid grid-cols-4 gap-2">
+                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
+                    <i className="fas fa-file-contract text-lg mb-1 text-white"></i>
+                    <p className="text-[10px] font-bold text-white leading-tight">Arancelaria</p>
+                    <p className="text-[10px] font-bold text-white">0813.40.00.00</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
+                    <i className="fas fa-industry text-lg mb-1 text-white"></i>
+                    <p className="text-[10px] font-bold text-white leading-tight">Chips/mes</p>
+                    <p className="text-[10px] font-bold text-white">1,000</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
+                    <i className="fas fa-weight text-lg mb-1 text-white"></i>
+                    <p className="text-[10px] font-bold text-white leading-tight">Pulpa/mes</p>
+                    <p className="text-[10px] font-bold text-white">1,000 Kg</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
+                    <i className="fas fa-building text-lg mb-1 text-white"></i>
+                    <p className="text-[10px] font-bold text-white leading-tight">Plantas</p>
+                    <p className="text-[10px] font-bold text-white">1</p>
                   </div>
                 </div>
               </div>
             </div>
-            
-            {/* Áreas - DISEÑO ATARDECER PROFESIONAL */}
+
+            {/* COLUMNA DERECHA: Áreas en UNA SOLA FILA */}
             <div className="w-full xl:w-2/3">
-              <div className="bg-white rounded-xl shadow-sm p-6 mb-6 border border-orange-200">
-                <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-900 mb-2">Sistema de Gestión Documental</h2>
-                <p className="text-orange-600 text-center">Acceda a las diferentes áreas corporativas y sus documentos</p>
+              <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
+                <h2 className="text-xl md:text-2xl font-bold text-center text-orange-800 mb-1">Áreas Corporativas</h2>
+                <p className="text-orange-600 text-center text-sm">Seleccione un área para acceder a sus documentos</p>
               </div>
-              
-              <div className="max-h-[75vh] overflow-y-auto pr-2 custom-scrollbar">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {areasData.map((area) => (
-                    hasAccess(area.id) && (
-                      <div 
-                        key={area.id}
-                        className="bg-white rounded-xl shadow-sm p-5 border-l-4 hover:shadow-md transition-all duration-300 cursor-pointer border border-orange-200"
-                        style={{ 
-                          borderLeftColor: getColor(area.color, 500),
-                        }}
-                        onClick={() => toggleSubmenu(area.id)}
-                      >
-                        {/* Header del área */}
-                        <div className="flex items-center mb-4">
-                          <div 
-                            className="w-12 h-12 rounded-lg flex items-center justify-center mr-4 shadow-sm"
-                            style={{ 
-                              background: `linear-gradient(135deg, ${getColor(area.color, 100)}, ${getColor(area.color, 200)})`
-                            }}
-                          >
-                            <i 
-                              className={`${area.icono} text-lg`}
-                              style={{ color: getColor(area.color, 600) }}
-                            ></i>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h3 
-                              className="text-lg font-bold truncate"
-                              style={{ color: getColor(area.color, 800) }}
-                            >
-                              {area.nombre}
-                            </h3>
-                            <p className="text-xs text-orange-500 mt-1">
-                              {area.subcarpetas.length} {area.subcarpetas.length === 1 ? 'carpeta' : 'carpetas'}
-                            </p>
-                          </div>
+
+              {/* Áreas en cuadrícula horizontal - UNA FILA */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                {areasData.map((area) => (
+                  hasAccess(area.id) && (
+                    <div 
+                      key={area.id}
+                      className="bg-white rounded-xl shadow-sm p-3 border-l-4 hover:shadow-md transition-all duration-300 cursor-pointer border border-orange-200"
+                      style={{ 
+                        borderLeftColor: getColor(area.color, 600),
+                      }}
+                      onClick={() => toggleSubmenu(area.id)}
+                    >
+                      {/* Header del área */}
+                      <div className="flex items-center mb-2">
+                        <div 
+                          className="w-8 h-8 rounded-lg flex items-center justify-center mr-2 shadow-sm flex-shrink-0"
+                          style={{ 
+                            background: `linear-gradient(135deg, ${getColor(area.color, 100)}, ${getColor(area.color, 200)})`
+                          }}
+                        >
                           <i 
-                            className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-sm ml-2`}
-                            style={{ color: getColor(area.color, 600) }}
+                            className={`${area.icono} text-sm`}
+                            style={{ color: getColor(area.color, 700) }}
                           ></i>
                         </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 
+                            className="text-xs font-bold truncate"
+                            style={{ color: getColor(area.color, 800) }}
+                          >
+                            {area.nombre}
+                          </h3>
+                        </div>
+                        <i 
+                          className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-[10px] ml-1 flex-shrink-0`}
+                          style={{ color: getColor(area.color, 600) }}
+                        ></i>
+                      </div>
 
-                        {/* Subcarpetas */}
-                        <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                          <div className="space-y-3 pt-3 max-h-80 overflow-y-auto pr-1 custom-scrollbar-thin">
-                            {area.subcarpetas.map((subcarpeta, index) => (
+                      {/* Subcarpetas */}
+                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <div className="space-y-1 pt-2 max-h-40 overflow-y-auto pr-1 custom-scrollbar-thin">
+                          {area.subcarpetas.map((subcarpeta, index) => (
+                            <div 
+                              key={index}
+                              className="p-1.5 rounded-lg cursor-pointer transition-all duration-200 border hover:shadow-sm"
+                              style={{ 
+                                borderColor: getColor(area.color, 200),
+                                backgroundColor: getColor(area.color, 50)
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                redirectToOneDrive(subcarpeta.clave);
+                              }}
+                            >
                               <div 
-                                key={index}
-                                className="p-3 rounded-lg cursor-pointer transition-all duration-200 border hover:shadow-sm"
-                                style={{ 
-                                  borderColor: getColor(area.color, 200),
-                                  backgroundColor: getColor(area.color, 50)
-                                }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  redirectToOneDrive(subcarpeta.clave);
-                                }}
+                                className="flex items-center font-medium text-[11px]"
+                                style={{ color: getColor(area.color, 700) }}
                               >
-                                <div 
-                                  className="flex items-center font-medium text-sm"
-                                  style={{ color: getColor(area.color, 700) }}
-                                >
-                                  <i className={`${subcarpeta.icono} mr-3 text-base`}></i>
-                                  <span className="truncate">{subcarpeta.nombre}</span>
-                                </div>
+                                <i className={`${subcarpeta.icono} mr-2 text-[11px]`}></i>
+                                <span className="truncate">{subcarpeta.nombre}</span>
                               </div>
-                            ))}
-                          </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                    )
-                  ))}
-                </div>
+                    </div>
+                  )
+                ))}
               </div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Footer Corporativo Atardecer */}
-      <footer className="bg-gradient-to-r from-orange-600 to-amber-700 text-white py-8 mt-12">
+      {/* Footer Corporativo Atardecer - Colores más intensos */}
+      <footer className="bg-gradient-to-r from-orange-700 to-amber-800 text-white py-6 mt-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
@@ -833,7 +841,7 @@ export default function Home() {
       {/* Estilos CSS personalizados */}
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
+          width: 4px;
         }
         
         .custom-scrollbar::-webkit-scrollbar-track {
@@ -842,12 +850,12 @@ export default function Home() {
         }
         
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #f97316;
+          background: #ea580c;
           border-radius: 8px;
         }
         
         .custom-scrollbar-thin::-webkit-scrollbar {
-          width: 3px;
+          width: 2px;
         }
         
         .custom-scrollbar-thin::-webkit-scrollbar-track {
