@@ -31,7 +31,6 @@ interface PlanoZone {
   nombre: string;
   coords: number[];
   enlace: string;
-  shape: 'poly';
 }
 
 export default function Home() {
@@ -52,78 +51,67 @@ export default function Home() {
       id: 'cam1',
       nombre: 'Cámara 1',
       coords: [496, 64, 639, 61, 644, 112, 484, 120],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBV_XciVjgNQJ6xnB5CxsMOAcFyqVJ1CWnQn3_IVGryM38?e=6XXEzx',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBV_XciVjgNQJ6xnB5CxsMOAcFyqVJ1CWnQn3_IVGryM38?e=6XXEzx'
     },
     {
       id: 'cam2',
       nombre: 'Cámara 2',
       coords: [825, 66, 973, 66, 983, 122, 827, 115],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBGB-33IOpnT4Jg4Tz1VEWGAWC-S3iZzSZbH1KRC-cZFSY?e=wbDaEC',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBGB-33IOpnT4Jg4Tz1VEWGAWC-S3iZzSZbH1KRC-cZFSY?e=wbDaEC'
     },
     {
       id: 'cam3',
       nombre: 'Cámara 3',
       coords: [1302, 71, 1478, 75, 1480, 117, 1305, 129],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCL0vBmHYUQSKvzbb82btwkAdmst0H6w-CB8kU05je1pTY?e=En1fL1',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCL0vBmHYUQSKvzbb82btwkAdmst0H6w-CB8kU05je1pTY?e=En1fL1'
     },
     {
       id: 'cam4',
       nombre: 'Cámara 4',
       coords: [276, 593, 354, 593, 355, 895, 277, 890],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgB7Ud4hetRAQ72zt3N1nhe0AXIKsEPC1Aqkh6MnAthtjEo?e=iCDVWV',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgB7Ud4hetRAQ72zt3N1nhe0AXIKsEPC1Aqkh6MnAthtjEo?e=iCDVWV'
     },
     {
       id: 'lio01',
       nombre: 'Lio 01',
       coords: [435, 572, 552, 573, 554, 628, 435, 632, 432, 599],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1'
     },
     {
       id: 'lio02',
       nombre: 'Lio 02',
       coords: [496, 824, 619, 823, 617, 880, 493, 882],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBfdgCX1To3S4HzwBsmvYWpAXRqMgY03WRPG2JJAlWn8fk?e=1ml2L1'
     },
     {
       id: 'des01',
       nombre: 'Des 01',
       coords: [852, 824, 901, 822, 907, 934, 847, 937],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCl4bvxXLaZRZtbyryJ7EGKAdQJaecY6OyN85S7S3K8Pes?e=dhXuh2',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCl4bvxXLaZRZtbyryJ7EGKAdQJaecY6OyN85S7S3K8Pes?e=dhXuh2'
     },
     {
       id: 'sco02',
       nombre: 'Sco 02',
       coords: [903, 702, 1007, 697, 1008, 738, 907, 748],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgA4jKmLeOM4SZLDCqr0TvonAVMLewDPjxwnoX6NzCgX7So?e=qOFKSh',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgA4jKmLeOM4SZLDCqr0TvonAVMLewDPjxwnoX6NzCgX7So?e=qOFKSh'
     },
     {
       id: 'deh01',
       nombre: 'Deh 01',
       coords: [532, 690, 657, 690, 661, 744, 528, 753],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCdQ806SVgfSY20SmT99rYcAXlGktjs2h4ujSoEnOi9XIs?e=fybtuy',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCdQ806SVgfSY20SmT99rYcAXlGktjs2h4ujSoEnOi9XIs?e=fybtuy'
     },
     {
       id: 'cod01',
       nombre: 'Cod 01',
       coords: [1022, 544, 1081, 541, 1081, 634, 1027, 631],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCa7Rrudl8dR7k148eeTOjLAeYl4ZHI4NkL-iyInKJWdBw?e=HGN9Y2',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCa7Rrudl8dR7k148eeTOjLAeYl4ZHI4NkL-iyInKJWdBw?e=HGN9Y2'
     },
     {
       id: 'mes01',
       nombre: 'Mes 01',
       coords: [918, 885, 1007, 895, 1015, 951, 920, 944],
-      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCRZ3tlRP96QaR9iaNVMOpLAQlhugYP_32VXu2TZwijA4g?e=DJHCgi',
-      shape: 'poly'
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/IgCRZ3tlRP96QaR9iaNVMOpLAQlhugYP_32VXu2TZwijA4g?e=DJHCgi'
     }
   ];
 
@@ -147,7 +135,6 @@ export default function Home() {
     setIsLoading(true);
     setLoginError('');
 
-    // Simular validación de credenciales
     setTimeout(() => {
       const validUsers = [
         { username: 'Emily', password: 'admin2025', role: 'administracion' },
@@ -186,12 +173,10 @@ export default function Home() {
     localStorage.removeItem('agiru-auth');
   };
 
-  // Función para alternar menús desplegables
   const toggleSubmenu = (menu: MenuType) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
-  // Función para redirigir a carpetas de OneDrive
   const redirectToOneDrive = (carpeta: string) => {
     const enlaces: { [key: string]: string } = {
       'historico-antes-de-2025': 'https://1drv.ms/f/c/092e39edf7b9ea99/ElIubDi-PlpAp3zW9TP55h8BBSRCpYkxuTshu8F7UruV9A?e=o8lsN1',
@@ -265,7 +250,6 @@ export default function Home() {
     }
   };
 
-  // Control de accesos por rol de usuario
   const userPermissions = {
     administracion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas', 'personales'],
     produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion', 'gestion'],
@@ -279,7 +263,6 @@ export default function Home() {
     return permissions ? permissions.includes(area) : false;
   };
 
-  // Datos de las áreas
   const areasData: AreaInfo[] = [
     {
       id: 'plantacion',
@@ -464,7 +447,6 @@ export default function Home() {
     }
   ];
 
-  // Imágenes para el carrusel
   const carouselImages = [
     'https://i.ibb.co/prWnw63p/MG-0034.jpg',
     'https://i.ibb.co/m5mw3sw3/MG-0028.jpg',
@@ -472,12 +454,10 @@ export default function Home() {
     'https://i.ibb.co/bjdtqpGP/MG-0006.jpg'
   ];
 
-  // Función para redirigir a Google Drive
   const redirectToGoogleDrive = () => {
     window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank');
   };
 
-  // Función auxiliar para obtener colores
   const getColor = (color: string, shade: number): string => {
     const colorMap: { [key: string]: { [key: number]: string } } = {
       orange: {
@@ -507,8 +487,8 @@ export default function Home() {
     return colorMap[color]?.[shade] || '#f97316';
   };
 
-  // Función para calcular el bounding box de un polígono
-  const getBoundingBox = (coords: number[]) => {
+  // Función para obtener el bounding box de un polígono
+  const getPolygonBounds = (coords: number[]) => {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (let i = 0; i < coords.length; i += 2) {
       const x = coords[i];
@@ -521,20 +501,25 @@ export default function Home() {
     return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
   };
 
-  // Si el usuario no está autenticado, mostrar SOLO el formulario de login
+  // Si el usuario no está autenticado - CON NUEVOS LOGOS
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border border-orange-200">
           <div className="text-center mb-8">
             <div className="flex flex-col items-center justify-center mb-6">
-              <div className="h-24 w-24 mb-4 flex items-center justify-center bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl p-3 shadow-lg border-4 border-white">
-                <img 
-                  src="https://i.ibb.co/fY6pdCPW/Logo-Air.png" 
-                  alt="Logo" 
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              {/* Logo Airú nuevo */}
+              <img 
+                src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
+                alt="Airú" 
+                className="h-20 w-auto object-contain mb-2"
+              />
+              {/* Logo Masctóra */}
+              <img 
+                src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
+                alt="Masctóra" 
+                className="h-12 w-auto object-contain"
+              />
             </div>
             <h1 className="text-2xl font-bold text-orange-900 mb-2">Airú</h1>
             <p className="text-orange-700 font-medium">Sistema Interno Corporativo</p>
@@ -611,16 +596,16 @@ export default function Home() {
   // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      {/* Header Corporativo con dos logos */}
-      <header className="bg-gradient-to-r from-orange-600 to-amber-700 shadow-lg border-b border-orange-500 relative">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
-            {/* Logo Masctóra - Izquierda */}
+      {/* Header con fondo BLANCO y línea naranja abajo */}
+      <header className="bg-white shadow-sm border-b-4 border-orange-500">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-3">
+            {/* Logo Masctóra - Izquierda MÁS GRANDE */}
             <div className="flex-shrink-0">
               <img 
                 src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
                 alt="Masctóra" 
-                className="h-14 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
             
@@ -629,20 +614,20 @@ export default function Home() {
               <img 
                 src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
                 alt="Airú" 
-                className="h-14 w-auto object-contain"
+                className="h-12 w-auto object-contain"
               />
-              <span className="text-white text-xs mt-1 font-medium">Sistema Corporativo</span>
+              <span className="text-orange-600 text-xs font-medium mt-0.5">Sistema Corporativo</span>
             </div>
             
             {/* Información de usuario - Derecha */}
             <div className="flex items-center gap-4">
               <div className="text-right hidden sm:block">
-                <span className="text-orange-100 text-sm block">Bienvenido</span>
-                <span className="text-white font-bold text-lg block">{currentUser}</span>
-                <span className="text-orange-200 text-xs block">Rol: {userRole}</span>
+                <span className="text-orange-500 text-xs block">Bienvenido</span>
+                <span className="text-orange-800 font-bold text-base block">{currentUser}</span>
+                <span className="text-orange-400 text-xs block">Rol: {userRole}</span>
               </div>
               <button 
-                className="px-4 py-2 rounded-lg font-semibold bg-white text-orange-700 hover:bg-orange-50 transition-all duration-200 text-sm"
+                className="px-4 py-2 rounded-lg font-semibold bg-orange-500 text-white hover:bg-orange-600 transition-all duration-200 text-sm shadow-sm"
                 onClick={handleLogout}
               >
                 <i className="fas fa-sign-out-alt mr-2"></i>Salir
@@ -650,13 +635,13 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Navegación - Debajo de los logos */}
-          <nav className="flex flex-wrap justify-center gap-2 mt-3 pt-3 border-t border-orange-400/30">
+          {/* Navegación */}
+          <nav className="flex flex-wrap justify-center gap-2 mt-3 pt-3 border-t border-orange-200">
             <button 
               className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
                 activeSection === 'areas' 
-                  ? 'bg-white text-orange-700 shadow-md' 
-                  : 'text-orange-100 hover:bg-orange-500 hover:text-white'
+                  ? 'bg-orange-500 text-white shadow-md' 
+                  : 'text-orange-600 hover:bg-orange-100'
               }`}
               onClick={() => setActiveSection('areas')}
             >
@@ -665,8 +650,8 @@ export default function Home() {
             <button 
               className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
                 activeSection === 'mision' 
-                  ? 'bg-white text-orange-700 shadow-md' 
-                  : 'text-orange-100 hover:bg-orange-500 hover:text-white'
+                  ? 'bg-orange-500 text-white shadow-md' 
+                  : 'text-orange-600 hover:bg-orange-100'
               }`}
               onClick={() => setActiveSection('mision')}
             >
@@ -675,8 +660,8 @@ export default function Home() {
             <button 
               className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 text-sm ${
                 activeSection === 'paneles' 
-                  ? 'bg-white text-orange-700 shadow-md' 
-                  : 'text-orange-100 hover:bg-orange-500 hover:text-white'
+                  ? 'bg-orange-500 text-white shadow-md' 
+                  : 'text-orange-600 hover:bg-orange-100'
               }`}
               onClick={() => setActiveSection('paneles')}
             >
@@ -751,32 +736,31 @@ export default function Home() {
         {/* Sección de Áreas (Principal) */}
         {activeSection === 'areas' && (
           <div className="flex flex-col xl:flex-row gap-6">
-            {/* COLUMNA IZQUIERDA: Plano GRANDE + Galería + Indicadores */}
+            {/* COLUMNA IZQUIERDA: Plano GRANDE con coordenadas EXACTAS */}
             <div className="w-full xl:w-2/3">
-              {/* Plano - MÁS GRANDE con zonas cliqueables exactas */}
               <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
                 <h3 className="text-sm font-bold text-orange-800 mb-3 text-center">Plano de Airú</h3>
                 <div className="relative rounded-lg overflow-hidden border border-orange-200">
-                  {/* Contenedor de la imagen con tamaño fijo para mantener proporciones */}
-                  <div className="relative w-full" style={{ paddingBottom: '65%' }}>
+                  {/* Contenedor con tamaño fijo para mantener proporciones de la imagen original */}
+                  <div className="relative" style={{ paddingBottom: '64.94%' }}>
                     <img 
                       src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
                       alt="Plano Airú"
                       className="absolute top-0 left-0 w-full h-full object-contain"
+                      style={{ imageRendering: 'auto' }}
                     />
-                    {/* Zonas cliqueables usando polígonos exactos del image-map */}
+                    {/* Zonas cliqueables con coordenadas EXACTAS en píxeles */}
                     {planoZones.map((zone) => {
-                      const bbox = getBoundingBox(zone.coords);
-                      // La imagen original es de aproximadamente 1540x1000
+                      const bounds = getPolygonBounds(zone.coords);
                       return (
                         <div
                           key={zone.id}
                           className="absolute cursor-pointer transition-all duration-200"
                           style={{
-                            left: `${(bbox.x / 1540) * 100}%`,
-                            top: `${(bbox.y / 1000) * 100}%`,
-                            width: `${(bbox.width / 1540) * 100}%`,
-                            height: `${(bbox.height / 1000) * 100}%`,
+                            left: `${bounds.x}px`,
+                            top: `${bounds.y}px`,
+                            width: `${bounds.width}px`,
+                            height: `${bounds.height}px`,
                             backgroundColor: hoveredZone === zone.id ? 'rgba(234, 88, 12, 0.25)' : 'transparent',
                             border: hoveredZone === zone.id ? '2px solid rgba(234, 88, 12, 0.9)' : '2px solid transparent',
                             borderRadius: '4px',
@@ -803,7 +787,6 @@ export default function Home() {
 
               {/* Galería + Indicadores en UNA FILA */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Galería */}
                 <div className="bg-white rounded-xl shadow-sm p-4 border border-orange-300">
                   <h3 className="text-sm font-bold text-orange-800 mb-2 text-center">Galería Corporativa</h3>
                   <div className="rounded-lg overflow-hidden shadow-md border border-orange-200 cursor-pointer" onClick={redirectToGoogleDrive}>
@@ -826,7 +809,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Indicadores */}
                 <div className="bg-gradient-to-r from-orange-600 to-amber-700 text-white rounded-xl shadow-sm p-4 border border-orange-400">
                   <h3 className="text-sm font-bold mb-3 text-center">Indicadores Clave</h3>
                   <div className="grid grid-cols-2 gap-2">
@@ -855,14 +837,13 @@ export default function Home() {
               </div>
             </div>
 
-            {/* COLUMNA DERECHA: Áreas en UNA SOLA COLUMNA - COMPACTAS */}
+            {/* COLUMNA DERECHA: Áreas en UNA SOLA COLUMNA */}
             <div className="w-full xl:w-1/3">
               <div className="bg-white rounded-xl shadow-sm p-3 mb-3 border border-orange-300">
                 <h2 className="text-lg font-bold text-center text-orange-800 mb-1">Áreas Corporativas</h2>
                 <p className="text-orange-600 text-center text-xs">Seleccione un área</p>
               </div>
 
-              {/* Áreas en UNA SOLA COLUMNA - COMPACTAS */}
               <div className="space-y-1.5 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
                 {areasData.map((area) => (
                   hasAccess(area.id) && (
@@ -874,7 +855,6 @@ export default function Home() {
                       }}
                       onClick={() => toggleSubmenu(area.id)}
                     >
-                      {/* Header del área - COMPACTO */}
                       <div className="flex items-center">
                         <div 
                           className="w-7 h-7 rounded-lg flex items-center justify-center mr-2 shadow-sm flex-shrink-0"
@@ -901,7 +881,6 @@ export default function Home() {
                         ></i>
                       </div>
 
-                      {/* Subcarpetas - COMPACTAS */}
                       <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-60 opacity-100 mt-1.5' : 'max-h-0 opacity-0'}`}>
                         <div className="grid grid-cols-1 gap-1 max-h-32 overflow-y-auto pr-1 custom-scrollbar-thin">
                           {area.subcarpetas.map((subcarpeta, index) => (
@@ -937,24 +916,24 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer */}
+      {/* Footer con logos */}
       <footer className="bg-gradient-to-r from-orange-700 to-amber-800 text-white py-6 mt-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <img 
                   src="https://i.ibb.co/fGXpx8CB/LOGOAIRU-removebg-preview.png" 
                   alt="Airú" 
-                  className="h-8 w-auto object-contain"
+                  className="h-10 w-auto object-contain brightness-0 invert"
                 />
-                <div className="h-8 w-px bg-orange-400/30"></div>
+                <div className="h-10 w-px bg-orange-400/30"></div>
                 <img 
                   src="https://i.ibb.co/LzVjdkth/MASCTORA-removebg-preview.png" 
                   alt="Masctóra" 
-                  className="h-8 w-auto object-contain"
+                  className="h-10 w-auto object-contain brightness-0 invert"
                 />
-                <div className="h-8 w-px bg-orange-400/30"></div>
+                <div className="h-10 w-px bg-orange-400/30"></div>
                 <div>
                   <p className="text-sm text-orange-100 font-medium">Airú - Sistema Corporativo</p>
                   <p className="text-xs text-orange-200">Innovación y calidad en cada producto</p>
@@ -969,41 +948,33 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Estilos CSS personalizados */}
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 3px;
         }
-        
         .custom-scrollbar::-webkit-scrollbar-track {
           background: #fed7aa;
           border-radius: 8px;
         }
-        
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background: #ea580c;
           border-radius: 8px;
         }
-        
         .custom-scrollbar-thin::-webkit-scrollbar {
           width: 2px;
         }
-        
         .custom-scrollbar-thin::-webkit-scrollbar-track {
           background: #ffedd5;
           border-radius: 8px;
         }
-        
         .custom-scrollbar-thin::-webkit-scrollbar-thumb {
           background: #fb923c;
           border-radius: 8px;
         }
-        
         .scrollbar-hide {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
-        
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
