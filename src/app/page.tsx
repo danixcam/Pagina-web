@@ -25,6 +25,18 @@ interface AreaInfo {
   subcarpetas: { nombre: string; clave: string; icono: string }[];
 }
 
+// Definir zonas del plano
+interface PlanoZone {
+  id: string;
+  nombre: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  enlace: string;
+  color: string;
+}
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState<SectionType>('areas');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,6 +47,71 @@ export default function Home() {
   const [currentUser, setCurrentUser] = useState('');
   const [userRole, setUserRole] = useState('');
   const [openMenu, setOpenMenu] = useState<MenuType>(null);
+  const [hoveredZone, setHoveredZone] = useState<string | null>(null);
+
+  // Zonas del plano - ¡AQUÍ DEBES PONER TUS ENLACES!
+  const planoZones: PlanoZone[] = [
+    {
+      id: 'zona1',
+      nombre: 'Planta de Producción',
+      x: 10,
+      y: 15,
+      width: 35,
+      height: 45,
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/EglYlVkhQlJDtnk1VpJ_9h8BeIFIiYFyXgD9E9qZbC96BQ?e=eH3V8V', // Producción
+      color: 'rgba(251, 146, 60, 0.3)'
+    },
+    {
+      id: 'zona2',
+      nombre: 'Almacén',
+      x: 50,
+      y: 15,
+      width: 25,
+      height: 30,
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/EnlE7wF0eBhArVaqhXxnymEBbxzq_2y6X7GNf-kieXY3Tw?e=oBo1na', // Almacén
+      color: 'rgba(245, 158, 11, 0.3)'
+    },
+    {
+      id: 'zona3',
+      nombre: 'Oficinas Administrativas',
+      x: 78,
+      y: 15,
+      width: 18,
+      height: 25,
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/Elh1ozrRgctIrJ3WAZzYnpcBf3evTJ70w6puQyhyIjnQg?e=KgkKDx', // Administración
+      color: 'rgba(251, 146, 60, 0.3)'
+    },
+    {
+      id: 'zona4',
+      nombre: 'Laboratorio / I+D',
+      x: 50,
+      y: 50,
+      width: 25,
+      height: 25,
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/Eqtt_21ReeZHgFzXYqTfNWcBEHqjmdJ-lJbRIfZOHNpamQ?e=jde0LB', // Investigación
+      color: 'rgba(245, 158, 11, 0.3)'
+    },
+    {
+      id: 'zona5',
+      nombre: 'Área de Cultivo',
+      x: 10,
+      y: 65,
+      width: 35,
+      height: 25,
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep7Sh3wa9-ZNroCBnJXxVAYBOluaOnizaCe--NcXa_996A?e=yuEsD0', // Propiedad
+      color: 'rgba(251, 146, 60, 0.3)'
+    },
+    {
+      id: 'zona6',
+      nombre: 'Logística / Distribución',
+      x: 78,
+      y: 45,
+      width: 18,
+      height: 30,
+      enlace: 'https://1drv.ms/f/c/092e39edf7b9ea99/EnfmdmrT-xJOv9k314ozZLoBnnyZ3_I6qMlrAs6r1VBBgg?e=rjnwmx', // Distribución
+      color: 'rgba(251, 146, 60, 0.3)'
+    },
+  ];
 
   // Verificar si ya hay una sesión activa al cargar la página
   useEffect(() => {
@@ -203,7 +280,7 @@ export default function Home() {
     }
   };
 
-  // Control de accesos por rol de usuario - ACTUALIZADO
+  // Control de accesos por rol de usuario
   const userPermissions = {
     administracion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas', 'personales'],
     produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion', 'gestion'],
@@ -402,19 +479,6 @@ export default function Home() {
     }
   ];
 
-  // Imágenes para el carrusel
-  const carouselImages = [
-    'https://i.ibb.co/prWnw63p/MG-0034.jpg',
-    'https://i.ibb.co/m5mw3sw3/MG-0028.jpg',
-    'https://i.ibb.co/XfcVnR8g/MG-0019.jpg',
-    'https://i.ibb.co/bjdtqpGP/MG-0006.jpg'
-  ];
-
-  // Función para redirigir a Google Drive
-  const redirectToGoogleDrive = () => {
-    window.open('https://drive.google.com/drive/folders/1jS93cvrPySFzgKkhXBxvQeL19wK-h01D', '_blank');
-  };
-
   // Función auxiliar para obtener colores
   const getColor = (color: string, shade: number): string => {
     const colorMap: { [key: string]: { [key: number]: string } } = {
@@ -535,7 +599,7 @@ export default function Home() {
   // CONTENIDO PARA USUARIOS AUTENTICADOS
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
-      {/* Header Corporativo Atardecer - Colores más intensos */}
+      {/* Header Corporativo - Colores más intensos */}
       <header className="bg-gradient-to-r from-orange-600 to-amber-700 shadow-lg border-b border-orange-500">
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
@@ -663,81 +727,57 @@ export default function Home() {
         {/* Sección de Áreas (Principal) - NUEVO LAYOUT */}
         {activeSection === 'areas' && (
           <div className="flex flex-col xl:flex-row gap-6">
-            {/* COLUMNA IZQUIERDA: Plano + Carrusel + Indicadores */}
-            <div className="w-full xl:w-1/3">
-              {/* Plano de Airú - ARRIBA */}
-              <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300 cursor-pointer hover:shadow-md transition-shadow" onClick={redirectToGoogleDrive}>
-                <h3 className="text-sm font-bold text-orange-800 mb-2 text-center">Plano de Airú</h3>
-                <div className="rounded-lg overflow-hidden border border-orange-200">
+            {/* COLUMNA IZQUIERDA: Plano - OCUPA MÁS ESPACIO */}
+            <div className="w-full xl:w-1/2">
+              <div className="bg-white rounded-xl shadow-sm p-4 border border-orange-300">
+                <h3 className="text-sm font-bold text-orange-800 mb-3 text-center">Plano de Airú</h3>
+                <div className="relative rounded-lg overflow-hidden border border-orange-200">
                   <img 
                     src="https://i.ibb.co/YFPZqFdn/PLANO-AIRU.png" 
                     alt="Plano Airú"
                     className="w-full h-auto object-contain"
                   />
-                </div>
-                <p className="text-xs text-orange-500 text-center mt-2">⬇️ Haz clic para ver en Drive</p>
-              </div>
-
-              {/* Carrusel - ABAJO (más pequeño) */}
-              <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
-                <h3 className="text-sm font-bold text-orange-800 mb-2 text-center">Galería Corporativa</h3>
-                <div className="rounded-lg overflow-hidden shadow-md border border-orange-200 cursor-pointer" onClick={redirectToGoogleDrive}>
-                  <div className="relative h-40 bg-gradient-to-r from-orange-400 to-amber-500 overflow-hidden">
-                    <div className="flex overflow-x-auto snap-x snap-mandatory h-full scrollbar-hide">
-                      {carouselImages.map((img, index) => (
-                        <div key={index} className="flex-shrink-0 w-full h-full snap-center">
-                          <img 
-                            src={img} 
-                            alt={`Imagen ${index + 1}`}
-                            className="w-full h-full object-cover"
-                          />
+                  {/* Zonas cliqueables del plano */}
+                  {planoZones.map((zone) => (
+                    <div
+                      key={zone.id}
+                      className="absolute rounded-lg cursor-pointer transition-all duration-200"
+                      style={{
+                        left: `${zone.x}%`,
+                        top: `${zone.y}%`,
+                        width: `${zone.width}%`,
+                        height: `${zone.height}%`,
+                        backgroundColor: hoveredZone === zone.id ? zone.color : 'transparent',
+                        border: hoveredZone === zone.id ? '2px solid rgba(234, 88, 12, 0.8)' : '2px solid transparent',
+                        zIndex: 10
+                      }}
+                      onMouseEnter={() => setHoveredZone(zone.id)}
+                      onMouseLeave={() => setHoveredZone(null)}
+                      onClick={() => window.open(zone.enlace, '_blank')}
+                      title={zone.nombre}
+                    >
+                      {/* Tooltip flotante al hacer hover */}
+                      {hoveredZone === zone.id && (
+                        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-orange-700 text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
+                          {zone.nombre}
                         </div>
-                      ))}
+                      )}
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                      <span className="text-white text-xs font-semibold">Ver galería completa</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </div>
-
-              {/* Indicadores - UNA FILA HORIZONTAL */}
-              <div className="bg-gradient-to-r from-orange-600 to-amber-700 text-white rounded-xl shadow-sm p-4 border border-orange-400">
-                <h3 className="text-sm font-bold mb-3 text-center">Indicadores Clave</h3>
-                <div className="grid grid-cols-4 gap-2">
-                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
-                    <i className="fas fa-file-contract text-lg mb-1 text-white"></i>
-                    <p className="text-[10px] font-bold text-white leading-tight">Arancelaria</p>
-                    <p className="text-[10px] font-bold text-white">0813.40.00.00</p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
-                    <i className="fas fa-industry text-lg mb-1 text-white"></i>
-                    <p className="text-[10px] font-bold text-white leading-tight">Chips/mes</p>
-                    <p className="text-[10px] font-bold text-white">1,000</p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
-                    <i className="fas fa-weight text-lg mb-1 text-white"></i>
-                    <p className="text-[10px] font-bold text-white leading-tight">Pulpa/mes</p>
-                    <p className="text-[10px] font-bold text-white">1,000 Kg</p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg text-center">
-                    <i className="fas fa-building text-lg mb-1 text-white"></i>
-                    <p className="text-[10px] font-bold text-white leading-tight">Plantas</p>
-                    <p className="text-[10px] font-bold text-white">1</p>
-                  </div>
-                </div>
+                <p className="text-xs text-orange-500 text-center mt-2">⬇️ Haz clic en las zonas del plano para acceder</p>
               </div>
             </div>
 
-            {/* COLUMNA DERECHA: Áreas en UNA SOLA FILA */}
-            <div className="w-full xl:w-2/3">
+            {/* COLUMNA DERECHA: Áreas en UNA SOLA COLUMNA */}
+            <div className="w-full xl:w-1/2">
               <div className="bg-white rounded-xl shadow-sm p-4 mb-4 border border-orange-300">
                 <h2 className="text-xl md:text-2xl font-bold text-center text-orange-800 mb-1">Áreas Corporativas</h2>
                 <p className="text-orange-600 text-center text-sm">Seleccione un área para acceder a sus documentos</p>
               </div>
 
-              {/* Áreas en cuadrícula horizontal - UNA FILA */}
-              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+              {/* Áreas en UNA SOLA COLUMNA */}
+              <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
                 {areasData.map((area) => (
                   hasAccess(area.id) && (
                     <div 
@@ -749,39 +789,42 @@ export default function Home() {
                       onClick={() => toggleSubmenu(area.id)}
                     >
                       {/* Header del área */}
-                      <div className="flex items-center mb-2">
+                      <div className="flex items-center">
                         <div 
-                          className="w-8 h-8 rounded-lg flex items-center justify-center mr-2 shadow-sm flex-shrink-0"
+                          className="w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-sm flex-shrink-0"
                           style={{ 
                             background: `linear-gradient(135deg, ${getColor(area.color, 100)}, ${getColor(area.color, 200)})`
                           }}
                         >
                           <i 
-                            className={`${area.icono} text-sm`}
+                            className={`${area.icono} text-base`}
                             style={{ color: getColor(area.color, 700) }}
                           ></i>
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 
-                            className="text-xs font-bold truncate"
+                            className="text-sm font-bold"
                             style={{ color: getColor(area.color, 800) }}
                           >
                             {area.nombre}
                           </h3>
+                          <p className="text-[10px] text-orange-500">
+                            {area.subcarpetas.length} {area.subcarpetas.length === 1 ? 'carpeta' : 'carpetas'}
+                          </p>
                         </div>
                         <i 
-                          className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-[10px] ml-1 flex-shrink-0`}
+                          className={`fas fa-chevron-${openMenu === area.id ? 'up' : 'down'} text-xs ml-2 flex-shrink-0 transition-transform duration-300`}
                           style={{ color: getColor(area.color, 600) }}
                         ></i>
                       </div>
 
                       {/* Subcarpetas */}
-                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
-                        <div className="space-y-1 pt-2 max-h-40 overflow-y-auto pr-1 custom-scrollbar-thin">
+                      <div className={`overflow-hidden transition-all duration-300 ${openMenu === area.id ? 'max-h-96 opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto pr-1 custom-scrollbar-thin">
                           {area.subcarpetas.map((subcarpeta, index) => (
                             <div 
                               key={index}
-                              className="p-1.5 rounded-lg cursor-pointer transition-all duration-200 border hover:shadow-sm"
+                              className="p-2 rounded-lg cursor-pointer transition-all duration-200 border hover:shadow-sm"
                               style={{ 
                                 borderColor: getColor(area.color, 200),
                                 backgroundColor: getColor(area.color, 50)
@@ -792,10 +835,10 @@ export default function Home() {
                               }}
                             >
                               <div 
-                                className="flex items-center font-medium text-[11px]"
+                                className="flex items-center font-medium text-xs"
                                 style={{ color: getColor(area.color, 700) }}
                               >
-                                <i className={`${subcarpeta.icono} mr-2 text-[11px]`}></i>
+                                <i className={`${subcarpeta.icono} mr-2 text-xs`}></i>
                                 <span className="truncate">{subcarpeta.nombre}</span>
                               </div>
                             </div>
@@ -811,7 +854,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* Footer Corporativo Atardecer - Colores más intensos */}
+      {/* Footer */}
       <footer className="bg-gradient-to-r from-orange-700 to-amber-800 text-white py-6 mt-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
