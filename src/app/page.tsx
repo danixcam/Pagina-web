@@ -276,7 +276,7 @@ export default function Home() {
     },
     {
       id: 'planta',
-      nombre: 'PLANTA',
+      nombre: 'FABRICA',
       icono: 'fas fa-industry',
       color: 'amber',
       subcarpetas: [
