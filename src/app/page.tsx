@@ -704,48 +704,22 @@ const toggleSubmenu = (menu: MenuType) => {
 
       <div className="container mx-auto px-4 py-8">
           {/* Código Integral de Ética */}
-        {activeSection === 'mision' && (
-          <div className="w-full xl:w-2/3 mx-auto mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-900 mb-8">
-              CÓDIGO INTEGRAL DE ÉTICA,CONDUCTA Y BUEN GOBIERNO 
-            </h2>
-            
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-8 border border-orange-300">
-              <p className="text-lg text-orange-800 leading-relaxed text-center">
-                En <strong className="text-orange-700">Airú</strong>, nos dedicamos a ofrecer productos frescos, saludables y de alta calidad, 
-                cultivados con esmero por agricultores locales. Nos enorgullece nuestra producción 
-                orgánica, libre de agroquímicos y sin azúcares añadidos. Promovemos la sostenibilidad 
-                ambiental y el respeto por la naturaleza en cada etapa de nuestra cadena productiva.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-600">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                    <i className="fas fa-award text-orange-700 text-lg"></i>
-                  </div>
-                  <h3 className="text-xl font-bold text-orange-800">Calidad y Frescura</h3>
-                </div>
-                <p className="text-orange-700">
-                  Comprometidos con ofrecer productos frescos, cultivados de forma responsable y sin agroquímicos.
-                </p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-amber-600">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mr-4">
-                    <i className="fas fa-leaf text-amber-700 text-lg"></i>
-                  </div>
-                  <h3 className="text-xl font-bold text-amber-800">Sostenibilidad Ambiental</h3>
-                </div>
-                <p className="text-amber-700">
-                  Practicamos métodos de producción sostenibles que respetan y protegen el medio ambiente.
-                </p>
+          {activeSection === 'mision' && (
+            <div className="w-full">
+              <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-900 mb-6">
+                Código Integral de Ética, Conducta y Buen Gobierno
+              </h2>
+          
+              <div className="bg-white rounded-xl shadow-lg p-4 border border-orange-300">
+                <iframe
+                  src="https://1drv.ms/b/c/092e39edf7b9ea99/IQQ7wZT8ohptRamSUIJOP9suAcwH22ZbSSWutUzWTHjQJ9E"
+                  className="w-full rounded-lg"
+                  style={{ height: "900px" }}
+                  frameBorder="0"
+                />
               </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Sección de Paneles - POWER BI INTEGRADO */}
         {activeSection === 'paneles' && (
