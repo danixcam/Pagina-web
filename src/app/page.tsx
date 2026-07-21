@@ -7,12 +7,14 @@ type MenuType =
   | 'plantacion' | 'planta' | 'logistica' | 'calidad' | 'admin' 
   | 'rh' | 'marketing' | 'investigacion' | 'ventas' | 'import-export'
   | 'respaldos' | 'gestion' | 'gerencia' | 'finanzas' | 'personales'
+  | 'sgia-panel' | 'clientes'
   | null;
 
 type AreaType = 
-  | 'plantacion' | 'planta' | 'logistica' | 'calidad' | 'admin' 
-  | 'rh' | 'marketing' | 'investigacion' | 'ventas' | 'import-export'
-  | 'respaldos' | 'gestion' | 'gerencia' | 'finanzas' | 'personales';
+  | 'plantacion' | 'planta' | 'logistica' | 'calidad' | 'admin'
+  | 'rh'  | 'marketing' | 'investigacion' | 'ventas'
+  | 'import-export' | 'respaldos' | 'gestion' | 'sgia-panel' | 'clientes'
+  | 'gerencia' | 'finanzas' | 'personales';
 
 type SectionType = 'areas' | 'mision' | 'paneles';
 
@@ -173,9 +175,13 @@ export default function Home() {
     localStorage.removeItem('agiru-auth');
   };
 
-  const toggleSubmenu = (menu: MenuType) => {
-    setOpenMenu(openMenu === menu ? null : menu);
-  };
+const toggleSubmenu = (menu: MenuType) => {
+  if (menu === 'clientes') {
+    redirectToOneDrive('clientes');
+    return;
+  }
+  setOpenMenu(openMenu === menu ? null : menu);
+};
 
   const redirectToOneDrive = (carpeta: string) => {
     const enlaces: { [key: string]: string } = {
@@ -183,7 +189,7 @@ export default function Home() {
       'propiedad': 'https://1drv.ms/f/c/092e39edf7b9ea99/Ep7Sh3wa9-ZNroCBnJXxVAYBOluaOnizaCe--NcXa_996A?e=yuEsD0',
       'almacen': 'https://1drv.ms/f/c/092e39edf7b9ea99/EnlE7wF0eBhArVaqhXxnymEBbxzq_2y6X7GNf-kieXY3Tw?e=oBo1na',
       'mantenimiento-de-equipos': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuMSSTakqQtOmh_GQWNuDHgBHP3N_GbbbPO7UcvnuWNVuA?e=MVDDw5',
-      'produccion': 'https://1drv.ms/f/c/092e39edf7b9ea99/EglYlVkhQlJDtnk1VpJ_9h8BeIFIiYFyXgD9E9qZbC96BQ?e=eH3V8V',
+      'produccion': 'https://1drv.ms/f/c/092e39edf7b9ea99/IgAJWJVZIUJSQ7Z5NVaSf_YfASKhMmPz21dM5ENBhCEi_mg?e=0oApSy',
       'compra-abastecimiento-insumos-planta': 'https://1drv.ms/f/c/092e39edf7b9ea99/EuSmBU0d3LlOmcKxD9lfCwYB83Qh4LoTAXxExYBSJikhBQ?e=7lMj8f',
       'cotizaciones-activos-infraestructura': 'https://1drv.ms/f/c/092e39edf7b9ea99/EtISskJw5ydFmF-TlRwSC7cBLetUs-SwtT9ezpEcn874Cg?e=Xqlbm9',
       'distribucio-transporte': 'https://1drv.ms/f/c/092e39edf7b9ea99/EnfmdmrT-xJOv9k314ozZLoBnnyZ3_I6qMlrAs6r1VBBgg?e=rjnwmx',
@@ -240,6 +246,9 @@ export default function Home() {
       'santiago': 'https://1drv.ms/f/c/092e39edf7b9ea99/EjdfmscNdIhGokkMFTRTLXUBOnQI4SE6RX9tlxzgvFW9VQ?e=LHwZeY',
       'emili': 'https://1drv.ms/f/c/092e39edf7b9ea99/EguLXjSL0_NJotfcTyeCXB8BQJBPReT-JQuQrZpUbBe7Pw?e=9vBydD',
       'daniela': 'https://1drv.ms/f/c/092e39edf7b9ea99/EgwujdpFBVJCjOF8KQuYmqcB5G2gmrtVrk4bTHbwymP5cw?e=9yJJ00',
+      'sgia-editables': 'https://1drv.ms/f/c/092e39edf7b9ea99/IgAFhdKwes4_QJj6DxBn1hAkAULk9gQFBuD-GMa_-f3RKik?e=BQWIqp',
+      'sgia-registros': 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBWJQNTBTfmQYrunjolW7FNATJ0N7qvAT0eYuupkTj0MQU?e=Y4aPiz',
+      'clientes': 'https://1drv.ms/f/c/092e39edf7b9ea99/IgBsfgS4qxtiQoUtSezdn5nLAQ-fpEQaxOVjebFfEyt9lD4?e=U8UaRB',
     };
     
     const enlace = enlaces[carpeta] || '#';
@@ -251,10 +260,10 @@ export default function Home() {
   };
 
   const userPermissions = {
-    administracion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas', 'personales'],
-    produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion', 'gestion'],
-    gerencia: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'gerencia', 'finanzas', 'gestion'],
-    gestion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas'],
+    administracion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas', 'personales', 'sgia-panel', 'clientes'],
+    produccion: ['plantacion', 'planta', 'logistica', 'calidad', 'investigacion', 'gestion','sgia-panel', 'clientes'],
+    gerencia: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'gerencia', 'finanzas', 'gestion','sgia-panel', 'clientes'],
+    gestion: ['plantacion', 'planta', 'logistica', 'calidad', 'admin', 'rh', 'marketing', 'investigacion', 'ventas', 'import-export', 'respaldos', 'gestion', 'gerencia', 'finanzas','sgia-panel', 'clientes'],
     invitado: ['plantacion', 'planta', 'gestion']
   };
 
@@ -444,7 +453,32 @@ export default function Home() {
         { nombre: 'Emili', clave: 'emili', icono: 'fas fa-user' },
         { nombre: 'Daniela', clave: 'daniela', icono: 'fas fa-user' }
       ]
+    },
+    {
+  id: 'sgia-panel',
+  nombre: 'SGIA PANEL',
+  icono: 'fas fa-chart-pie',
+  color: 'orange',
+  subcarpetas: [
+    {
+      nombre: 'Editables',
+      clave: 'sgia-editables',
+      icono: 'fas fa-edit'
+    },
+    {
+      nombre: 'Registros',
+      clave: 'sgia-registros',
+      icono: 'fas fa-folder-open'
     }
+  ]
+},
+    {
+  id: 'clientes',
+  nombre: 'CLIENTES',
+  icono: 'fas fa-users',
+  color: 'amber',
+  subcarpetas: []
+}
   ];
 
   const carouselImages = [
@@ -669,11 +703,11 @@ export default function Home() {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        {/* Sección de Misión, Visión y Valores */}
+          {/* Código Integral de Ética */}
         {activeSection === 'mision' && (
           <div className="w-full xl:w-2/3 mx-auto mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-center text-orange-900 mb-8">
-              Nuestra Filosofía Corporativa
+              CÓDIGO INTEGRAL DE ÉTICA,CONDUCTA Y BUEN GOBIERNO 
             </h2>
             
             <div className="bg-white rounded-xl shadow-sm p-8 mb-8 border border-orange-300">
